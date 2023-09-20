@@ -9,4 +9,4 @@ A more modern solution involves the use of "expert systems". These platforms cap
 
 ## Motivation
 
-This project showcases the process of generating all parameters for a Variable Frequency Drive (VFD) based on user system specifications. The goal is to separate VFD-specific knowledge from the broader system engineering specifications.
+This project embodies a transformative approach in the domain of hardware engineering. We demonstrate the generation of all parameters for a Variable Frequency Drive (VFD) based purely on user system specifications. This is more than just a parameter generator; it's a paradigm shift. By focusing on this method, we aspire to foster a clearer, more automated bridge between system engineering specifications and VFD-specific knowledge. The overarching objective is to streamline processes, minimize errors, and empower engineers to focus on innovative solutions rather than get bogged down by the nitty-gritty details of manual parameter settings.
