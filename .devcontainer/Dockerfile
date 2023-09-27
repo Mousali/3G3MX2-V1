@@ -55,9 +55,7 @@ RUN apt-get install -yq --fix-missing --no-install-recommends plantuml
 
 ENV DEBIAN_FRONTEND=noninteractive \
     DEBCONF_NONINTERACTIVE_SEEN=true \
-    DOTNET_INTERACTIVE_CLI_TELEMETRY_OPTOUT=true \
-    AWS_ACCESS_KEY_ID="AKIAQ644IWYLHB3NJVVC" \
-    WS_SECRET_ACCESS_KEY="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"
+    DOTNET_INTERACTIVE_CLI_TELEMETRY_OPTOUT=true 
 
 ENV PROVIDER="aws"
 
