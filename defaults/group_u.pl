@@ -1,3 +1,6 @@
+% Group U: User Parameters
+
+%% User parameters
 u001_default("no").
 u002_default("no").
 u003_default("no").
