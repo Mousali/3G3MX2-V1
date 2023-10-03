@@ -8,5 +8,5 @@
         "dockerfile": "Dockerfile"
     },
 
-    "extensions": ["arthurwang.vsc-prolog"]
+    "extensions": ["arthurwang.vsc-prolog", "streetsidesoftware.code-spell-checker"]
 }
