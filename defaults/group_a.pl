@@ -52,7 +52,7 @@ a039_default("04").
 a041_default("01").
 a241_default("01").
 a042_default("1.0").
-a241_default("1.0").
+a242_default("1.0").
 a043_default("5.0").
 a243_default("5.0").
 a044_default("00").
