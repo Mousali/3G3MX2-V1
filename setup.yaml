@@ -45,16 +45,16 @@ motor :
 #####################################################################
         run_command_source: Digital Operator
 
-    # 2nd :
-        # brand : HQD
-        # model : GDZ-24
-        # power_kw : 3.0
-        # rpm :
-        #     min : 3000
-        #     base : 24000
-        #     max : 24000
-        # poles : 2
-        # voltage : 220
+    2nd :
+        brand : HQD
+        model : GDZ-24
+        power_kw : 3.0
+        rpm :
+            min : 3000
+            base : 18000
+            max : 24000
+        poles : 2
+        voltage : 220
 #####################################################################
 # speed (frequency) reference input selection valid value is of:
 # - Digital Operator (Volume)
@@ -68,7 +68,7 @@ motor :
 # - DriveProgramming
 # - Operation function output
 #####################################################################
-        # speed_reference : voltage (FV)
+        speed_reference : voltage (FV)
 #####################################################################
 # Run command source valid options:
 # - Drive-Programming
@@ -76,20 +76,20 @@ motor :
 # - Modbus communication
 # - Option
 #####################################################################
-        # run_command_source: Digital Operator
+        run_command_source: Digital Operator
 
 
 #####################################################################
 #####################################################################
 # Standard operating Function settings
 #####################################################################
-    operations:
+operations:
 #####################################################################
 # Heavy Load/Light Load oration Selection :
 # - Heavy (CT)
 # - Light (VT)
 #####################################################################
-        load_mode: Heavy (CT)
+    load_mode: Heavy (CT)
 #####################################################################
 # Inverter Mode Selection :
 # - Disabled
@@ -97,20 +97,20 @@ motor :
 # - Induction motor high-frequency
 # - PM motor
 #####################################################################
-        inverter_mode: Disabled
+    inverter_mode: Disabled
 #####################################################################
 # Torque Limit option
 # - disabled
 # - 200% with an input of 10V
 #####################################################################
-        torque_limit: disabled
+    torque_limit: disabled
 #####################################################################
 # Filter parameters for FV and FI analog input signal (ms)
 # Valid settings:
 # - 1 to 30 ms ; or
 # - 'Fixed to 500-ms'
 #####################################################################
-        analog_filter : 16
+    analog_filter : 16
 #####################################################################
 # Frequency control profile
 #
@@ -169,63 +169,63 @@ motor :
 
 # plot created using https://textik.com/
 #####################################################################
-        f0_at_0 : 0 # f0 must = 0 or f1
-        f1: 10
-        i0: 60
-        f2: 350
-        i1: 90
+    f0_at_0 : 0 # f0 must = 0 or f1
+    f1: 10
+    i0: 60
+    f2: 350
+    i1: 90
 #####################################################################
 # VFD inputs setup
 #####################################################################
-        input:
-            s1:
-                function: FW (Forward)
-                mode: 'no' # or 'nc'
-            s2: 
-                function: RV (Reverse)
-                mode: 'no' # or 'nc'
-            s3: 
-                function: RS (Reset)
-                mode: 'no' # or 'nc'
-            s4: 
-                function: EXT (External trip)
-                mode: 'no' # or 'nc'
-            s5: 
-                function: CF1 (Multi-step speed setting binary 1)
-                mode: 'no' # or 'nc'
-            s6: 
-                function: CF2 (Multi-step speed setting binary 2)
-                mode: 'no' # or 'nc'
-            s7: 
-                function: JG (Jogging)
-                mode: 'no' # or 'nc'
+    input:
+        s1:
+            function: FW (Forward)
+            mode: 'no' # or 'nc'
+        s2: 
+            function: RV (Reverse)
+            mode: 'no' # or 'nc'
+        s3: 
+            function: RS (Reset)
+            mode: 'no' # or 'nc'
+        s4: 
+            function: EXT (External trip)
+            mode: 'no' # or 'nc'
+        s5: 
+            function: CF1 (Multi-step speed setting binary 1)
+            mode: 'no' # or 'nc'
+        s6: 
+            function: CF2 (Multi-step speed setting binary 2)
+            mode: 'no' # or 'nc'
+        s7: 
+            function: JG (Jogging)
+            mode: 'no' # or 'nc'
 #####################################################################
 # Multi Step Speed Mode valid options:
 # - disabled
 # - Binary (16-step selection with 4 terminals
 # - Bit (8-step selection with 7 terminals
 #####################################################################
-        multi_step_speed:
-            mode: disabled
-            bit1: s1
-            bit2: s2
-            bit3: s3
-            bit4: s4
-            bit5: s5
-            bit6: s6
-            bit7: s7
-            reference_1: 0
-            reference_2: 0
-            reference_3: 0
-            reference_4: 0
-            reference_5: 0
-            reference_6: 0
-            reference_7: 0
-            reference_8: 0
-            reference_9: 0
-            reference_10: 0
-            reference_11: 0
-            reference_12: 0
-            reference_13: 0
-            reference_14: 0
-            reference_15: 0
+    multi_step_speed:
+        mode: disabled
+        bit1: s1
+        bit2: s2
+        bit3: s3
+        bit4: s4
+        bit5: s5
+        bit6: s6
+        bit7: s7
+        reference_1: 0
+        reference_2: 0
+        reference_3: 0
+        reference_4: 0
+        reference_5: 0
+        reference_6: 0
+        reference_7: 0
+        reference_8: 0
+        reference_9: 0
+        reference_10: 0
+        reference_11: 0
+        reference_12: 0
+        reference_13: 0
+        reference_14: 0
+        reference_15: 0

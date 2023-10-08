@@ -134,144 +134,164 @@ a202("04") :-
     setup(YAML),
     YAML.motor.get('2nd').get(run_command_source,"Digital Operator") = "Option".
 
-% % A003
-% a003(X) :- 
-%     setup(YAML),
-%     YAML.motor.'2nd'.run_command_source =     
-%     motor1_base_operating_frequency(X),
-%     X >= 30,
-%     a004(Y),
-%     X =< Y.
+% A003
+a003(F) :- 
+    setup(YAML),
+    F is YAML.motor.get('1st').get(rpm).get(base) / (60 * 2 / YAML.motor.get('1st').get(poles)) ,
+    F >= 30,
+    a004(F_max),
+    F =< F_max.
 
-% a203(X) :- 
-%     motor2_base_operating_frequency(X),
-%     X >= 30,
-%     a204(Y),
-%     X =< Y.
+a203(F) :- 
+    setup(YAML),
+    F is YAML.motor.get('2nd').get(rpm).get(base) / (60 * 2 / YAML.motor.get('2nd').get(poles)) ,
+    F >= 30,
+    a204(F_max),
+    F =< F_max.
 
-% % motor maximum operating frequency
-% a004(X) :- 
-%     motor1_maximum_operating_frequency(X),
-%     X =< 400,
-%     not(inverter_mode('Induction motor high-frequency')).
+% motor maximum operating frequency
+a004(F) :- 
+    setup(YAML),
+    F is YAML.motor.get('1st').get(rpm).get(max) / (60 * 2 / YAML.motor.get('1st').get(poles)) ,
+    F =< 400,
+    YAML.operations.inverter_mode \= "Induction motor high-frequency".
     
-% a004(X) :- 
-%     motor1_maximum_operating_frequency(X),
-%     X =< 580,
-%     inverter_mode('Induction motor high-frequency').
+a204(F) :- 
+    setup(YAML),
+    F is YAML.motor.get('2nd').get(rpm).get(max) / (60 * 2 / YAML.motor.get('2nd').get(poles)) ,
+    F =< 400,
+    YAML.operations.inverter_mode \= "Induction motor high-frequency".
     
-% a204(X) :- 
-%     motor2_maximum_operating_frequency(X),
-%     X =< 400,
-%     not(inverter_mode('Induction motor high-frequency')).
+a204(F) :- 
+    setup(YAML),
+    F is YAML.motor.get('2nd').get(rpm).get(max) / (60 * 2 / YAML.motor.get('2nd').get(poles)) ,
+    F =< 580,
+    YAML.operations.inverter_mode = "Induction motor high-frequency".
+
     
-% a204(X) :- 
-%     motor2_maximum_operating_frequency(X),
-%     X =< 580,
-%     inverter_mode('Induction motor high-frequency').
+% A005 FV/FI Selection
+% Switch between FV (Voltage) and FI (Current)
+a005("00") :-
+    setup(YAML),
+    YAML.motor.get('1st').get(speed_control_source) = "voltage (FV)".
+
+a005("00") :-
+    setup(YAML),
+    YAML.motor.get('1st').get(speed_control_source) = "current (FI)".
     
-% % A005 FV/FI Selection
-% % Switch between FV (Voltage) and FI (Current)
-% a005("00") :-
-%     motor1_operation_speed_control_source('voltage (FV)').
-
-% a005("00") :-
-%     motor1_operation_speed_control_source('current (FI)').
+% Switch between FV (Voltage) and volume
+a005("02") :-
+    setup(YAML),
+    YAML.inverter.get(accessories) = "3G3AX_OP01",
+    YAML.motor.get('1st').get(speed_control_source) = "voltage (FV)".
     
-% % Switch between FV (Voltage) and volume
-% a005('02') :-
-%     volume_control_3G3AX_OP01(true),
-%     motor1_operation_speed_control_source('voltage (FV)').
+a005("02") :-
+    setup(YAML),
+    YAML.inverter.get(accessories) = "3G3AX_OP01",
+    YAML.motor.get('1st').get(speed_control_source) = "Digital Operator (Volume)".
     
-% a005('02') :-
-%     volume_control_3G3AX_OP01(true),
-%     motor1_operation_speed_control_source('Digital Operator (Volume)').
+% 'witch between FI (Current) and volume
+a005("03") :-
+    setup(YAML),
+    YAML.inverter.get(accessories) = "3G3AX_OP01",
+    YAML.motor.get('1st').get(speed_control_source) = "current (FI)".
+
+a005("03") :-
+    setup(YAML),
+    YAML.inverter.get(accessories) = "3G3AX_OP01",
+    YAML.motor.get('1st').get(speed_control_source) = "Digital Operator (Volume)".
+
+a141("02") :- 
+    setup(YAML),
+    YAML.motor.get('1st').get(speed_control_source) = "voltage (FV)".
     
-% % 'witch between FI (Current) and volume
-% a005('03') :-
-%     volume_control_3G3AX_OP01(true),
-%     motor1_operation_speed_control_source('current (FI)').
+a141("03") :- 
+    setup(YAML),
+    YAML.motor.get('1st').get(speed_control_source) = "current (FI)".
 
-% a005('03') :-
-%     volume_control_3G3AX_OP01(true),
-%     motor1_operation_speed_control_source('Digital Operator (Volume)').
 
-% a141('02') :- 
-%     motor1_speed_control_method('voltage').
+a011(F1) :-
+    setup(YAML),
+    F1 is YAML.operations.get(f1),
+    a003(A003),
+    F1 =< A003.
+
+a101(F1) :-
+    setup(YAML),
+    F1 is YAML.operations.get(f1),    
+    a003(A003),
+    F1 =< A003.
+
+a161(F1) :-
+    setup(YAML),
+    F1 is YAML.operations.get(f1),   
+    a003(A003),
+    F1 =< A003.
+
+a012(F2) :-
+    setup(YAML),
+    F2 is YAML.operations.get(f2),
+    a003(A003),
+    F2 =< A003.
+
+a102(F2) :-
+    setup(YAML),
+    F2 is YAML.operations.get(f2),
+    a003(A003),
+    F2 =< A003.
+
+a162(F2) :-
+    setup(YAML),
+    F2 is YAML.operations.get(f2),
+    a003(A003),
+    F2 =< A003.
+
+a013(I0) :-
+    setup(YAML),
+    I0 is YAML.operations.get(i0),
+    I1 is YAML.operations.get(i1),
+    I0 < I1.
     
-% a141('03') :- 
-%     motor1_speed_control_method('current').
+a103(I0) :-
+    setup(YAML),
+    I0 is YAML.operations.get(i0),
+    I1 is YAML.operations.get(i1),
+    I0 < I1.
 
+a163(I0) :-
+    setup(YAML),
+    I0 is YAML.operations.get(i0),
+    I1 is YAML.operations.get(i1),
+    I0 < I1.
 
-% a011(F1) :-
-%     a003(A003),
-%     f1_at_i0(F1,_),
-%     F1 =< A003.
-
-
-% a101(F1) :-
-%     a003(A003),
-%     f1_at_i0(F1,_),
-%     F1 =< A003.
-
-% a161(F1) :-
-%     a003(A003),
-%     f1_at_i0(F1,_),
-%     F1 =< A003.
-
-% a012(F2) :-
-%     a003(A003),
-%     f2_at_i1(F2,_),
-%     F2 =< A003.
-
-% a102(F2) :-
-%     a003(A003),
-%     f2_at_i1(F2,_),
-%     F2 =< A003.
-
-% a162(F2) :-
-%     a003(A003),
-%     f2_at_i1(F2,_),
-%     F2 =< A003.
-
-% a013(I0) :-
-%     f1_at_i0(_,I0),
-%     f2_at_i1(_,I1),
-%     I0 < I1.
+a014(I1) :-
+    setup(YAML),
+    I0 is YAML.operations.get(i0),
+    I1 is YAML.operations.get(i1),
+    I0 < I1.
     
-% a103(I0) :-
-%     f1_at_i0(_,I0),
-%     f2_at_i1(_,I1),
-%     I0 < I1.
+a104(I1) :-
+    setup(YAML),
+    I0 is YAML.operations.get(i0),
+    I1 is YAML.operations.get(i1),
+    I0 < I1.
 
-% a163(I0) :-
-%     f1_at_i0(_,I0),
-%     f2_at_i1(_,I1),
-%     I0 < I1.
+a164(I1) :-
+    setup(YAML),
+    I0 is YAML.operations.get(i0),
+    I1 is YAML.operations.get(i1),
+    I0 < I1.
 
-% a014(I1) :-
-%     f1_at_i0(_,I0),
-%     f2_at_i1(_,I1),
-%     I0 < I1.
+a015("00") :-
+    setup(YAML),
+    YAML.operations.get(f0_at_0) = 0.
     
-% a104(I1) :-
-%     f1_at_i0(_,I0),
-%     f2_at_i1(_,I1),
-%     I0 < I1.
-
-% a164(I1) :-
-%     f1_at_i0(_,I0),
-%     f2_at_i1(_,I1),
-%     I0 < I1.
-
-% a015("00") :-
-%     f0_at_0(0).
-    
-% a015("01") :-
-%     f0_at_0(F0),
-%     f1_at_i0(F0,_),
-%     F0 > 0.
-
+a015("01") :-
+    setup(YAML),
+    YAML.operations.get(f0_at_0) > 0,
+    YAML.operations.get(f0_at_0) = YAML.operations.get(f1).
+        
+   
 % a016('31') :-
 %     % TODO: must not be using PID function
 %     analog_input_filter_ms('Fixed to 500-ms filter with ±0.1-Hz hysteresis');
