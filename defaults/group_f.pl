@@ -1,8 +1,8 @@
-% Group F: Basic Function Parameters
+% Group f: Basic function Parameters
 
-F001_default("6.00").
-F002_default("10.00").
-F202_default("10.00").
-F003_default("10.00").
-F203_default("10.00").
-F004_default("00").
+f001_default("6.00").
+f002_default("10.00").
+f202_default("10.00").
+f003_default("10.00").
+f203_default("10.00").
+f004_default("00").

@@ -2,5 +2,8 @@
     "cSpell.words": [
         "Modbus",
         "OMRON"
+    ],
+    "cSpell.enableFiletypes": [
+        "prolog"
     ]
 }

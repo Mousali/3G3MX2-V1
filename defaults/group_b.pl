@@ -23,7 +23,7 @@ b018_default("0.00").
 b019_default("0.").
 b020_default("0.00").
 
-%% Overload limit, overcurrent protection
+%% Overload limit, over current protection
 b021_default("01").
 b221_default("01").
 % b022_default("").
@@ -125,7 +125,7 @@ b124_default("0.00").
 % b126_default("").
 b127_default("0.00").
 
-%% Overvoltage suppression during deceleration
+%% Over voltage suppression during deceleration
 b130_default("01").
 % b131_default("").
 b132_default("1.00").

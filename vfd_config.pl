@@ -1,4 +1,12 @@
+% Load default predicates
 :- consult("defaults/group_a").
+:- consult("defaults/group_b").
+:- consult("defaults/group_c").
+:- consult("defaults/group_d").
+:- consult("defaults/group_f").
+:- consult("defaults/group_h").
+:- consult("defaults/group_p").
+:- consult("defaults/group_u").
 
 :- dynamic setup/1.
 
@@ -7,7 +15,7 @@ setup(YAML):-
 
 % :- 
 %     setup(YAML),
-%     writef('Modle: %10r\n', [YAML.inverter.model]).
+%     writef('Model: %10r\n', [YAML.inverter.model]).
     
 a001("00") :- 
     setup(YAML),
@@ -130,35 +138,35 @@ a202("04") :-
 % a003(X) :- 
 %     setup(YAML),
 %     YAML.motor.'2nd'.run_command_source =     
-%     motor1_base_operating_frequancy(X),
+%     motor1_base_operating_frequency(X),
 %     X >= 30,
 %     a004(Y),
 %     X =< Y.
 
 % a203(X) :- 
-%     motor2_base_operating_frequancy(X),
+%     motor2_base_operating_frequency(X),
 %     X >= 30,
 %     a204(Y),
 %     X =< Y.
 
-% % motor maximum operating frequancy
+% % motor maximum operating frequency
 % a004(X) :- 
-%     motor1_maximum_operating_frequancy(X),
+%     motor1_maximum_operating_frequency(X),
 %     X =< 400,
 %     not(inverter_mode('Induction motor high-frequency')).
     
 % a004(X) :- 
-%     motor1_maximum_operating_frequancy(X),
+%     motor1_maximum_operating_frequency(X),
 %     X =< 580,
 %     inverter_mode('Induction motor high-frequency').
     
 % a204(X) :- 
-%     motor2_maximum_operating_frequancy(X),
+%     motor2_maximum_operating_frequency(X),
 %     X =< 400,
 %     not(inverter_mode('Induction motor high-frequency')).
     
 % a204(X) :- 
-%     motor2_maximum_operating_frequancy(X),
+%     motor2_maximum_operating_frequency(X),
 %     X =< 580,
 %     inverter_mode('Induction motor high-frequency').
     
@@ -189,10 +197,10 @@ a202("04") :-
 %     motor1_operation_speed_control_source('Digital Operator (Volume)').
 
 % a141('02') :- 
-%     motor1_speed_control_mothod('voltage').
+%     motor1_speed_control_method('voltage').
     
 % a141('03') :- 
-%     motor1_speed_control_mothod('current').
+%     motor1_speed_control_method('current').
 
 
 % a011(F1) :-
@@ -265,7 +273,7 @@ a202("04") :-
 %     F0 > 0.
 
 % a016('31') :-
-%     % TODO: must not be useing PID funcation
+%     % TODO: must not be using PID function
 %     analog_input_filter_ms('Fixed to 500-ms filter with ±0.1-Hz hysteresis');
 %     (
 %         analog_input_filter_ms(Y), 
@@ -295,7 +303,7 @@ a202("04") :-
 
 
 
-% cycl through all parameters.
+% cycle through all parameters.
 % Print if a parameter value is not the same as default. 
 :- findall([Upper_X, Y], 
         ( 
@@ -308,5 +316,3 @@ a202("04") :-
             Y \= Y_default,
             writef('%w : %6r\n', [Upper_X,Y])            
         ), _).
-
-    
