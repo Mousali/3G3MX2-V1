@@ -126,9 +126,9 @@ operations:
 
 
     #####################################################################
-    # Frequency control profile
+    # speed control profile
     #
-    #    example frequency response with f0=f1Hz                  
+    #    example speed response with f0=f1Hz                  
     #
     #     |                                                      
     #  s2 +--------------------------------+                     
@@ -154,7 +154,7 @@ operations:
     #     VR min                           20mA                  
     #                                      VR max               
     #                                     
-    #    example frequency response with f0=0Hz                  
+    #    example speed response with f0=0Hz                  
     #  
     #     |                                                      
     #     |                                                      
