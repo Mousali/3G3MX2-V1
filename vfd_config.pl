@@ -1,3 +1,5 @@
+:- consult("utilities.pl").
+
 % Load default predicates
 :- consult("defaults/group_a").
 :- consult("defaults/group_b").
@@ -137,14 +139,14 @@ a202("04") :-
 % A003
 a003(F) :- 
     setup(YAML),
-    F is YAML.motor.get('1st').get(rpm).get(base) / (60 * 2 / YAML.motor.get('1st').get(poles)) ,
+    freq_speed(F,YAML.motor.get('1st').get(rpm).get(base),YAML.motor.get('1st').get(poles)),
     F >= 30,
     a004(F_max),
     F =< F_max.
 
 a203(F) :- 
     setup(YAML),
-    F is YAML.motor.get('2nd').get(rpm).get(base) / (60 * 2 / YAML.motor.get('2nd').get(poles)) ,
+    freq_speed(F,YAML.motor.get('2st').get(rpm).get(base),YAML.motor.get('2st').get(poles)),
     F >= 30,
     a204(F_max),
     F =< F_max.
@@ -152,19 +154,19 @@ a203(F) :-
 % motor maximum operating frequency
 a004(F) :- 
     setup(YAML),
-    F is YAML.motor.get('1st').get(rpm).get(max) / (60 * 2 / YAML.motor.get('1st').get(poles)) ,
+    freq_speed(F,YAML.motor.get('1st').get(rpm).get(base),YAML.motor.get('1st').get(poles)),
     F =< 400,
     YAML.operations.inverter_mode \= "Induction motor high-frequency".
     
 a204(F) :- 
     setup(YAML),
-    F is YAML.motor.get('2nd').get(rpm).get(max) / (60 * 2 / YAML.motor.get('2nd').get(poles)) ,
+    freq_speed(F,YAML.motor.get('2st').get(rpm).get(base),YAML.motor.get('2st').get(poles)),
     F =< 400,
     YAML.operations.inverter_mode \= "Induction motor high-frequency".
     
 a204(F) :- 
     setup(YAML),
-    F is YAML.motor.get('2nd').get(rpm).get(max) / (60 * 2 / YAML.motor.get('2nd').get(poles)) ,
+    freq_speed(F,YAML.motor.get('2st').get(rpm).get(base),YAML.motor.get('2st').get(poles)),
     F =< 580,
     YAML.operations.inverter_mode = "Induction motor high-frequency".
 
@@ -209,42 +211,42 @@ a141("03") :-
     setup(YAML),
     YAML.motor.get('1st').get(speed_control_source) = "current (FI)".
 
-
-a011(F1) :-
+a011(F) :-
     setup(YAML),
-    F1 is YAML.operations.get(f1),
+    freq_speed( F , YAML.operations.get(s1) , YAML.motor.get('1st').get(poles) ),
     a003(A003),
-    F1 =< A003.
+    F =< A003.
 
-a101(F1) :-
+a101(F) :-
     setup(YAML),
-    F1 is YAML.operations.get(f1),    
+    freq_speed( F , YAML.operations.get(s1) , YAML.motor.get('1st').get(poles) ),
     a003(A003),
-    F1 =< A003.
+    F =< A003.
 
-a161(F1) :-
+a161(F) :-
     setup(YAML),
-    F1 is YAML.operations.get(f1),   
+    freq_speed( F , YAML.operations.get(s1) , YAML.motor.get('1st').get(poles) ),
     a003(A003),
-    F1 =< A003.
+    F =< A003,
+    F < 100.
 
-a012(F2) :-
+a012(F) :-
     setup(YAML),
-    F2 is YAML.operations.get(f2),
+    freq_speed( F , YAML.operations.get(s2) , YAML.motor.get('1st').get(poles) ),
     a003(A003),
-    F2 =< A003.
+    F =< A003.
 
-a102(F2) :-
+a102(F) :-
     setup(YAML),
-    F2 is YAML.operations.get(f2),
+    freq_speed( F , YAML.operations.get(s2) , YAML.motor.get('1st').get(poles) ),
     a003(A003),
-    F2 =< A003.
+    F =< A003.
 
-a162(F2) :-
+a162(F) :-
     setup(YAML),
-    F2 is YAML.operations.get(f2),
+    freq_speed( F , YAML.operations.get(s2) , YAML.motor.get('1st').get(poles) ),
     a003(A003),
-    F2 =< A003.
+    F =< A003.
 
 a013(I0) :-
     setup(YAML),
@@ -284,12 +286,12 @@ a164(I1) :-
 
 a015("00") :-
     setup(YAML),
-    YAML.operations.get(f0_at_0) = 0.
+    YAML.operations.get(s0_at_0) = 0.
     
 a015("01") :-
     setup(YAML),
-    YAML.operations.get(f0_at_0) > 0,
-    YAML.operations.get(f0_at_0) = YAML.operations.get(f1).
+    YAML.operations.get(s0_at_0) > 0,
+    YAML.operations.get(s0_at_0) = YAML.operations.get(s1).
         
    
 % a016('31') :-
@@ -320,9 +322,6 @@ a015("01") :-
 %a019("00") :-
 %    'Bit (8-step selection with 7 terminals)'
 
-
-
-
 % cycle through all parameters.
 % Print if a parameter value is not the same as default. 
 :- findall([Upper_X, Y], 
@@ -336,3 +335,4 @@ a015("01") :-
             Y \= Y_default,
             writef('%w : %6r\n', [Upper_X,Y])            
         ), _).
+    

@@ -6,8 +6,13 @@ inverter :
     brand : OMRON
     # accessories : 3G3AX-OP01
 
+power_grid:
+    voltage:
+        single_phase: 230
+        three_phase: 400
+    frequency: 50
 
-#####################################################################
+
 #####################################################################
 # Attached Motors Specifications
 #####################################################################
@@ -22,27 +27,30 @@ motor :
             max : 24000
         poles : 2
         voltage : 220
-#####################################################################
-# speed (frequency) reference input selection valid value is of:
-# - Digital Operator (Volume)
-# - Control circuit terminal block (Analog input)
-# - voltage (FV)
-# - current (FI)
-# - Digital Operator (F001)
-# - Modbus communication
-# - Option
-# - Pulse train frequency
-# - DriveProgramming
-# - Operation function output
-#####################################################################
+
+
+        #####################################################################
+        # speed (frequency) reference input selection valid value is of:
+        # - Digital Operator (Volume)
+        # - Control circuit terminal block (Analog input)
+        # - voltage (FV)
+        # - current (FI)
+        # - Digital Operator (F001)
+        # - Modbus communication
+        # - Option
+        # - Pulse train frequency
+        # - DriveProgramming
+        # - Operation function output
         speed_reference : voltage (FV)
-#####################################################################
-# Run command source valid options:
-# - Drive-Programming
-# - Digital Operator
-# - Modbus communication
-# - Option
-#####################################################################
+
+
+        #####################################################################
+        # Run command source valid options:
+        # - Drive-Programming
+        # - Digital Operator
+        # - Modbus communication
+        # - Option
+        #####################################################################
         run_command_source: Digital Operator
 
     2nd :
@@ -55,128 +63,135 @@ motor :
             max : 24000
         poles : 2
         voltage : 220
-#####################################################################
-# speed (frequency) reference input selection valid value is of:
-# - Digital Operator (Volume)
-# - Control circuit terminal block (Analog input)
-# - voltage (FV)
-# - current (FI)
-# - Digital Operator (F001)
-# - Modbus communication
-# - Option
-# - Pulse train frequency
-# - DriveProgramming
-# - Operation function output
-#####################################################################
+
+
+        #####################################################################
+        # speed (frequency) reference input selection valid value is of:
+        # - Digital Operator (Volume)
+        # - Control circuit terminal block (Analog input)
+        # - voltage (FV)
+        # - current (FI)
+        # - Digital Operator (F001)
+        # - Modbus communication
+        # - Option
+        # - Pulse train frequency
+        # - DriveProgramming
+        # - Operation function output
+
         speed_reference : voltage (FV)
-#####################################################################
-# Run command source valid options:
-# - Drive-Programming
-# - Digital Operator
-# - Modbus communication
-# - Option
-#####################################################################
+
+
+        #####################################################################
+        # Run command source valid options:
+        # - Drive-Programming
+        # - Digital Operator
+        # - Modbus communication
+        # - Option
+
         run_command_source: Digital Operator
 
 
-#####################################################################
+
 #####################################################################
 # Standard operating Function settings
-#####################################################################
 operations:
-#####################################################################
-# Heavy Load/Light Load oration Selection :
-# - Heavy (CT)
-# - Light (VT)
-#####################################################################
+    #####################################################################
+    # Heavy Load/Light Load oration Selection :
+    # - Heavy (CT)
+    # - Light (VT)
     load_mode: Heavy (CT)
-#####################################################################
-# Inverter Mode Selection :
-# - Disabled
-# - Induction motor
-# - Induction motor high-frequency
-# - PM motor
-#####################################################################
-    inverter_mode: Disabled
-#####################################################################
-# Torque Limit option
-# - disabled
-# - 200% with an input of 10V
-#####################################################################
-    torque_limit: disabled
-#####################################################################
-# Filter parameters for FV and FI analog input signal (ms)
-# Valid settings:
-# - 1 to 30 ms ; or
-# - 'Fixed to 500-ms'
-#####################################################################
-    analog_filter : 16
-#####################################################################
-# Frequency control profile
-#
-#    example frequency response with f0=f1Hz                  
-#
-#     |                                                      
-#  f2 +--------------------------------+                     
-#     |                    /|          |                     
-#     |                   / |          |                     
-#     |                  /  |          |                     
-#     |                 /   |          |                     
-#     |                /    |          |                     
-#     |               /     |          |                     
-#     |              /      |          |                     
-#     |             /       |          |                     
-#     |            /        |          |                     
-#     |           /         |          |                     
-#     |          /          |          |                     
-#  f1 |         /           |          |                     
-#  f0 +--------|            |          |                     
-#     |        |            |          |                     
-#     |        |            |          |                     
-#     |        |            |          |                     
-#     |--------|------------|----------|-------              
-#     0%      i0          i1           100%                  
-#     0mA                              10V                   
-#     VR min                           20mA                  
-#                                      VR max               
-#                                     
-#    example frequency response with f0=0Hz                  
-#  
-#     |                                                      
-#     |                                                      
-#  f2 +--------------------------------+                     
-#     |                    /|          |                     
-#     |                   / |          |                     
-#     |                  /  |          |                     
-#     |                 /   |          |                     
-#     |                /    |          |                     
-#     |               /     |          |                     
-#     |              /      |          |                     
-#     |             /       |          |                     
-#     |            /        |          |                     
-#     |           /         |          |                     
-#     |          /          |          |                     
-#     |         /           |          |                     
-#     |        /            |          |                     
-#  f1 +-------/             |          |                     
-#     |       |             |          |                     
-#     |       |             |          |                     
-#  f0 +-------|-------------|----------|-------              
-#     0%      i0           i1          100%                  
-#     0mA                              10V                   
-#     VR min                           20mA                  
-#                                      VR max                
 
-# plot created using https://textik.com/
-#####################################################################
-    f0_at_0 : 0 # f0 must = 0 or f1
-    f1: 10
-    i0: 60
-    f2: 350
-    i1: 90
-#####################################################################
-# VFD inputs setup
-#####################################################################
+
+    #####################################################################
+    # Inverter Mode Selection :
+    # - Disabled
+    # - Induction motor
+    # - Induction motor high-frequency
+    # - PM motor
+    inverter_mode: Disabled
+
+
+    #####################################################################
+    # Torque Limit option
+    # - disabled
+    # - 200% with an input of 10V
+    torque_limit: disabled
+
+    #####################################################################
+    # Filter parameters for FV and FI analog input signal (ms)
+    # Valid settings:
+    # - 1 to 30 ms ; or
+    # - 'Fixed to 500-ms'
+    analog_filter : 16
+
+
+    #####################################################################
+    # Frequency control profile
+    #
+    #    example frequency response with f0=f1Hz                  
+    #
+    #     |                                                      
+    #  s2 +--------------------------------+                     
+    #     |                    /|          |                     
+    #     |                   / |          |                     
+    #     |                  /  |          |                     
+    #     |                 /   |          |                     
+    #     |                /    |          |                     
+    #     |               /     |          |                     
+    #     |              /      |          |                     
+    #     |             /       |          |                     
+    #     |            /        |          |                     
+    #     |           /         |          |                     
+    #     |          /          |          |                     
+    #  s1 |         /           |          |                     
+    #  s0 +--------|            |          |                     
+    #     |        |            |          |                     
+    #     |        |            |          |                     
+    #     |        |            |          |                     
+    #     |--------|------------|----------|-------              
+    #     0%      i0          i1           100%                  
+    #     0mA                              10V                   
+    #     VR min                           20mA                  
+    #                                      VR max               
+    #                                     
+    #    example frequency response with f0=0Hz                  
+    #  
+    #     |                                                      
+    #     |                                                      
+    #  s2 +--------------------------------+                     
+    #     |                    /|          |                     
+    #     |                   / |          |                     
+    #     |                  /  |          |                     
+    #     |                 /   |          |                     
+    #     |                /    |          |                     
+    #     |               /     |          |                     
+    #     |              /      |          |                     
+    #     |             /       |          |                     
+    #     |            /        |          |                     
+    #     |           /         |          |                     
+    #     |          /          |          |                     
+    #     |         /           |          |                     
+    #     |        /            |          |                     
+    #  s1 +-------/             |          |                     
+    #     |       |             |          |                     
+    #     |       |             |          |                     
+    #  f0 +-------|-------------|----------|-------              
+    #     0%      i0           i1          100%                  
+    #     0mA                              10V                   
+    #     VR min                           20mA                  
+    #                                      VR max                
+    # plot created using https://textik.com/
+    #####################################################################
+    s0_at_0 : 3600 # f0 must = 0 or f1
+    s1: 3600
+    i0: 10 # %
+    s2: 24000
+    i1: 90 # %
+
+
+    #####################################################################
+    # VFD inputs setup
+    #####################################################################
     input:
         s1:
             function: FW (Forward)
@@ -199,12 +214,14 @@ operations:
         s7: 
             function: JG (Jogging)
             mode: 'no' # or 'nc'
-#####################################################################
-# Multi Step Speed Mode valid options:
-# - disabled
-# - Binary (16-step selection with 4 terminals
-# - Bit (8-step selection with 7 terminals
-#####################################################################
+
+
+    #####################################################################
+    # Multi Step Speed Mode valid options:
+    # - disabled
+    # - Binary (16-step selection with 4 terminals
+    # - Bit (8-step selection with 7 terminals
+    #####################################################################
     multi_step_speed:
         mode: disabled
         bit1: s1
