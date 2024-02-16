@@ -1,12 +1,20 @@
 //devcontainer.json
 {
     "name": "Prolog",
-  
     // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
     "build": {
         // Path is relative to the devcontainer.json file.
         "dockerfile": "Dockerfile"
     },
-
-    "extensions": ["arthurwang.vsc-prolog", "streetsidesoftware.code-spell-checker"]
+    "mounts": [
+        {
+            "source": "/etc/localtime",
+            "target": "/etc/localtime",
+            "type": "bind"
+        },
+    ],
+    "extensions": [
+        "arthurwang.vsc-prolog",
+        "streetsidesoftware.code-spell-checker"
+    ]
 }
