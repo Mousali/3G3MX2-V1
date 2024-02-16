@@ -5,5 +5,17 @@
     ],
     "cSpell.enableFiletypes": [
         "prolog"
-    ]
+    ],
+    "terminal.integrated.profiles.linux": {
+        
+        "Nushell": {
+            // "path": "/home/ubuntu/.cargo/bin/nu --config /workspaces/3G3MX2-V1/.devcontainer/config.nu -c source /home/ubuntu/.oh-my-posh.nu",
+            // "path": "/home/ubuntu/.cargo/bin/nu --config /home/ubuntu/3G3MX2-V1/.devcontainer/config.nu",
+            // "path": "/home/ubuntu/.cargo/bin/nu",
+            "path": "/home/ubuntu/.cargo/bin/nu",
+          }
+    },
+    "terminal.integrated.defaultProfile.linux": "Nushell",
+    "terminal.integrated.fontFamily": "MesloLGS Nerd Font Mono",
+    "terminal.integrated.fontWeight": "normal"
 }

@@ -53,6 +53,10 @@ RUN apt-get update \
     plantuml \
     swi-prolog \
     terraform \
+    pkg-config \
+    libssl-dev \
+    gcc \
+    build-essential \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget -U Mozilla/5.0 https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -O awscliv2.zip \
@@ -68,16 +72,25 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.11 1 \
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1 \
     && update-alternatives  --set python3 /usr/bin/python3.11
 
-RUN adduser ubuntu --disabled-password
+ENV RUSTUP_HOME=/usr/local
+ENV CARGO_HOME=$RUSTUP_HOME
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh  -s -- -y
+RUN cargo install nu
+
+RUN wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O /usr/local/bin/oh-my-posh
+RUN chmod +x /usr/local/bin/oh-my-posh
+RUN mkdir /etc/poshthemes
+RUN wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/themes.zip -O /etc/poshthemes/themes.zip
+RUN unzip /etc/poshthemes/themes.zip -d /etc/poshthemes
+RUN chmod u+rw /etc/poshthemes/*.json
+RUN rm /etc/poshthemes/themes.zip
+
+
+# RUN chmod u+rw /home/ubuntu/.config/nushell/*
+
+RUN adduser ubuntu --disabled-password --shell /usr/local/bin/nu
 USER ubuntu
-
 WORKDIR /home/ubuntu/
-ENV PATH="/home/ubuntu/.local:/home/ubuntu/.local/bin:/home/ubuntu/.local/share:/home/ubuntu/.local/lib:/home/ubuntu/.dotnet/tools:${PATH}"
+RUN oh-my-posh init nu --config /etc/poshthemes/powerlevel10k_rainbow.omp.json
 
-# RUN pip install --no-cache-dir --user "jupyterlab-github>=4.0.0" "jupyterlab_rise>=0.40.0" jupyterlab-git jupyterlab_code_formatter jupyterlab_latex sphinx sphinxcontrib-bibtex nbconvert RISE black isort pytest-cov pytest nbdime IPython jupyterlab_prolog_codemirror_extension prolog_kernel nbsphinx Sphinx pandoc ipykernel IPython
-RUN pip install --no-cache-dir --user "jupyterlab-github<4.0.0" "jupyterlab_rise<0.40.0" dask-labextension jupyterlab_code_formatter jupyterlab-system-monitor jupyterlab-drawio jupyterlab_latex jupyterlab-git jupyterlab_code_formatter jupyterlab_latex sphinx sphinxcontrib-bibtex nbconvert RISE black isort pytest-cov pytest nbdime IPython jupyterlab_prolog_codemirror_extension prolog_kernel nbsphinx Sphinx pandoc ipykernel IPython pandoc-plantuml-filter
-RUN python -m prolog_kernel.install --user
-
-ENV JUPYTER_PORT=8888
-
-ENTRYPOINT jupyter lab --ServerApp.ip=0.0.0.0 --ServerApp.open_browser=False --ServerApp.token= --ServerApp.trust_xheaders=True --ServerApp.allow_origin=* --ServerApp.port=${JUPYTER_PORT}
+ENTRYPOINT nu
