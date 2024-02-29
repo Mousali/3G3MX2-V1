@@ -1,23 +1,22 @@
 FROM ubuntu:22.04
 
-ENV DEBIAN_FRONTEND=noninteractive \
-    DEBCONF_NONINTERACTIVE_SEEN=true \
-    DOTNET_INTERACTIVE_CLI_TELEMETRY_OPTOUT=true 
+# ENV DEBIAN_FRONTEND=noninteractive \
+#     DEBCONF_NONINTERACTIVE_SEEN=true \
+#     DOTNET_INTERACTIVE_CLI_TELEMETRY_OPTOUT=true 
 
 ENV NODE_MAJOR=20
 
-RUN apt-get update \
-    && apt-get -y upgrade \
-    && apt-get install -yq --fix-missing --no-install-recommends \
-    gnupg \
+RUN apt-get update &&\
+    apt-get -y upgrade &&\
+    apt-get -y install gnupg \
     software-properties-common \
     gpg \
     wget \
     zip \
     curl  \
     coreutils  \
-    gpg-agent \
-    && rm -rf /var/lib/apt/lists/*
+    gpg-agent
+RUN rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /etc/apt/keyrings
 RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
@@ -85,12 +84,16 @@ RUN unzip /etc/poshthemes/themes.zip -d /etc/poshthemes
 RUN chmod u+rw /etc/poshthemes/*.json
 RUN rm /etc/poshthemes/themes.zip
 
+COPY docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
+CMD [ "sleep", "infinity" ]
 
 # RUN chmod u+rw /home/ubuntu/.config/nushell/*
 
-RUN adduser ubuntu --disabled-password --shell /usr/local/bin/nu
-USER ubuntu
-WORKDIR /home/ubuntu/
-RUN oh-my-posh init nu --config /etc/poshthemes/powerlevel10k_rainbow.omp.json
+# RUN adduser ubuntu --disabled-password --shell /usr/local/bin/nu
+# USER ubuntu
+# WORKDIR /home/ubuntu/
+# RUN oh-my-posh init nu --config /etc/poshthemes/powerlevel10k_rainbow.omp.json
 
-ENTRYPOINT nu
+# ENTRYPOINT nu

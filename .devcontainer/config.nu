@@ -6,6 +6,12 @@
 # https://www.nushell.sh/book/coloring_and_theming.html
 # And here is the theme collection
 # https://github.com/nushell/nu_scripts/tree/main/themes
+
+let my_path = ( $nu.home-path | path join ".cargo/bin" )
+
+$env.PATH = ( if $my_path in $env.PATH { $env.PATH } else { $env.PATH | prepend $my_path } )
+
+
 let dark_theme = {
     # color for nushell primitives
     separator: white
