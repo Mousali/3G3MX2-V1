@@ -1,3 +1,7 @@
+#!/usr/bin/swipl -q
+
+:- initialization(main, program).
+
 :- consult("utilities.pl").
 
 % Load default predicates
@@ -322,17 +326,19 @@ a015("01") :-
 %a019("00") :-
 %    'Bit (8-step selection with 7 terminals)'
 
-% cycle through all parameters.
-% Print if a parameter value is not the same as default. 
-:- findall([Upper_X, Y], 
-        ( 
-            current_predicate(X/1),
-            re_match("^[a,b,c,d,f,h,p,u]\\d{3}$",X),
-            call(X,Y), 
-            string_upper(X,Upper_X), 
-            atom_concat(X,'_default', X_default),
-            call(X_default,Y_default),
-            Y \= Y_default,
-            writef('%w : %6r\n', [Upper_X,Y])            
-        ), _).
+main :- 
+    % cycle through all parameters.
+    % Print if a parameter value is not the same as default. 
+    findall([Upper_X, Y], 
+    ( 
+        current_predicate(X/1),
+        re_match("^[a,b,c,d,f,h,p,u]\\d{3}$",X),
+        call(X,Y), 
+        string_upper(X,Upper_X), 
+        atom_concat(X,'_default', X_default),
+        call(X_default,Y_default),
+        Y \= Y_default,
+        writef('%w : %6r\n', [Upper_X,Y])            
+    ), _),
+    halt.
     
