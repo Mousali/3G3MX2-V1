@@ -5,20 +5,5 @@
     ],
     "cSpell.enableFiletypes": [
         "prolog"
-    ],
-    "terminal.integrated.fontFamily": "MesloLGS Nerd Font Mono",
-    "terminal.integrated.fontWeight": "normal",
-    "terminal.integrated.automationProfile.linux": {
-        "nushell (login)": {
-            "path": "nu",
-            "args": [""]
-          }        
-    },
-    "terminal.integrated.profiles.linux": {
-        "nushell": {
-          "path": "nu",
-          "args": [""]
-        }
-      },
-    "terminal.integrated.defaultProfile.linux": "nushell",
+    ]
 }

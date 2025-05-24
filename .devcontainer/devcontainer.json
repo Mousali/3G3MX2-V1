@@ -1,12 +1,8 @@
 //devcontainer.json
 {
     "name": "Prolog",
-    "overrideCommand": false,
-    // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-    "build": {
-        // Path is relative to the devcontainer.json file.
-        "dockerfile": "Dockerfile"
-    },
+    "image": "swipl:9.3.23",
+    "postCreateCommand": "apt-get update && apt-get install -yq --fix-missing --no-install-recommends git",
     "mounts": [
         {
             "source": "/etc/localtime",
@@ -16,6 +12,8 @@
     ],
     "extensions": [
         "arthurwang.vsc-prolog",
-        "streetsidesoftware.code-spell-checker"
+        "streetsidesoftware.code-spell-checker",
+        "yzhang.markdown-all-in-one",
+        "github.copilot"
     ]
 }
