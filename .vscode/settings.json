@@ -1,7 +1,14 @@
 {
     "cSpell.words": [
+        "Ammar",
+        "findall",
+        "getval",
         "Modbus",
-        "OMRON"
+        "Mousali",
+        "OMRON",
+        "setval",
+        "vfdparam",
+        "writef"
     ],
     "cSpell.enableFiletypes": [
         "prolog"
