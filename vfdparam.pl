@@ -3,10 +3,8 @@
 % vfdparam - Extract VFD parameters from a motor and VFD YAML specification
 %  
 % DESCRIPTION:
-%   This Prolog script reads a YAML file containing motor and Variable 
-%   Frequency Drive (VFD) specification and outputs configuration parameters.
-%   The script can only only those parameters that differ from their default 
-%   values. 
+%   Calculate Omron VFD configuration parameters from YAML VFD and motor 
+%   specification file.
 %
 % USAGE:
 %   Run as a standalone script:
@@ -33,11 +31,38 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+:- use_module(library(optparse)).
 :- initialization(main, main).
 
-main([Spec_Filename]) :-
-    yaml_read(Spec_Filename, S),
-    b_setval(spec, S),
+main(Args):-
+    OptsSpec=[
+        [opt(change_only), type(boolean), default(false),shortflags([c]), longflags(['changed-only']),help('Print parameter change summary only')], 
+        [opt(help), type(boolean), shortflags([h]), longflags([help]), help('Show this help message'), default(false)],
+        [opt(outfile), meta('FILE'), type(atom),shortflags([o]), longflags(['output-file']),help('write output to FILE'), default(false)]
+    ],
+    opt_parse( OptsSpec, Args, Ops, PositionalArgs),
+
+    (
+        Ops.help == true ->
+        (
+            opt_help(OptsSpec, Help),
+            format('USAGE:~+vfdprama [OPTION]... SPEC_YAML_FILENAME~nCalculate Omron VFD configuration parameters from YAML VFD and motor specification file.~nOPTIONS:~n~w~n', [Help]),
+            halt(0)
+        ); true
+    ),
+    ( 
+        PositionalArgs = [SpecFilename|_] ->
+        (
+            yaml_read(SpecFilename, S),
+            b_setval(spec, S)
+        ); true
+    ),
+
+    vfdparam(Ops),
+    halt(0).
+
+vfdparam(Ops):-
+    Ops.change_only == true,
 
     % cycle through all parameters.
     % Print if a parameter value different from default. 
@@ -51,12 +76,10 @@ main([Spec_Filename]) :-
         call(X_default,Y_default),
         Y \= Y_default,
         writef('%w : %6r\n', [Upper_X,Y])            
-    ), _),
-    halt.
+    ), _).
 
-main(['--full', Spec_Filename]) :-
-    yaml_read(Spec_Filename, S),
-    b_setval(spec, S),
+vfdparam(Ops):-
+    Ops.change_only == false,
 
     % cycle through all parameters.
     findall([Upper_X, Y], 
@@ -66,8 +89,7 @@ main(['--full', Spec_Filename]) :-
         call(X,Y), 
         string_upper(X,Upper_X), 
         writef('%w : %6r\n', [Upper_X,Y])            
-    ), _),
-    halt.
+    ), _).
 
 :- consult("utilities.pl").
 
