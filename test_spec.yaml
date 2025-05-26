@@ -4,7 +4,7 @@
 inverter : 
     model : 3G3MX2-A4150-V1(Q2)
     brand : OMRON
-    # accessories : 3G3AX-OP01
+    accessories : 3G3AX-OP01
 
 power_grid:
     voltage:
@@ -42,8 +42,7 @@ motor :
         # - DriveProgramming
         # - Operation function output
         speed_reference : voltage (FV)
-
-
+        
         #####################################################################
         # Run command source valid options:
         # - Drive-Programming
@@ -95,6 +94,9 @@ motor :
 #####################################################################
 # Standard operating Function settings
 operations:
+    # Initial frequency
+    initial_frequency: 120
+    
     #####################################################################
     # Heavy Load/Light Load oration Selection :
     # - Heavy (CT)

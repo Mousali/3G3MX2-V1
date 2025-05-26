@@ -32,11 +32,11 @@ vfdparam [OPTIONS] SPEC_YAML_FILENAME
 ```
 
 ### Options
-| Option           | Short Form | Default | Description |
-|------------------|------------|---------|-------------|
-| `--changed-only` | `-c`       | `false` | Output only parameters that differ from defaults |
-| `--help`         | `-h`       | `false` | Display help message and exit |
-| `--output-file`  | `-o FILE`  | STDOUT  | Write output to specified file |
+| Option           | Short Form | Description |
+|------------------|------------|-------------|
+| `--changed-only` | `-c`       | Output only parameters that differ from defaults |
+| `--help`         | `-h`       | Display help message and exit |
+| `--output-file`  | `-o FILE`  | Write output to specified file |
 
 ### Examples
 

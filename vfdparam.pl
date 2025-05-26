@@ -64,31 +64,64 @@ main(Args):-
 vfdparam(Ops):-
     Ops.change_only == true,
 
+    findall(Name, 
+    ( 
+        current_predicate(Name/1),
+        re_match("^[a,b,c,d,f,h,p,u]\\d{3}$",Name)
+    ), Params),
+    sort(Params, UniqueParams),
+
     % cycle through all parameters.
     % Print if a parameter value different from default. 
-    findall([Upper_X, Y], 
-    ( 
-        current_predicate(X/1),
-        re_match("^[a,b,c,d,f,h,p,u]\\d{3}$",X),
-        call(X,Y), 
-        string_upper(X,Upper_X), 
-        atom_concat(X,'_default', X_default),
-        call(X_default,Y_default),
-        Y \= Y_default,
-        writef('%w : %6r\n', [Upper_X,Y])            
+    findall([Param, Value], 
+    (
+        member(Param, UniqueParams), 
+        call(Param,Value),
+
+        atom_concat(Param,'_default', Param_default),
+        call(Param_default,Value_default),
+        Value =\= Value_default,    
+
+        string_upper(Param,Upper_Param), 
+        format('~w: ~w~n', [Upper_Param,Value])
     ), _).
 
 vfdparam(Ops):-
     Ops.change_only == false,
 
-    % cycle through all parameters.
-    findall([Upper_X, Y], 
+    findall(Name, 
     ( 
-        current_predicate(X/1),
-        re_match("^[a,b,c,d,f,h,p,u]\\d{3}$",X),
-        call(X,Y), 
-        string_upper(X,Upper_X), 
-        writef('%w : %6r\n', [Upper_X,Y])            
+        current_predicate(Name/1),
+        re_match("^[a,b,c,d,f,h,p,u]\\d{3}$",Name)
+    ), Params),
+
+    findall(Name, 
+    ( 
+        current_predicate(Name/1),
+        re_match("^[a,b,c,d,f,h,p,u]\\d{3}_default$",Name)
+    ), Param_defaults),
+    sort(Param_defaults, UniqueParam_defaults),
+
+    % cycle through all parameters.
+    % Print if a parameter value different from default. 
+    findall([Param_default, Value], 
+    (
+        member(Param_default, UniqueParam_defaults), 
+        call(Param_default,Value_default),
+
+        sub_string(Param_default, 0, 4, _, Sub),
+        atom_string(Param,Sub),
+        string_upper(Param,Upper_Param), 
+        ( 
+            member(Param,Params) -> 
+            (
+                call(Param,Value),
+                Value == [] -> format('a~w: ~w~n', [Upper_Param,Value]) ; format('b~w: ~w~n', [Upper_Param,Value_default])
+            );
+            (
+                format('~w: ~w~n', [Upper_Param,Value_default])
+            )
+        )
     ), _).
 
 % Load default predicates
