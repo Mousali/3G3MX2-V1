@@ -91,8 +91,6 @@ vfdparam(Ops):-
         writef('%w : %6r\n', [Upper_X,Y])            
     ), _).
 
-:- consult("utilities.pl").
-
 % Load default predicates
 :- consult("defaults/group_a_default").
 :- consult("defaults/group_b_default").

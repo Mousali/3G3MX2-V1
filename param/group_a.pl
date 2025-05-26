@@ -1,3 +1,5 @@
+:- consult("utilities.pl").
+
 a001("00") :- 
     b_getval(spec, S),
     S.motor.get('1st').get(speed_reference,"Digital Operator (F001)") = "Digital Operator (Volume)",
