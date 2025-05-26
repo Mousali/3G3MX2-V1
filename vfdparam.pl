@@ -38,7 +38,7 @@ main(Args):-
     OptsSpec=[
         [opt(change_only), type(boolean), default(false),shortflags([c]), longflags(['changed-only']),help('Print parameter change summary only')], 
         [opt(help), type(boolean), shortflags([h]), longflags([help]), help('Show this help message'), default(false)],
-        [opt(outfile), meta('FILE'), type(atom),shortflags([o]), longflags(['output-file']),help('write output to FILE'), default(false)]
+        [opt(outfile), meta('FILE'), type(atom), shortflags([o]), longflags(['output-file']),help('write output to FILE'), default(false)]
     ],
     opt_parse( OptsSpec, Args, Ops, PositionalArgs),
 
@@ -46,7 +46,7 @@ main(Args):-
         Ops.help == true ->
         (
             opt_help(OptsSpec, Help),
-            format('USAGE:~+vfdprama [OPTION]... SPEC_YAML_FILENAME~nCalculate Omron VFD configuration parameters from YAML VFD and motor specification file.~nOPTIONS:~n~w~n', [Help]),
+            format('USAGE:~+vfdparam [OPTION]... SPEC_YAML_FILENAME~nCalculate Omron VFD configuration parameters from YAML VFD and motor specification file.~nOPTIONS:~n~w~n', [Help]),
             halt(0)
         ); true
     ),

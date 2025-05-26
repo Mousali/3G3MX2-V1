@@ -1,4 +1,4 @@
-:- consult("utilities.pl").
+:- consult("../utilities.pl").
 
 a001("00") :- 
     b_getval(spec, S),
