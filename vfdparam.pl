@@ -116,7 +116,7 @@ vfdparam(Ops):-
             member(Param,Params) -> 
             (
                 call(Param,Value),
-                Value == [] -> format('a~w: ~w~n', [Upper_Param,Value]) ; format('b~w: ~w~n', [Upper_Param,Value_default])
+                Value == [] -> format('~w: ~w~n', [Upper_Param,Value]) ; format('~w: ~w~n', [Upper_Param,Value_default])
             );
             (
                 format('~w: ~w~n', [Upper_Param,Value_default])
