@@ -2,10 +2,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % vfdparam  -   Calculate VFD parameter values given a VFD and motor 
 %               specification YAML file. 
-%
+%  
 % USAGE:
-%   Run as a standalone script:
-%     $ vfdparam.pl [--calculated-only] SPEC_FILENAME
+%   vfdparam.pl [--calculated-only] SPEC_FILENAME
 %
 % OPTIONS:
 %   --calculated-only  -c  boolean=false    Print calculated parameter values only
@@ -13,10 +12,10 @@
 %   --output-file      -o  FILE:atom=false  write output to FILE
 %
 % INPUT:
-%   - A YAML file path (e.g., 'spec.yaml') containing VDF parameters.
+%   Specification YAML string from stdin or specification YAML filename.
 %
 % OUTPUT:
-%   - Prints non-default VDF parameters in YAML format to stdout.
+%   Prints VDF parameter values to stdout or output file.
 %
 % EXIT STATUS:
 %   - 0: Success
@@ -54,23 +53,28 @@ main(Args):-
         Ops.help == true ->
         (
             opt_help(OptsSpec, Help),
-            format('USAGE:~+vfdparam [OPTION]... SPEC_YAML_FILENAME~nCalculate Omron VFD configuration parameters from YAML VFD and motor specification file.~nOPTIONS:~n~w~n', [Help]),
+            format('USAGE:~n~+vfdparam [OPTION]... [SPEC_YAML_FILENAME]~n~nCalculate Omron VFD configuration parameters from YAML VFD and motor specification file.~n~nOPTIONS:~n~w~n', [Help]),
             halt(0)
         ); true
     ),
     ( 
         PositionalArgs = [SpecFilename|_] ->
         (
-            yaml_read(SpecFilename, S),
-            b_setval(spec, S)
-        ); true
+            % read spec from YAML file
+            yaml_read(SpecFilename, Str),
+            b_setval(spec, Str)
+        );(
+            % read spec POSIX stdin
+            yaml_read(user_input,Str),
+            b_setval(spec, Str)
+        )
     ),
 
     vfdparam(Ops),
     halt(0).
 
 vfdparam(Ops):-
-    Ops.change_only == true,
+    Ops.calculated_only == true,
 
     findall(Name, 
     ( 
@@ -90,7 +94,7 @@ vfdparam(Ops):-
     ), _).
 
 vfdparam(Ops):-
-    Ops.change_only == false,
+    Ops.calculated_only == false,
 
     findall(Name, 
     ( 
