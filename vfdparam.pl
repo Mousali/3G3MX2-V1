@@ -31,6 +31,15 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+:- consult("param/group_a").
+:- consult("param/group_b").
+:- consult("param/group_c").
+:- consult("param/group_d").
+:- consult("param/group_f").
+:- consult("param/group_h").
+:- consult("param/group_p").
+:- consult("param/group_u").
+
 :- use_module(library(optparse)).
 :- initialization(main, main).
 
@@ -66,7 +75,7 @@ vfdparam(Ops):-
 
     findall(Name, 
     ( 
-        current_predicate(Name/1),
+        current_predicate(Name/2),
         re_match("^[a,b,c,d,f,h,p,u]\\d{3}$",Name)
     ), Params),
     sort(Params, UniqueParams),
@@ -76,14 +85,10 @@ vfdparam(Ops):-
     findall([Param, Value], 
     (
         member(Param, UniqueParams), 
-        call(Param,Value),
+        call(Param,Value, computed),
 
-        atom_concat(Param,'_default', Param_default),
-        call(Param_default,Value_default),
-        Value =\= Value_default,    
-
-        string_upper(Param,Upper_Param), 
-        format('~w: ~w~n', [Upper_Param,Value])
+        string_upper(Param,Uppercase_Param), 
+        format('~w: ~w~n', [Uppercase_Param,Value])
     ), _).
 
 vfdparam(Ops):-
@@ -91,54 +96,16 @@ vfdparam(Ops):-
 
     findall(Name, 
     ( 
-        current_predicate(Name/1),
+        current_predicate(Name/2),
         re_match("^[a,b,c,d,f,h,p,u]\\d{3}$",Name)
     ), Params),
+    sort(Params, UniqueParams),
 
-    findall(Name, 
-    ( 
-        current_predicate(Name/1),
-        re_match("^[a,b,c,d,f,h,p,u]\\d{3}_default$",Name)
-    ), Param_defaults),
-    sort(Param_defaults, UniqueParam_defaults),
-
-    % cycle through all parameters.
-    % Print if a parameter value different from default. 
-    findall([Param_default, Value], 
+    findall([Param, Value], 
     (
-        member(Param_default, UniqueParam_defaults), 
-        call(Param_default,Value_default),
+        member(Param, UniqueParams), 
+        call(Param,Value, _),
 
-        sub_string(Param_default, 0, 4, _, Sub),
-        atom_string(Param,Sub),
-        string_upper(Param,Upper_Param), 
-        ( 
-            member(Param,Params) -> 
-            (
-                call(Param,Value),
-                Value == [] -> format('~w: ~w~n', [Upper_Param,Value]) ; format('~w: ~w~n', [Upper_Param,Value_default])
-            );
-            (
-                format('~w: ~w~n', [Upper_Param,Value_default])
-            )
-        )
+        string_upper(Param,Uppercase_Param), 
+        format('~w: ~w~n', [Uppercase_Param,Value])
     ), _).
-
-% Load default predicates
-:- consult("defaults/group_a_default").
-:- consult("defaults/group_b_default").
-:- consult("defaults/group_c_default").
-:- consult("defaults/group_d_default").
-:- consult("defaults/group_f_default").
-:- consult("defaults/group_h_default").
-:- consult("defaults/group_p_default").
-:- consult("defaults/group_u_default").
-
-:- consult("param/group_a").
-:- consult("param/group_b").
-:- consult("param/group_c").
-:- consult("param/group_d").
-:- consult("param/group_f").
-:- consult("param/group_h").
-:- consult("param/group_p").
-:- consult("param/group_u").

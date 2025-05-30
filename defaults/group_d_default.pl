@@ -1,1 +1,0 @@
-% Group d: Monitor Mode
