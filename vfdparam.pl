@@ -1,23 +1,22 @@
 #!/usr/bin/swipl -q
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% vfdparam - Extract VFD parameters from a motor and VFD YAML specification
-%  
-% DESCRIPTION:
-%   Calculate Omron VFD configuration parameters from YAML VFD and motor 
-%   specification file.
+% vfdparam  -   Calculate VFD parameter values given a VFD and motor 
+%               specification YAML file. 
 %
 % USAGE:
 %   Run as a standalone script:
-%     $ vfdparam.pl [--full] SPEC_FILENAME
+%     $ vfdparam.pl [--calculated-only] SPEC_FILENAME
+%
+% OPTIONS:
+%   --calculated-only  -c  boolean=false    Print calculated parameter values only
+%   --help             -h  boolean=false    Show this help message
+%   --output-file      -o  FILE:atom=false  write output to FILE
 %
 % INPUT:
 %   - A YAML file path (e.g., 'spec.yaml') containing VDF parameters.
 %
 % OUTPUT:
 %   - Prints non-default VDF parameters in YAML format to stdout.
-%
-% REQUIREMENTS:
-%   - SWI-Prolog.
 %
 % EXIT STATUS:
 %   - 0: Success
@@ -45,7 +44,7 @@
 
 main(Args):-
     OptsSpec=[
-        [opt(change_only), type(boolean), default(false),shortflags([c]), longflags(['changed-only']),help('Print parameter change summary only')], 
+        [opt(calculated_only), type(boolean), default(false),shortflags([c]), longflags(['calculated-only']),help('Print calculated parameter values only')], 
         [opt(help), type(boolean), shortflags([h]), longflags([help]), help('Show this help message'), default(false)],
         [opt(outfile), meta('FILE'), type(atom), shortflags([o]), longflags(['output-file']),help('write output to FILE'), default(false)]
     ],
@@ -80,8 +79,7 @@ vfdparam(Ops):-
     ), Params),
     sort(Params, UniqueParams),
 
-    % cycle through all parameters.
-    % Print if a parameter value different from default. 
+    % Print calculated values only
     findall([Param, Value], 
     (
         member(Param, UniqueParams), 
@@ -101,6 +99,7 @@ vfdparam(Ops):-
     ), Params),
     sort(Params, UniqueParams),
 
+    % Print all parameter values
     findall([Param, Value], 
     (
         member(Param, UniqueParams), 
