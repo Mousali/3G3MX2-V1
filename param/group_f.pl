@@ -1,6 +1,6 @@
 :- dynamic a001/1.
 
-f001(F, computed):-
+f001(F, calculated):-
    b_getval(spec, S),
    a001(02),
    F=S.operations.initial_frequency ,!.

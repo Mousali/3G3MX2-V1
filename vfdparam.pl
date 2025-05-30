@@ -45,7 +45,7 @@ main(Args):-
     OptsSpec=[
         [opt(calculated_only), type(boolean), default(false),shortflags([c]), longflags(['calculated-only']),help('Print calculated parameter values only')], 
         [opt(help), type(boolean), shortflags([h]), longflags([help]), help('Show this help message'), default(false)],
-        [opt(outfile), meta('FILE'), type(atom), shortflags([o]), longflags(['output-file']),help('write output to FILE'), default(false)]
+        [opt(outfile), meta('FILE'), type(atom), shortflags([o]), longflags(['output-file']),help('write output to FILE'), default(user_output)]
     ],
     opt_parse( OptsSpec, Args, Ops, PositionalArgs),
 
@@ -69,7 +69,7 @@ main(Args):-
             b_setval(spec, Str)
         )
     ),
-
+    open(Ops.outfile, write, _, [create([write]),alias(output)]),
     vfdparam(Ops),
     halt(0).
 
@@ -87,10 +87,10 @@ vfdparam(Ops):-
     findall([Param, Value], 
     (
         member(Param, UniqueParams), 
-        call(Param,Value, computed),
+        call(Param,Value, calculated),
 
-        string_upper(Param,Uppercase_Param), 
-        format('~w: ~w~n', [Uppercase_Param,Value])
+        string_upper(Param,Uppercase_Param),
+        format(output, '~w: ~w~n', [Uppercase_Param,Value])
     ), _).
 
 vfdparam(Ops):-
@@ -110,5 +110,5 @@ vfdparam(Ops):-
         call(Param,Value, _),
 
         string_upper(Param,Uppercase_Param), 
-        format('~w: ~w~n', [Uppercase_Param,Value])
+        format(output, '~w: ~w~n', [Uppercase_Param,Value])
     ), _).

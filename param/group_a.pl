@@ -1,132 +1,132 @@
 :- consult(["../utilities.pl"]).
 
-a001(00, computed):- 
+a001(00, calculated):- 
     b_getval(spec, S),
     S.motor.get('1st').get(speed_reference,"Digital Operator (F001)") = "Digital Operator (Volume)",
     S.inverter.accessories = "3G3AX-OP01", !.
 
-a001(01, computed):- 
+a001(01, calculated):- 
     b_getval(spec, S),
     S.motor.get('1st').get(speed_reference,"Digital Operator (F001)") = "Control circuit terminal block (Analog input)", !.
 
-a001(01, computed):-
+a001(01, calculated):-
     b_getval(spec, S),
     S.motor.get('1st').get(speed_reference,"Digital Operator (F001)") = "voltage (FV)", !.
 
-a001(01, computed):- 
+a001(01, calculated):- 
     b_getval(spec, S),
     S.motor.get('1st').get(speed_reference,"Digital Operator (F001)") = "current (FI)", !.
 
-a001(02, computed):- 
+a001(02, calculated):- 
     b_getval(spec, S),
     S.motor.get('1st').get(speed_reference,"Digital Operator (F001)") = "Digital Operator (F001)", !.
 
-a001(03, computed):- 
+a001(03, calculated):- 
     b_getval(spec, S),
     S.motor.get('1st').get(speed_reference,"Digital Operator (F001)") = "Modbus communication", !.
 
-a001(04, computed):- 
+a001(04, calculated):- 
     b_getval(spec, S),
     S.motor.get('1st').get(speed_reference,"Digital Operator (F001)") = "Option", !.
 
-a001(06, computed):- 
+a001(06, calculated):- 
     b_getval(spec, S),
     S.motor.get('1st').get(speed_reference,"Digital Operator (F001)") = "Pulse train frequency", !.
 
-a001(07, computed):- 
+a001(07, calculated):- 
     b_getval(spec, S),
     S.motor.get('1st').get(speed_reference,"Digital Operator (F001)") = "DriveProgramming", !.
 
-a001(10, computed):- 
+a001(10, calculated):- 
     b_getval(spec, S),
     S.motor.get('1st').get(speed_reference,"Digital Operator (F001)") = "Operation function output", !.
 
 a001(02, default).
 
 % A201
-a201(00, computed):- 
+a201(00, calculated):- 
     b_getval(spec, S),
     S.motor.get('2nd').get(speed_reference,"Digital Operator (F001)") = "Digital Operator (Volume)",
     S.inverter.accessories = "3G3AX-OP01", !.
 
-a201(01, computed):-
+a201(01, calculated):-
     b_getval(spec, S),
     S.motor.get('2nd').get(speed_reference,"Digital Operator (F001)") = "Control circuit terminal block (Analog input)", !.
 
-a201(01, computed):- 
+a201(01, calculated):- 
     b_getval(spec, S),
     S.motor.get('2nd').get(speed_reference,"Digital Operator (F001)") = "voltage (FV)", !.
 
-a201(01, computed):- 
+a201(01, calculated):- 
     b_getval(spec, S),
     S.motor.get('2nd').get(speed_reference,"Digital Operator (F001)") = "current (FI)", !.
 
-a201(02, computed):- 
+a201(02, calculated):- 
     b_getval(spec, S),
     S.motor.get('2nd').get(speed_reference,"Digital Operator (F001)") = "Digital Operator (F001)", !.
 
-a201(03, computed):- 
+a201(03, calculated):- 
     b_getval(spec, S),
     S.motor.get('2nd').get(speed_reference,"Digital Operator (F001)") = "Modbus communication", !.
 
-a201(04, computed):- 
+a201(04, calculated):- 
     b_getval(spec, S),
     S.motor.get('2nd').get(speed_reference,"Digital Operator (F001)") = "Option", !.
 
-a201(06, computed):- 
+a201(06, calculated):- 
     b_getval(spec, S),
     S.motor.get('2nd').get(speed_reference,"Digital Operator (F001)") = "Pulse train frequency", !.
 
-a201(07, computed):- 
+a201(07, calculated):- 
     b_getval(spec, S),
     S.motor.get('2nd').get(speed_reference,"Digital Operator (F001)") = "DriveProgramming", !.
 
-a201(10, computed):- 
+a201(10, calculated):- 
     b_getval(spec, S),
     S.motor.get('2nd').get(speed_reference,"Digital Operator (F001)") = "Operation function output", !.
 
 a201(02, default).
 
 % A002 1st RUN Command Selection
-a002(01, computed):-
+a002(01, calculated):-
     b_getval(spec, S),
     S.motor.get('1st').get('run_command_source',"Digital Operator") = "Control terminal block (Drive-Programming)", !.
 
-a002(02, computed):- 
+a002(02, calculated):- 
     b_getval(spec, S),
     S.motor.get('1st').get('run_command_source',"Digital Operator") = "Digital Operator", !.
 
-a002(03, computed):- 
+a002(03, calculated):- 
     b_getval(spec, S),
     S.motor.get('1st').get('run_command_source',"Digital Operator") = "Modbus communication", !.
 
-a002(04, computed):- 
+a002(04, calculated):- 
     b_getval(spec, S),
     S.motor.get('1st').get('run_command_source',"Digital Operator") = "Option", !.
 
 a002(02, default).
 
 % A202 2st RUN Command Selection
-a202(01, computed):- 
+a202(01, calculated):- 
     b_getval(spec, S),
     S.motor.get('2nd').get(run_command_source,"Digital Operator") ="Control terminal block (Drive-Programming)", !.
 
-a202(02, computed):- 
+a202(02, calculated):- 
     b_getval(spec, S),
     S.motor.get('2nd').get(run_command_source,"Digital Operator") = "Digital Operator", !.
 
-a202(03, computed):- 
+a202(03, calculated):- 
     b_getval(spec, S),
     S.motor.get('2nd').get(run_command_source,"Digital Operator") = "Modbus communication", !.
 
-a202(04, computed):- 
+a202(04, calculated):- 
     b_getval(spec, S),
     S.motor.get('2nd').get(run_command_source,"Digital Operator") = "Option", !.
 
 a202(02, default).
 
 % A003
-a003(F, computed):- 
+a003(F, calculated):- 
     b_getval(spec, S),
     freq_speed(F,S.motor.get('1st').get(rpm).get(base),S.motor.get('1st').get(poles)),
     F >= 30,
@@ -135,7 +135,7 @@ a003(F, computed):-
 
 a003(60.0, default).
 
-a203(F, computed):- 
+a203(F, calculated):- 
     b_getval(spec, S),
     freq_speed(F,S.motor.get('2st').get(rpm).get(base),S.motor.get('2st').get(poles)),
     F >= 30,
@@ -145,7 +145,7 @@ a203(F, computed):-
 a203(60.0, default).
 
 % motor maximum operating frequency
-a004(F, computed):- 
+a004(F, calculated):- 
     b_getval(spec, S),
     freq_speed(F,S.motor.get('1st').get(rpm).get(base),S.motor.get('1st').get(poles)),
     F =< 400,
@@ -153,13 +153,13 @@ a004(F, computed):-
 
 a004(60.0, default).
 
-a204(F, computed):- 
+a204(F, calculated):- 
     b_getval(spec, S),
     freq_speed(F,S.motor.get('2st').get(rpm).get(base),S.motor.get('2st').get(poles)),
     F =< 400,
     S.operations.inverter_mode \= "Induction motor high-frequency", !.
     
-a204(F, computed):- 
+a204(F, calculated):- 
     b_getval(spec, S),
     freq_speed(F,S.motor.get('2st').get(rpm).get(base),S.motor.get('2st').get(poles)),
     F =< 580,
@@ -169,49 +169,49 @@ a204(60.0, default).
     
 % A005 FV/FI Selection
 % Switch between FV (Voltage) and FI (Current)
-a005(00, computed):-
+a005(00, calculated):-
     b_getval(spec, S),
     S.motor.get('1st').get(speed_reference) = "voltage (FV)", !.
 
-a005(00, computed):-
+a005(00, calculated):-
     b_getval(spec, S),
     S.motor.get('1st').get(speed_reference) = "current (FI)", !.
     
 % Switch between FV (Voltage) and volume
-a005(02, computed):-
+a005(02, calculated):-
     b_getval(spec, S),
     S.inverter.get(accessories) = "3G3AX_OP01",
     S.motor.get('1st').get(speed_reference) = "voltage (FV)", !.
     
-a005(02, computed):-
+a005(02, calculated):-
     b_getval(spec, S),
     S.inverter.get(accessories) = "3G3AX_OP01",
     S.motor.get('1st').get(speed_reference) = "Digital Operator (Volume)", !.
     
 % 'witch between FI (Current) and volume
-a005(03, computed):-
+a005(03, calculated):-
     b_getval(spec, S),
     S.inverter.get(accessories) = "3G3AX_OP01",
     S.motor.get('1st').get(speed_reference) = "current (FI)", !.
 
-a005(03, computed):-
+a005(03, calculated):-
     b_getval(spec, S),
     S.inverter.get(accessories) = "3G3AX_OP01",
     S.motor.get('1st').get(speed_reference) = "Digital Operator (Volume)", !.
 
 a005(00, default).
 
-a141(02, computed):- 
+a141(02, calculated):- 
     b_getval(spec, S),
     S.motor.get('1st').get(speed_reference) = "voltage (FV)", !.
     
-a141(03, computed):- 
+a141(03, calculated):- 
     b_getval(spec, S),
     S.motor.get('1st').get(speed_reference) = "current (FI)", !.
 
 a141(02, default).
 
-a011(F, computed):-
+a011(F, calculated):-
     b_getval(spec, S),
     freq_speed( F , S.operations.get(s1) , S.motor.get('1st').get(poles) ),
     a003(A003,_),
@@ -219,7 +219,7 @@ a011(F, computed):-
 
 a011(0.00, default).
 
-a101(F, computed):-
+a101(F, calculated):-
     b_getval(spec, S),
     freq_speed( F , S.operations.get(s1) , S.motor.get('1st').get(poles) ),
     a003(A003,_),
@@ -227,7 +227,7 @@ a101(F, computed):-
 
 a101(0.00, default).
 
-a161(F, computed):-
+a161(F, calculated):-
     b_getval(spec, S),
     freq_speed( F , S.operations.get(s1) , S.motor.get('1st').get(poles) ),
     a003(A003,_),
@@ -236,7 +236,7 @@ a161(F, computed):-
 
 a161(0.00, default).
 
-a012(F, computed):-
+a012(F, calculated):-
     b_getval(spec, S),
     freq_speed( F , S.operations.get(s2) , S.motor.get('1st').get(poles) ),
     a003(A003,_),
@@ -244,7 +244,7 @@ a012(F, computed):-
 
 a012(0.00, default).
 
-a102(F, computed):-
+a102(F, calculated):-
     b_getval(spec, S),
     freq_speed( F , S.operations.get(s2) , S.motor.get('1st').get(poles) ),
     a003(A003,_),
@@ -252,7 +252,7 @@ a102(F, computed):-
 
 a102(0.00, default).
 
-a162(F, computed):-
+a162(F, calculated):-
     b_getval(spec, S),
     freq_speed( F , S.operations.get(s2) , S.motor.get('1st').get(poles) ),
     a003(A003,_),
@@ -260,7 +260,7 @@ a162(F, computed):-
 
 a162(0.00, default).
 
-a013(I0, computed):-
+a013(I0, calculated):-
     b_getval(spec, S),
     I0 is S.operations.get(i0),
     I1 is S.operations.get(i1),
@@ -268,7 +268,7 @@ a013(I0, computed):-
 
 a013(0.0, default).
 
-a103(I0, computed):-
+a103(I0, calculated):-
     b_getval(spec, S),
     I0 is S.operations.get(i0),
     I1 is S.operations.get(i1),
@@ -277,7 +277,7 @@ a103(I0, computed):-
 a103(20, default).
 
 
-a163(I0, computed):-
+a163(I0, calculated):-
     b_getval(spec, S),
     I0 is S.operations.get(i0),
     I1 is S.operations.get(i1),
@@ -286,7 +286,7 @@ a163(I0, computed):-
 a163(0.0, default).
 
 
-a014(I1, computed):-
+a014(I1, calculated):-
     b_getval(spec, S),
     I0 is S.operations.get(i0),
     I1 is S.operations.get(i1),
@@ -294,7 +294,7 @@ a014(I1, computed):-
 
 a014(100, default).
 
-a104(I1, computed):-
+a104(I1, calculated):-
     b_getval(spec, S),
     I0 is S.operations.get(i0),
     I1 is S.operations.get(i1),
@@ -302,7 +302,7 @@ a104(I1, computed):-
 
 a104(100, default).
 
-a164(I1, computed):-
+a164(I1, calculated):-
     b_getval(spec, S),
     I0 is S.operations.get(i0),
     I1 is S.operations.get(i1),
@@ -310,18 +310,18 @@ a164(I1, computed):-
 
 a164(100.0, default).
 
-a015(00, computed):-
+a015(00, calculated):-
     b_getval(spec, S),
     S.operations.get(s0_at_0) = 0, !.
     
-a015(01, computed):-
+a015(01, calculated):-
     b_getval(spec, S),
     S.operations.get(s0_at_0) > 0,
     S.operations.get(s0_at_0) = S.operations.get(s1), !.
         
 a015(01, default).
    
-% a016('31', computed):-
+% a016('31', calculated):-
 %     % TODO: must not be using PID function
 %     analog_input_filter_ms('Fixed to 500-ms filter with ±0.1-Hz hysteresis');
 %     (
@@ -331,14 +331,14 @@ a015(01, default).
 
 % %volume_control_3G3AX_OP01(false), !.
 
-% a016(X, computed):-
+% a016(X, calculated):-
 %     analog_input_filter_ms(Y),
 %     Y =< 61,
 %     X is div(Y,2), !.
 
 a016(8.0, default).
 
-%a017(00, computed):-
+%a017(00, calculated):-
     % DriveProgramming Function Parameters are not covered. 
     % 01: Enabled (Start/stop via multifunction
     % input PRG terminal)
@@ -348,9 +348,9 @@ a016(8.0, default).
 a017(00, default).
 
 % Multi-step speed, jogging
-%a019(00, computed):-
+%a019(00, calculated):-
 %    'Binary (16-step selection with 4 terminals)'
-%a019(00, computed):-
+%a019(00, calculated):-
 %    'Bit (8-step selection with 7 terminals)'
 
 a019(00, default).
