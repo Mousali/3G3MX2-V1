@@ -45,7 +45,7 @@ main(Args):-
     OptsSpec=[
         [opt(calculated_only), type(boolean), default(false),shortflags([c]), longflags(['calculated-only']),help('Print calculated parameter values only')], 
         [opt(help), type(boolean), shortflags([h]), longflags([help]), help('Show this help message'), default(false)],
-        [opt(outfile), meta('FILE'), type(atom), shortflags([o]), longflags(['output-file']),help('write output to FILE'), default(user_output)]
+        [opt(outfile), meta('FILE'), type(atom), shortflags([o]), longflags(['output-file']),help('write output to FILE'), default(std_out)]
     ],
     opt_parse( OptsSpec, Args, Ops, PositionalArgs),
 
@@ -69,12 +69,13 @@ main(Args):-
             b_setval(spec, Str)
         )
     ),
-    open(Ops.outfile, write, _, [create([write]),alias(output)]),
-    vfdparam(Ops),
-    halt(0).
-
-vfdparam(Ops):-
-    Ops.calculated_only == true,
+    (
+        Ops.outfile = std_out -> true 
+        ;(
+            open(Ops.outfile, write, Out),
+            set_output(Out)
+        )
+    ),
 
     findall(Name, 
     ( 
@@ -83,32 +84,19 @@ vfdparam(Ops):-
     ), Params),
     sort(Params, UniqueParams),
 
-    % Print calculated values only
     findall([Param, Value], 
     (
         member(Param, UniqueParams), 
-        call(Param,Value, calculated),
-
-        string_upper(Param,Uppercase_Param),
-        format(output, '~w: ~w~n', [Uppercase_Param,Value])
-    ), _).
-
-vfdparam(Ops):-
-    Ops.calculated_only == false,
-
-    findall(Name, 
-    ( 
-        current_predicate(Name/2),
-        re_match("^[a,b,c,d,f,h,p,u]\\d{3}$",Name)
-    ), Params),
-    sort(Params, UniqueParams),
-
-    % Print all parameter values
-    findall([Param, Value], 
-    (
-        member(Param, UniqueParams), 
-        call(Param,Value, _),
+        
+        (
+            Ops.calculated_only -> 
+            call(Param,Value, calculated) ; 
+            call(Param,Value, _)
+        ),
 
         string_upper(Param,Uppercase_Param), 
-        format(output, '~w: ~w~n', [Uppercase_Param,Value])
-    ), _).
+        format('~w: ~w~n', [Uppercase_Param,Value])
+    ), _),
+
+    halt(0).
+
