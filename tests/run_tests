@@ -1,0 +1,8 @@
+#!/usr/bin/swipl -q
+
+%swipl -g run_tests -t halt your/file.pl
+
+:- [group_a_test].
+
+:- run_tests.
+:- halt(0).
