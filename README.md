@@ -1,12 +1,12 @@
 # OMRON MX2 Series Type V1 Inverter Parameter Generator (3G3MX2-V1)
 
-An expert system that automatically generates optimal OMRON MX2 VFD parameters from motor and drive specifications.
+An expert system that calculate VFD parameter values given a VFD and motor specification YAML file.
 
 ## Features
 
-- 🚀 **Automated Configuration** - Generates precise VFD settings from simple YAML input
-- ⚡ **Error Reduction** - Eliminates manual calculation mistakes
-- � **Two Output Modes** - View full parameters or only changed values
+- 🚀 **Automated Configuration** - Generates VFD settings from simple YAML input
+- ⚡ **Error Reduction** - Eliminates manual calculation
+- � **Two Output Modes** - View full parameters or only calculated values
 - 📁 **Flexible Output** - Print to console or save to file
 
 ## Background
@@ -28,15 +28,15 @@ This project introduces an expert system that automates parameter generation. Us
 
 ### Basic Command
 ```sh
-vfdparam [OPTIONS] SPEC_YAML_FILENAME
+vfdparam [OPTIONS] [SPEC_YAML_FILENAME]
 ```
 
 ### Options
 | Option           | Short Form | Description |
 |------------------|------------|-------------|
-| `--changed-only` | `-c`       | Output only parameters that differ from defaults |
-| `--help`         | `-h`       | Display help message and exit |
-| `--output-file`  | `-o FILE`  | Write output to specified file |
+| `--calculated-only` | `-c`       | Print calculated parameter values only |
+| `--output-file`  | `-o FILE`  | Write output to file |
+| `--help`         | `-h`       | Display this help message |
 
 ### Examples
 
@@ -49,7 +49,7 @@ vfdparam motor_config.yaml
 ```sh
 vfdparam -c motor_config.yaml
 # Equivalent to:
-vfdparam --changed-only motor_config.yaml
+vfdparam --calculated-only motor_config.yaml
 ```
 
 #### 3. Save output to file
@@ -80,9 +80,10 @@ motor :
             max : 24000
         poles : 2
         voltage : 220
+...
 ```
 
 ### Output Interpretation
-- Parameters are output in YAML format
+- Parameter values output to stdout or optional output file (YAML format)
 - Each line shows: `ParameterCode: Value  # Description`
-- When using `-c`, only non-default values are shown
+- When using `-c`, only calculated values are printed

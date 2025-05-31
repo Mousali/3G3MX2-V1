@@ -8,8 +8,8 @@
 %
 % OPTIONS:
 %   --calculated-only  -c  boolean=false    Print calculated parameter values only
-%   --help             -h  boolean=false    Show this help message
 %   --output-file      -o  FILE:atom=false  write output to FILE
+%   --help             -h  boolean=false    Show this help message
 %
 % INPUT:
 %   Specification YAML string from stdin or specification YAML filename.
