@@ -16,8 +16,8 @@ power_grid:
 #####################################################################
 # Attached Motors Specifications
 #####################################################################
-motor :
-    1st :
+motor:
+    1st:
         brand : HQD
         model : GDZ-24
         power_kw : 3.0
@@ -41,7 +41,7 @@ motor :
         # - Pulse train frequency
         # - DriveProgramming
         # - Operation function output
-        speed_reference : voltage (FV)
+        speed_reference: voltage (FV)
         
         #####################################################################
         # Run command source valid options:

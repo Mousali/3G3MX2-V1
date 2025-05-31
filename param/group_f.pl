@@ -3,7 +3,7 @@
 f001(F, calculated):-
    b_getval(spec, S),
    a001(02),
-   F=S.operations.initial_frequency ,!.
+   F = S.get(operations/initial_frequency) ,!.
 
 % Default values 
 % Group f: Basic function Parameters

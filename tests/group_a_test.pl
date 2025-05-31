@@ -12,6 +12,6 @@ test(
         [ 
             setup(load_spec('test_spec.yaml'))
         ]
-    ):- a001(1,calculated).
+    ):- a001(01,calculated).
 
 :- end_tests(group_a).
