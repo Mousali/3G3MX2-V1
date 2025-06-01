@@ -70,11 +70,11 @@ main(Args):-
         )
     ),
     (
-        Ops.outfile = std_out -> true 
-        ;(
+        Ops.outfile \= std_out ->  
+        (
             open(Ops.outfile, write, Out),
             set_output(Out)
-        )
+        ); true
     ),
 
     findall(Name, 
