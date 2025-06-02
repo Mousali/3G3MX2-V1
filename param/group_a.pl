@@ -1,45 +1,60 @@
+:- use_module(library(macros)).
+:- use_module(library(isub)).
+
 :- consult(["../utilities.pl"]).
+
+#define(fuzzy_match_key_value(K,V), (isub(K, V, D, [normalize(true),zero_to_one(true)]), D >= 0.8)).
 
 a001(00, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'1st'/speed_reference) = "Digital Operator (Volume)",
-    S.get(inverter/accessories) = "3G3AX-OP01", !.
+	#fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"Digital Operator (Volume)"),
+	#fuzzy_match_key_value(S.get(inverter/accessories),"3G3AX-OP01"),
+	!.
 
 a001(01, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'1st'/speed_reference) = "Control circuit terminal block (Analog input)", !.
+	#fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"Control circuit terminal block (Analog input)"),
+	!.
 
 a001(01, calculated):-
     b_getval(spec, S),
-    S.get(motor/'1st'/speed_reference) = "voltage (FV)", !.
+	#fuzzy_match_key_value(S.get(motor/'1st'/speed_reference), "voltage (FV)"),
+	!.
 
 a001(01, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'1st'/speed_reference) = "current (FI)", !.
+	#fuzzy_match_key_value(S.get(motor/'1st'/speed_reference), "current (FI)"),
+	!.
 
 a001(02, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'1st'/speed_reference) = "Digital Operator (F001)", !.
+	#fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"Digital Operator (F001)"),
+	!.
 
 a001(03, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'1st'/speed_reference) = "Modbus communication", !.
+	#fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"Modbus communication"),
+	!.
 
 a001(04, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'1st'/speed_reference) = "Option", !.
+	#fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"Option"),
+	!.
 
 a001(06, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'1st'/speed_reference) = "Pulse train frequency", !.
+	#fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"Pulse train frequency"),
+	!.
 
 a001(07, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'1st'/speed_reference) = "DriveProgramming", !.
+	#fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"DriveProgramming"),
+	!.
 
 a001(10, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'1st'/speed_reference) = "Operation function output", !.
+	#fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"Operation function output"),
+	!.
 
 a001(02, default).
 

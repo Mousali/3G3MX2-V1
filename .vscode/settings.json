@@ -1,22 +1,23 @@
 {
-    "cSpell.words": [
-        "Ammar",
-        "findall",
-        "getval",
-        "longflags",
-        "Modbus",
-        "Mousali",
-        "OMRON",
-        "optparse",
-        "setval",
-        "shortflags",
-        "vfdparam",
-        "writef"
-    ],
-    "cSpell.enableFiletypes": [
-        "prolog"
-    ],
-    "cSpell.enabledFileTypes": {
-        "prolog": true
-    }
+	"cSpell.words": [
+		"Ammar",
+		"findall",
+		"getval",
+		"isub",
+		"longflags",
+		"Modbus",
+		"Mousali",
+		"OMRON",
+		"optparse",
+		"setval",
+		"shortflags",
+		"vfdparam",
+		"writef"
+	],
+	"cSpell.enableFiletypes": [
+		"prolog"
+	],
+	"cSpell.enabledFileTypes": {
+		"prolog": true
+	}
 }
