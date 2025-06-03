@@ -61,82 +61,82 @@ a001(02, default).
 % A201
 a201(00, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'2nd'/speed_reference) = "Digital Operator (Volume)",
-    S.get(inverter/accessories) = "3G3AX-OP01", !.
+    #fuzzy_match_key_value(S.get(motor/'2nd'/speed_reference),"Digital Operator (Volume)"),
+    #fuzzy_match_key_value(S.get(inverter/accessories),"3G3AX-OP01"), !.
 
 a201(01, calculated):-
     b_getval(spec, S),
-    S.get(motor/'2nd'/speed_reference) = "Control circuit terminal block (Analog input)", !.
+    #fuzzy_match_key_value(S.get(motor/'2nd'/speed_reference),"Control circuit terminal block (Analog input)"), !.
 
 a201(01, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'2nd'/speed_reference) = "voltage (FV)", !.
+    #fuzzy_match_key_value(S.get(motor/'2nd'/speed_reference),"voltage (FV)"), !.
 
 a201(01, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'2nd'/speed_reference) = "current (FI)", !.
+    #fuzzy_match_key_value(S.get(motor/'2nd'/speed_reference),"current (FI)"), !.
 
 a201(02, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'2nd'/speed_reference) = "Digital Operator (F001)", !.
+    #fuzzy_match_key_value(S.get(motor/'2nd'/speed_reference),"Digital Operator (F001)"), !.
 
 a201(03, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'2nd'/speed_reference) = "Modbus communication", !.
+    #fuzzy_match_key_value(S.get(motor/'2nd'/speed_reference),"Modbus communication"), !.
 
 a201(04, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'2nd'/speed_reference) = "Option", !.
+    #fuzzy_match_key_value(S.get(motor/'2nd'/speed_reference),"Option"), !.
 
 a201(06, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'2nd'/speed_reference) = "Pulse train frequency", !.
+    #fuzzy_match_key_value(S.get(motor/'2nd'/speed_reference),"Pulse train frequency"), !.
 
 a201(07, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'2nd'/speed_reference) = "DriveProgramming", !.
+    #fuzzy_match_key_value(S.get(motor/'2nd'/speed_reference),"DriveProgramming"), !.
 
 a201(10, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'2nd'/speed_reference) = "Operation function output", !.
+    #fuzzy_match_key_value(S.get(motor/'2nd'/speed_reference),"Operation function output"), !.
 
 a201(02, default).
 
 % A002 1st RUN Command Selection
 a002(01, calculated):-
     b_getval(spec, S),
-    S.get(motor/'1st'/'run_command_source') = "Control terminal block (Drive-Programming)", !.
+    #fuzzy_match_key_value(S.get(motor/'1st'/'run_command_source'),"Control terminal block (Drive-Programming)"), !.
 
 a002(02, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'1st'/'run_command_source') = "Digital Operator", !.
+    #fuzzy_match_key_value(S.get(motor/'1st'/'run_command_source'),"Digital Operator"), !.
 
 a002(03, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'1st'/'run_command_source') = "Modbus communication", !.
+    #fuzzy_match_key_value(S.get(motor/'1st'/'run_command_source'),"Modbus communication"), !.
 
 a002(04, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'1st'/'run_command_source') = "Option", !.
+    #fuzzy_match_key_value(S.get(motor/'1st'/'run_command_source'),"Option"), !.
 
 a002(02, default).
 
 % A202 2st RUN Command Selection
 a202(01, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'2st'/'run_command_source') = "Control terminal block (Drive-Programming)", !.
+    #fuzzy_match_key_value(S.get(motor/'2st'/'run_command_source'),"Control terminal block (Drive-Programming)"), !.
 
 a202(02, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'2st'/'run_command_source') = "Digital Operator", !.
+    #fuzzy_match_key_value(S.get(motor/'2st'/'run_command_source'),"Digital Operator"), !.
 
 a202(03, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'2st'/'run_command_source') = "Modbus communication", !.
+    #fuzzy_match_key_value(S.get(motor/'2st'/'run_command_source'),"Modbus communication"), !.
 
 a202(04, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'2st'/'run_command_source') = "Option", !.
+    #fuzzy_match_key_value(S.get(motor/'2st'/'run_command_source'),"Option"), !.
 
 a202(02, default).
 
@@ -164,13 +164,13 @@ a004(F, calculated):-
     b_getval(spec, S),
     freq_speed( F, S.get(motor/'1st'/rpm/base),S.get(motor/'1st'/poles) ),
     F =< 400,
-    S.operations.inverter_mode \= "Induction motor high-frequency", !.
+    \+ #fuzzy_match_key_value(S.get(operations/inverter_mode),"Induction motor high-frequency"), !.
 
 a004(F, calculated):- 
     b_getval(spec, S),
     freq_speed( F, S.get(motor/'1st'/rpm/base),S.get(motor/'1st'/poles) ),
     F =< 580,
-    S.operations.inverter_mode = "Induction motor high-frequency", !.
+    #fuzzy_match_key_value(S.get(operations/inverter_mode),"Induction motor high-frequency"), !.
 
 a004(60.0, default).
 
@@ -178,13 +178,13 @@ a204(F, calculated):-
     b_getval(spec, S),
     freq_speed( F, S.get(motor/'2st'/rpm/base),S.get(motor/'2st'/poles) ),
     F =< 400,
-    S.operations.inverter_mode \= "Induction motor high-frequency", !.
+    \+ #fuzzy_match_key_value(S.get(operations/inverter_mode),"Induction motor high-frequency"), !.
     
 a204(F, calculated):- 
     b_getval(spec, S),
     freq_speed( F, S.get(motor/'2st'/rpm/base),S.get(motor/'2st'/poles) ),
     F =< 580,
-    S.operations.inverter_mode = "Induction motor high-frequency", !.
+    #fuzzy_match_key_value(S.get(operations/inverter_mode),"Induction motor high-frequency"), !.
 
 a204(60.0, default).
     
@@ -192,43 +192,43 @@ a204(60.0, default).
 % Switch between FV (Voltage) and FI (Current)
 a005(00, calculated):-
     b_getval(spec, S),
-    S.get(motor/'1st'/speed_reference) = "voltage (FV)", !.
+    #fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"voltage (FV)"), !.
 
 a005(00, calculated):-
     b_getval(spec, S),
-    S.get(motor/'1st'/speed_reference) = "current (FI)", !.
+    #fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"current (FI)"), !.
     
 % Switch between FV (Voltage) and volume
 a005(02, calculated):-
     b_getval(spec, S),
-    S.get(inverter/accessories) = "3G3AX_OP01",
-    S.get(motor/'1st'/speed_reference) = "voltage (FV)", !.
+    #fuzzy_match_key_value(S.get(inverter/accessories),"3G3AX_OP01"),
+    #fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"voltage (FV)"), !.
     
 a005(02, calculated):-
     b_getval(spec, S),
-    S.get(inverter/accessories) = "3G3AX_OP01",
-    S.get(motor/'1st'/speed_reference) = "Digital Operator (Volume)", !.
+    #fuzzy_match_key_value(S.get(inverter/accessories),"3G3AX_OP01"),
+    #fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"Digital Operator (Volume)"), !.
     
 % 'witch between FI (Current) and volume
 a005(03, calculated):-
     b_getval(spec, S),
-    S.get(inverter/accessories) = "3G3AX_OP01",
-    S.get(motor/'1st'/speed_reference) = "current (FI)", !.
+    #fuzzy_match_key_value(S.get(inverter/accessories),"3G3AX_OP01"),
+    #fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"current (FI)"), !.
 
 a005(03, calculated):-
     b_getval(spec, S),
-    S.get(inverter/accessories) = "3G3AX_OP01",
-    S.get(motor/'1st'/speed_reference) = "Digital Operator (Volume)", !.
+    #fuzzy_match_key_value(S.get(inverter/accessories),"3G3AX_OP01"),
+    #fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"Digital Operator (Volume)"), !.
 
 a005(00, default).
 
 a141(02, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'1st'/speed_reference) = "voltage (FV)", !.
+    #fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"voltage (FV)"), !.
     
 a141(03, calculated):- 
     b_getval(spec, S),
-    S.get(motor/'1st'/speed_reference) = "current (FI)", !.
+    #fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"current (FI)"), !.
 
 a141(02, default).
 
