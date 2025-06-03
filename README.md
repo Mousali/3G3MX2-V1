@@ -24,6 +24,10 @@ This project introduces an expert system that automates parameter generation. Us
 | ❌ Requires deep expertise | ✅ Accessible to all engineers |
 | ❌ Difficult to verify | ✅ Transparent calculations |
 
+## Minimum System Requirements:
+Docker is a requirement. 
+Docker will download SWI prolog image and execute the script inside a container.
+
 ## Usage
 
 ### Basic Command
