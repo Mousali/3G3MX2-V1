@@ -1,57 +1,56 @@
-:- use_module(library(macros)).
+:- use_module(library(clpfd)).
 :- use_module(library(isub)).
-
-:- consult(["../utilities.pl"]).
+:- use_module(library(macros)).
 
 #define(fuzzy_match_key_value(K,V), (isub(K, V, D, [normalize(true),zero_to_one(true)]), D >= 0.8)).
 
-a001(00, calculated):- 
+a001(00, "Digital Operator (Volume) with 3G3AX-OP01"):- 
     b_getval(spec, S),
 	#fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"Digital Operator (Volume)"),
 	#fuzzy_match_key_value(S.get(inverter/accessories),"3G3AX-OP01"),
 	!.
 
-a001(01, calculated):- 
+a001(01, "Control circuit terminal block (Analog input)"):- 
     b_getval(spec, S),
 	#fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"Control circuit terminal block (Analog input)"),
 	!.
 
-a001(01, calculated):-
+a001(01, "voltage (FV)"):-
     b_getval(spec, S),
-	#fuzzy_match_key_value(S.get(motor/'1st'/speed_reference), "voltage (FV)"),
+    #fuzzy_match_key_value(S.get(motor/'1st'/speed_reference), "voltage (FV)"),
 	!.
 
-a001(01, calculated):- 
+a001(01, "current (FI)"):- 
     b_getval(spec, S),
 	#fuzzy_match_key_value(S.get(motor/'1st'/speed_reference), "current (FI)"),
 	!.
 
-a001(02, calculated):- 
+a001(02, "Digital Operator (F001)"):- 
     b_getval(spec, S),
 	#fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"Digital Operator (F001)"),
 	!.
 
-a001(03, calculated):- 
+a001(03, "Modbus communication"):- 
     b_getval(spec, S),
 	#fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"Modbus communication"),
 	!.
 
-a001(04, calculated):- 
+a001(04, "Option"):- 
     b_getval(spec, S),
 	#fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"Option"),
 	!.
 
-a001(06, calculated):- 
+a001(06, "Pulse train frequency"):- 
     b_getval(spec, S),
 	#fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"Pulse train frequency"),
 	!.
 
-a001(07, calculated):- 
+a001(07, "DriveProgramming"):- 
     b_getval(spec, S),
 	#fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"DriveProgramming"),
 	!.
 
-a001(10, calculated):- 
+a001(10, "Operation function output"):- 
     b_getval(spec, S),
 	#fuzzy_match_key_value(S.get(motor/'1st'/speed_reference),"Operation function output"),
 	!.
@@ -59,130 +58,138 @@ a001(10, calculated):-
 a001(02, default).
 
 % A201
-a201(00, calculated):- 
+a201(00, "Digital Operator (Volume) with 3G3AX-OP01"):- 
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(motor/'2nd'/speed_reference),"Digital Operator (Volume)"),
     #fuzzy_match_key_value(S.get(inverter/accessories),"3G3AX-OP01"), !.
 
-a201(01, calculated):-
+a201(01, "Control circuit terminal block (Analog input)"):-
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(motor/'2nd'/speed_reference),"Control circuit terminal block (Analog input)"), !.
 
-a201(01, calculated):- 
+a201(01, "voltage (FV)"):- 
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(motor/'2nd'/speed_reference),"voltage (FV)"), !.
 
-a201(01, calculated):- 
+a201(01, "current (FI)"):- 
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(motor/'2nd'/speed_reference),"current (FI)"), !.
 
-a201(02, calculated):- 
+a201(02, "Digital Operator (F001)"):- 
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(motor/'2nd'/speed_reference),"Digital Operator (F001)"), !.
 
-a201(03, calculated):- 
+a201(03, "Digital Operator (F001)"):- 
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(motor/'2nd'/speed_reference),"Modbus communication"), !.
 
-a201(04, calculated):- 
+a201(04, "Option"):- 
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(motor/'2nd'/speed_reference),"Option"), !.
 
-a201(06, calculated):- 
+a201(06, "Pulse train frequency"):- 
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(motor/'2nd'/speed_reference),"Pulse train frequency"), !.
 
-a201(07, calculated):- 
+a201(07, "DriveProgramming"):- 
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(motor/'2nd'/speed_reference),"DriveProgramming"), !.
 
-a201(10, calculated):- 
+a201(10, "Operation function output"):- 
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(motor/'2nd'/speed_reference),"Operation function output"), !.
 
 a201(02, default).
 
 % A002 1st RUN Command Selection
-a002(01, calculated):-
+a002(01, "Control terminal block (Drive-Programming)"):-
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(motor/'1st'/'run_command_source'),"Control terminal block (Drive-Programming)"), !.
 
-a002(02, calculated):- 
+a002(02, "Digital Operator"):- 
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(motor/'1st'/'run_command_source'),"Digital Operator"), !.
 
-a002(03, calculated):- 
+a002(03, "Modbus communication"):- 
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(motor/'1st'/'run_command_source'),"Modbus communication"), !.
 
-a002(04, calculated):- 
+a002(04, "Option"):- 
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(motor/'1st'/'run_command_source'),"Option"), !.
 
 a002(02, default).
 
 % A202 2st RUN Command Selection
-a202(01, calculated):- 
+a202(01, "Control terminal block (Drive-Programming)"):- 
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(motor/'2st'/'run_command_source'),"Control terminal block (Drive-Programming)"), !.
 
-a202(02, calculated):- 
+a202(02, "Digital Operator"):- 
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(motor/'2st'/'run_command_source'),"Digital Operator"), !.
 
-a202(03, calculated):- 
+a202(03, "Modbus communication"):- 
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(motor/'2st'/'run_command_source'),"Modbus communication"), !.
 
-a202(04, calculated):- 
+a202(04, "Option"):- 
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(motor/'2st'/'run_command_source'),"Option"), !.
 
 a202(02, default).
 
 % A003
-a003(F, calculated):- 
+a003(F, Msg):- 
     b_getval(spec, S),
-    freq_speed( F, S.get(motor/'1st'/rpm/base),S.get(motor/'1st'/poles) ),
+    F #= S.get(motor/'1st'/rpm/base) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D Hz * ~D poles) / 120', [S.get(motor/'1st'/rpm/base), S.get(motor/'1st'/poles)]),
     F >= 30,
     a004(F_max, _),
-    F =< F_max, !.
+    F =< F_max, 
+    !.
 
 a003(60.0, default).
 
-a203(F, calculated):- 
+a203(F, Msg):- 
     b_getval(spec, S),
-    freq_speed( F, S.get(motor/'2st'/rpm/base),S.get(motor/'2st'/poles) ),
+    F #= S.get(motor/'1st'/rpm/base) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D Hz * ~D poles) / 120', [S.get(motor/'1st'/rpm/base), S.get(motor/'1st'/poles)]),
     F >= 30,
     a204(F_max,_),
-    F =< F_max, !.
+    F =< F_max, 
+    !.
 
 a203(60.0, default).
 
 % motor maximum operating frequency
-a004(F, calculated):- 
+a004(F, Msg):- 
     b_getval(spec, S),
-    freq_speed( F, S.get(motor/'1st'/rpm/base),S.get(motor/'1st'/poles) ),
+    F #= S.get(motor/'1st'/rpm/base) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D Hz * ~D poles) / 120', [S.get(motor/'1st'/rpm/base), S.get(motor/'1st'/poles)]),
     F =< 400,
     \+ #fuzzy_match_key_value(S.get(operations/inverter_mode),"Induction motor high-frequency"), !.
 
-a004(F, calculated):- 
+a004(F, Msg):- 
     b_getval(spec, S),
-    freq_speed( F, S.get(motor/'1st'/rpm/base),S.get(motor/'1st'/poles) ),
+    F #= S.get(motor/'1st'/rpm/base) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D Hz * ~D poles) / 120 (high-frequency mode)', [S.get(motor/'1st'/rpm/base), S.get(motor/'1st'/poles)]),
     F =< 580,
     #fuzzy_match_key_value(S.get(operations/inverter_mode),"Induction motor high-frequency"), !.
 
 a004(60.0, default).
 
-a204(F, calculated):- 
+a204(F, Msg):- 
     b_getval(spec, S),
-    freq_speed( F, S.get(motor/'2st'/rpm/base),S.get(motor/'2st'/poles) ),
+    F #= S.get(motor/'1st'/rpm/base) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D Hz * ~D poles) / 120', [S.get(motor/'1st'/rpm/base), S.get(motor/'1st'/poles)]),
     F =< 400,
     \+ #fuzzy_match_key_value(S.get(operations/inverter_mode),"Induction motor high-frequency"), !.
     
-a204(F, calculated):- 
+a204(F, Msg):- 
     b_getval(spec, S),
-    freq_speed( F, S.get(motor/'2st'/rpm/base),S.get(motor/'2st'/poles) ),
+    F #= S.get(motor/'1st'/rpm/base) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D Hz * ~D poles) / 120 (high-frequency mode)', [S.get(motor/'1st'/rpm/base), S.get(motor/'1st'/poles)]),
     F =< 580,
     #fuzzy_match_key_value(S.get(operations/inverter_mode),"Induction motor high-frequency"), !.
 
@@ -234,7 +241,7 @@ a141(02, default).
 
 a011(F, calculated):-
     b_getval(spec, S),
-    freq_speed( F, S.get(operations/s1),S.get(motor/'1st'/poles) ),
+    F #= S.get(motor/'1st'/rpm/base) * S.get(motor/'1st'/poles) // 120,
     a003(A003,_),
     F =< A003, !.
 
@@ -242,7 +249,7 @@ a011(0.00, default).
 
 a101(F, calculated):-
     b_getval(spec, S),
-    freq_speed( F, S.get(operations/s1),S.get(motor/'1st'/poles) ),
+    F #= S.get(motor/'1st'/rpm/base) * S.get(motor/'1st'/poles) // 120,
     a003(A003,_),
     F =< A003, !.
 
@@ -250,7 +257,7 @@ a101(0.00, default).
 
 a161(F, calculated):-
     b_getval(spec, S),
-    freq_speed( F, S.get(operations/s1),S.get(motor/'1st'/poles) ),
+    F #= S.get(motor/'1st'/rpm/base) * S.get(motor/'1st'/poles) // 120,
     a003(A003,_),
     F =< A003,
     F < 100, !.
@@ -259,7 +266,7 @@ a161(0.00, default).
 
 a012(F, calculated):-
     b_getval(spec, S),
-    freq_speed( F, S.get(operations/s1),S.get(motor/'1st'/poles) ),
+    F #= S.get(motor/'1st'/rpm/base) * S.get(motor/'1st'/poles) // 120,
     a003(A003,_),
     F =< A003, !.
 
@@ -267,7 +274,7 @@ a012(0.00, default).
 
 a102(F, calculated):-
     b_getval(spec, S),
-    freq_speed( F, S.get(operations/s1),S.get(motor/'1st'/poles) ),
+    F #= S.get(motor/'1st'/rpm/base) * S.get(motor/'1st'/poles) // 120,
     a003(A003,_),
     F =< A003, !.
 
@@ -275,7 +282,7 @@ a102(0.00, default).
 
 a162(F, calculated):-
     b_getval(spec, S),
-    freq_speed( F, S.get(operations/s1),S.get(motor/'1st'/poles) ),
+    F #= S.get(motor/'1st'/rpm/base) * S.get(motor/'1st'/poles) // 120,
     a003(A003,_),
     F =< A003, !.
 

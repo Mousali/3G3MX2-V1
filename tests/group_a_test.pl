@@ -24,7 +24,7 @@ dict{
 )
 ]
 ):- 
-a001(01,calculated).
+a001(01,"voltage (FV)").
 
 test(
 	"a001 = 01 when speed_reference is voltage (FV) miss-spelt as Voltege (FV)", 
@@ -43,7 +43,7 @@ test(
 	)
 	]
 	):- 
-		a001(01,calculated).
+		a001(01,"voltage (FV)").
 
 test(
 "a001 = 01 when speed_reference is current (FI)", 
@@ -62,7 +62,7 @@ dict{
 )
 ]
 ):- 
-    a001(01,calculated).
+    a001(01,"current (FI)").
 
 
 test(
@@ -82,7 +82,7 @@ dict{
 )
 ]
 ):- 
-    a001(01,calculated).
+    a001(01,"current (FI)").
 
 
 
