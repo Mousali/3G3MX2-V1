@@ -11,7 +11,7 @@ s="$(cd "$(dirname "$0")" && pwd)/$(basename "$0")";docker run --rm -a stdin -a 
 %               specification YAML file. 
 %  
 % USAGE:
-%   vfdparam.pl [--calculated-only] SPEC_FILENAME
+%   vfdparam.pl [OPTIONS] <spec file>
 %
 % OPTIONS:
 %   --calculated-only  -c  boolean=false    Print calculated parameter values only
@@ -19,7 +19,7 @@ s="$(cd "$(dirname "$0")" && pwd)/$(basename "$0")";docker run --rm -a stdin -a 
 %   --help             -h  boolean=false    Show this help message
 %
 % INPUT:
-%   Specification YAML string from stdin or specification YAML filename.
+%   Specification YAML string from stdin or a list of specification YAML file names.
 %
 % OUTPUT:
 %   Prints VDF parameter values to stdout or output file.
@@ -72,7 +72,7 @@ main(Args):-
         Ops.help == true ->
         (
             opt_help(OptsSpec, Help),
-            format('USAGE:~n~+vfdparam [OPTION]... [SPEC_YAML_FILENAME]~n~nCalculate Omron VFD configuration parameters from YAML VFD and motor specification file.~n~nOPTIONS:~n~w~n', [Help]),
+            format('USAGE:~n~+vfdparam [OPTIONS] <spec file>~n~nCalculate Omron VFD configuration parameters from YAML VFD and motor specification file.~n~nOPTIONS:~n~w~n', [Help]),
             halt(0)
         ); true
     ),
