@@ -1,0 +1,5 @@
+power_grid:
+    voltage:
+        single_phase: 230
+        three_phase: 400
+    frequency: 50

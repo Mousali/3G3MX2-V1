@@ -36,6 +36,9 @@ s="$(cd "$(dirname "$0")" && pwd)/$(basename "$0")";docker run --rm -a stdin -a 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+:- use_module(library(readutil)).
+:- use_module(library(optparse)).
+
 :- consult("param/group_a").
 :- consult("param/group_b").
 :- consult("param/group_c").
@@ -45,8 +48,17 @@ s="$(cd "$(dirname "$0")" && pwd)/$(basename "$0")";docker run --rm -a stdin -a 
 :- consult("param/group_p").
 :- consult("param/group_u").
 
-:- use_module(library(optparse)).
 :- initialization(main, main).
+
+read_specs([], Str):-
+    read_string(user_input,_,Str).
+read_specs([H|[]], Str):- 
+    read_file_to_string(H, Str, []).
+read_specs([H|T], Str):- 
+    read_file_to_string(H, StrH, []),
+    read_specs(T, StrT),
+    string_concat(StrH, "\n\n", StrHH),
+    string_concat(StrHH, StrT, Str).
 
 main(Args):-
     OptsSpec=[
@@ -64,18 +76,12 @@ main(Args):-
             halt(0)
         ); true
     ),
-    ( 
-        PositionalArgs = [SpecFilename|_] ->
-        (
-            % read spec from YAML file
-            yaml_read(SpecFilename, Str),
-            b_setval(spec, Str)
-        );(
-            % read spec POSIX stdin
-            yaml_read(user_input,Str),
-            b_setval(spec, Str)
-        )
-    ),
+    
+    % read all spec files
+    read_specs(PositionalArgs, Str),
+    yaml_read(string(Str), Yaml_spec),
+    b_setval(spec, Yaml_spec),
+
     (
         Ops.outfile \= std_out ->  
         (

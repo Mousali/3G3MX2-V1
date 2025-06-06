@@ -46,7 +46,13 @@ vfdparam [OPTIONS] [SPEC_YAML_FILENAME]
 
 #### 1. Generate all parameters (default)
 ```sh
-vfdparam motor_config.yaml
+vfdparam example_spec.yaml
+
+# or split spec files
+vfdparam vdf_spec.yaml motor_spec.yaml ...
+
+# or path to spec files
+vfdparam ./example_spec/*
 ```
 
 #### 2. Show only modified parameters
