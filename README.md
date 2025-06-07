@@ -54,7 +54,7 @@ Docker will download SWI prolog image and execute the script inside a container.
 
 ### Basic Command
 ```sh
-vfdparam [OPTIONS] [SPEC_YAML_FILENAME]
+vfdparam [OPTIONS] [<spec_file> ...]
 ```
 
 ### Options

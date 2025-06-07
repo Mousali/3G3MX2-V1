@@ -11,7 +11,7 @@ s="$(cd "$(dirname "$0")" && pwd)/$(basename "$0")";docker run --rm -a stdin -a 
 %               specification YAML file. 
 %  
 % USAGE:
-%   vfdparam.pl [OPTIONS] <spec file>
+%   vfdparam.pl [OPTIONS] [<spec_file> ...]
 %
 % OPTIONS:
 %   --calculated-only  -c  boolean=false    Print calculated parameter values only
@@ -69,7 +69,7 @@ main(Args):-
         Ops.help == true ->
         (
             opt_help(OptsSpec, Help),
-            format('USAGE:~n~+vfdparam [OPTIONS] <spec file>~n~nCalculate Omron VFD configuration parameters from YAML VFD and motor specification file.~n~nOPTIONS:~n~w~n', [Help]),
+            format('USAGE:~n~+vfdparam [OPTIONS] [<spec_file> ...]~n~nCalculate Omron VFD configuration parameters from YAML VFD and motor specification file.~n~nOPTIONS:~n~w~n', [Help]),
             halt(0)
         )
     ; true
