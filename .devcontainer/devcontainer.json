@@ -12,7 +12,7 @@
     ],
     "extensions": [
         "ms-toolsai.jupyter",
-        "arthurwang.vsc-prolog",
+        "hargettp.pure-prolog-language-support",
         "streetsidesoftware.code-spell-checker",
         "yzhang.markdown-all-in-one",
         "github.copilot"
