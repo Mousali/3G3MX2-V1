@@ -1,11 +1,9 @@
 :- begin_tests(group_a).
 
-:- ["../param/group_a"].
+:- ["../group_a"].
 
 load_spec(D):-
     b_setval(spec, D).
-
-
 
 test(
 "a001 = 01 when speed_reference is voltage (FV)", 
@@ -35,7 +33,7 @@ test(
 		motor:dict{
 			'1st':
 			dict{
-				speed_reference:"voltage (FV)"
+				speed_reference:"voltege (FV)"
 				}
 			}
 		}
