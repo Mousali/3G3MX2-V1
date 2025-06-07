@@ -1,0 +1,11 @@
+operation:
+  start_rpm: 1000 # RPM
+  direction: Forward # Reverse
+
+  motor:
+    1st:
+      acceleration: 1.0 # seconds
+      deceleration: 1.0 # seconds
+    # 2nd:
+    #   acceleration: 1.0 # seconds
+    #   deceleration: 1.0 # seconds

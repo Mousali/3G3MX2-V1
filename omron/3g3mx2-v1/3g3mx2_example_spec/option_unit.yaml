@@ -1,0 +1,19 @@
+auxiliary_function:
+  
+  # operation_on_option_error: trip
+  operation_on_option_error: continue
+  
+  pulse_train_input_rp: Frequency setting #(including PID)
+  # pulse_train_input_rp_selection: Feedback pulse # (enabled only when 1st control is selected)
+  # pulse_train_input_rp_selection: MI8 # (General-purpose input 8 for DriveProgramming)
+
+  acceleration_deceleration_time_input_type: Digital Operator
+  # acceleration_deceleration_time_input_type: DriveProgramming
+
+simple_position_control:
+  pulse_train_input_type: Single-phase pulse train
+  # pulse_train_input_type: Phase A and B 90 deg phase difference pulse train
+  # pulse_train_input_type: Do not set
+  # pulse_train_input_type: Single-phase pulse train + direction
+  
+  # number_of_encoder_pulses: 1000

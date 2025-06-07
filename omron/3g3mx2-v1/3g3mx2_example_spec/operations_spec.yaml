@@ -1,7 +1,4 @@
-# Standard operating Function settings
 operations:
-    # Initial frequency
-    initial_frequency: 120
     
     #####################################################################
     # Heavy Load/Light Load oration Selection :

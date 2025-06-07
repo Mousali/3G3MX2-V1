@@ -1,7 +1,33 @@
 % Group P: Option/Applied Function Parameters
 
 %% Auxiliary function
+p001(00, "Trip on Option Error"):-
+    b_getval(spec, S),
+	#fuzzy_match_key_value(S.get(auxiliary_function/operation_on_option_error), trip),
+    !.
+
+p001(10, "Continue operation on Option Error"):-
+    b_getval(spec, S),
+	#fuzzy_match_key_value(S.get(auxiliary_function/operation_on_option_error), continue),
+    !.
+
 p001(00, default).
+
+p003(00, "Frequency setting (including PID) Pulse Train Input Selection"):-
+    b_getval(spec, S),
+	#fuzzy_match_key_value(S.get(auxiliary_function/pulse_train_input_rp_selection), frequencysetting),
+    !.
+
+p003(01, "Feedback pulse (enabled only when 1st control is selected) Pulse Train Input Selection"):-
+    b_getval(spec, S),
+	#fuzzy_match_key_value(S.get(auxiliary_function/pulse_train_input_rp_selection), feedbackpulse),
+    !.
+
+p003(02, "MI8 (General-purpose input 8 for DriveProgramming) Pulse Train Input Selection"):-
+    b_getval(spec, S),
+	#fuzzy_match_key_value(S.get(auxiliary_function/pulse_train_input_rp_selection), mi8),
+    !.
+
 p003(00, default).
 
 %% Simple position control
@@ -58,8 +84,6 @@ p071(5.00, default).
 p072(2684, default).
 p073(-2684, default).
 p075(00, default).
-
-%% Simple position control
 p077(1.0, default).
 p080(0, default).
 p081(00, default).

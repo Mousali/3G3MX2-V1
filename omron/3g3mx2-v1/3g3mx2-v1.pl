@@ -1,3 +1,9 @@
+:- use_module(library(clpfd)).
+:- use_module(library(isub)).
+:- use_module(library(macros)).
+
+#define(fuzzy_match_key_value(K,V), (isub(K, V, D, [normalize(true),zero_to_one(true)]), D >= 0.8)).
+
 is_vfd_param(P_name):-
     re_match("^[a,b,c,d,f,h,p,u]\\d{3}$",P_name).
 
