@@ -1,6 +1,14 @@
-# OMRON MX2 Series Type V1 Inverter Parameter Generator (3G3MX2-V1)
+# VFD (Variable Frequency Drive) Parameter Calculator
 
 An expert system that calculate VFD parameter values given a VFD and motor specification YAML file.
+
+> 🚧 **Project Under Construction** 🚧  
+This project is currently in development and its functionality is limited. At present, the program only supports calculating parameters for the following VFD models:
+
+- **Model:** 3G3MX2-A4150-V1(Q2)  
+- **Brand:** OMRON
+
+Support for additional models and features will be added in future updates. Stay tuned!
 
 ## Features
 
