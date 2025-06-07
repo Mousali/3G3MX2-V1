@@ -2,6 +2,20 @@
 
 An expert system that calculate VFD parameter values given a VFD and motor specification YAML file.
 
+## Disclaimer
+Use this code at your own risk. The author is not responsible for any damages or losses that may occur from using this code. Always test in a safe environment before deploying in production.
+
+The authors are not affiliated with OMRON or any other VFD manufacturer. This project is an independent effort to provide a tool for calculating VFD parameters based on user specifications.
+
+## Objectives
+
+This project is not endorsed or supported by OMRON or any other VFD manufacturer. It is intended as demonstration for educational and informational purposes only. What I hope to achieve is to 
+ - provide a tool that can help engineers and technicians quickly and accurately calculate VFD parameters based on their specific requirements.
+ - demonstrate the potential of PROLOG and using expert systems and automation to simplify complex engineering tasks.
+ - Make VFD parameter calculation more accessible to a wider audience, including those who may not have extensive experience with VFDs or electrical engineering.
+ - Make VFD parameter specification testable and verifiable.
+ - Make VFD parameter specification trackable using version control systems like Git.
+
 > 🚧 **Project Under Construction** 🚧  
 This project is currently in development and its functionality is limited. At present, the program only supports calculating parameters for the following VFD models:
 
