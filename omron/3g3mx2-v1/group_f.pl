@@ -9,14 +9,14 @@ f001(F, "starting frequency"):-
    F #=< F_max,
    !.
 
-f001(F_max, "Maximum VFD frequency"):-
+f001(F_max, "Maximum VFD starting frequency"):-
    b_getval(spec, S),
    F #= S.get(operation/start_rpm) * S.get(motor/'1st'/poles) // 120,
    a004(F_max, _),
    F #> F_max,
    !.
 
-% When the PID function is enabled: 0.0 -> 100.0 (per sent)
+% TODO: When the PID function is enabled: 0.0 -> 100.0 (per sent)
 
 
 f001(6.00, default).
