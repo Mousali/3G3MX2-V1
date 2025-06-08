@@ -119,3 +119,12 @@ motor :
 - Parameter values output to stdout or optional output file (YAML format)
 - Each line shows: `ParameterCode: Value  # Description`
 - When using `-c`, only calculated values are printed
+
+## 🙏 Sponsor
+
+Many thanks to [CNC VOX](https://www.cncvox.com.au) for sponsoring this project and supporting open-source development.
+
+Their contribution helps keep this project active and maintained.
+
+## Contributing
+We welcome contributions! If you have ideas, bug fixes, or improvements, please submit a pull request or open an issue.
