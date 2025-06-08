@@ -1,8 +1,9 @@
 #!/usr/bin/swipl -q
 
-%swipl -g run_tests -t halt your/file.pl
+:- ["../3g3mx2-v1.pl"].
 
 :- [group_a_test].
+:- [group_f_test].
 
-:- run_tests.
+:- run_tests().
 :- halt(0).

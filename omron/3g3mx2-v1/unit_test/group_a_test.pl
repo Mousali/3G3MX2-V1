@@ -1,9 +1,7 @@
 :- begin_tests(group_a).
 
-:- ["../group_a"].
-
-load_spec(D):-
-    b_setval(spec, D).
+load_spec(Test_Spec):-
+    b_setval(spec, Test_Spec).
 
 test(
 "a001 = 01 when speed_reference is voltage (FV)", 
