@@ -5,5 +5,6 @@
 :- [group_a_test].
 :- [group_f_test].
 
+:- set_test_options([output(always), format(log)]).
 :- run_tests().
 :- halt(0).

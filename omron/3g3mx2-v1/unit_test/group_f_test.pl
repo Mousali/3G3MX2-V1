@@ -4,7 +4,7 @@ load_spec(Test_Spec):-
     b_setval(spec, Test_Spec).
 
 test(
-"f001 = 20 Hz when start_rpm is 1200",
+"f001 = 20 Hz when starting rpm is 1200 and max rpm is 24000",
 [
     setup(
         load_spec(
@@ -27,10 +27,12 @@ test(
     )
 ]
 ):-
-    f001(20, "starting frequency").
+    f001(V, M),
+    assertion(V == 20),
+    assertion(M == "starting frequency").
 
 test(
-"f001 = 20 Hz when start_rpm is 1200",
+"f001 = 10 Hz when starting rpm is 1200 and max rpm is 600",
 [
     setup(
         load_spec(
@@ -53,6 +55,9 @@ test(
     )
 ]
 ):-
-    f001(10, "Maximum VFD starting frequency").
+    f001(V, M),
+    assertion(V == 10),
+    assertion(M == "Maximum VFD starting frequency").
+
 
 :- end_tests(group_f).

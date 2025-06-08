@@ -20,10 +20,12 @@ dict{
 )
 ]
 ):- 
-a001(01,"voltage (FV)").
+    a001(V,M),
+    assertion(V == 01),
+    assertion(M == "voltage (FV)").
 
 test(
-	"a001 = 01 when speed_reference is voltage (FV) miss-spelt as Voltege (FV)", 
+	"a001 = 01 when speed_reference is voltage (FV) misspell as Voltege (FV)", 
 	[
 	setup(
 	load_spec(
@@ -38,8 +40,10 @@ test(
 	)
 	)
 	]
-	):- 
-		a001(01,"voltage (FV)").
+):- 
+    a001(V,M),
+    assertion(V == 01),
+    assertion(M == "voltage (FV)").
 
 test(
 "a001 = 01 when speed_reference is current (FI)", 
@@ -58,11 +62,13 @@ dict{
 )
 ]
 ):- 
-    a001(01,"current (FI)").
+    a001(V,M),
+    assertion(V == 01),
+    assertion(M == "current (FI)").
 
 
 test(
-"a001 = 01 when speed_reference is miss-spelt as Carrent_(FI)", 
+"a001 = 01 when speed_reference is misspell as Carrent_(FI)", 
 [
 setup(
 load_spec(
@@ -78,7 +84,9 @@ dict{
 )
 ]
 ):- 
-    a001(01,"current (FI)").
+    a001(V,M),
+    assertion(V == 01),
+    assertion(M == "current (FI)").
 
 
 
