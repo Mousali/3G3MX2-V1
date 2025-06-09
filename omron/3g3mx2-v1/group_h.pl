@@ -1,8 +1,166 @@
 h001(00, default).
 h002(00, default).
 h202(00, default).
-h003([], default).
-h203([], default).
+
+h003(0.1, "Maximum applicable motor capacity (kw)"):-
+	b_getval(spec, S),
+	S.get(motor/'1st'/power_kw)  < 0.2,
+	!.
+
+h003(0.2, "Maximum applicable motor capacity (kw)"):-
+	b_getval(spec, S),
+	S.get(motor/'1st'/power_kw)  < 0.4,
+	!.
+
+h003(0.4, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'1st'/power_kw)  < 0.55,
+   !.
+
+h003(0.55, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'1st'/power_kw)  < 0.75,
+   !.
+
+h003(0.75, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'1st'/power_kw)  < 1.1,
+   !.
+
+h003(1.1, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'1st'/power_kw)  < 1.5,
+   !.
+
+h003(1.5 , "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'1st'/power_kw)  < 2.2,
+   !.
+
+h003(2.2, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'1st'/power_kw)  < 3.0,
+   !.
+
+h003(3.0, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'1st'/power_kw)  < 3.7,
+   !.
+
+h003(3.7, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'1st'/power_kw)  < 4.0,
+   !.
+
+h003(4.0, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'1st'/power_kw)  < 5.5,
+   !.
+
+h003(5.5, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'1st'/power_kw)  < 7.5,
+   !.
+
+h003(7.5, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'1st'/power_kw)  < 11.0,
+   !.
+
+h003(11.0, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'1st'/power_kw)  < 15.0,
+   !.
+
+h003(15.0, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'1st'/power_kw)  < 18.5,
+   !.
+
+h003(18.5, "Maximum applicable motor capacity (kw)"):-
+   !.
+
+h003(0.0, default).
+
+h203(0.1, "Maximum applicable motor capacity (kw)"):-
+	b_getval(spec, S),
+	S.get(motor/'2nd'/power_kw)  < 0.2,
+	!.
+
+h203(0.2, "Maximum applicable motor capacity (kw)"):-
+	b_getval(spec, S),
+	S.get(motor/'2nd'/power_kw)  < 0.4,
+	!.
+
+h203(0.4, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'2nd'/power_kw)  < 0.55,
+   !.
+
+h203(0.55, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'2nd'/power_kw)  < 0.75,
+   !.
+
+h203(0.75, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'2nd'/power_kw)  < 1.1,
+   !.
+
+h203(1.1, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'2nd'/power_kw)  < 1.5,
+   !.
+
+h203(1.5 , "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'2nd'/power_kw)  < 2.2,
+   !.
+
+h203(2.2, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'2nd'/power_kw)  < 3.0,
+   !.
+
+h203(3.0, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'2nd'/power_kw)  < 3.7,
+   !.
+
+h203(3.7, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'2nd'/power_kw)  < 4.0,
+   !.
+
+h203(4.0, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'2nd'/power_kw)  < 5.5,
+   !.
+
+h203(5.5, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'2nd'/power_kw)  < 7.5,
+   !.
+
+h203(7.5, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'2nd'/power_kw)  < 11.0,
+   !.
+
+h203(11.0, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'2nd'/power_kw)  < 15.0,
+   !.
+
+h203(15.0, "Maximum applicable motor capacity (kw)"):-
+   b_getval(spec, S),
+   S.get(motor/'2nd'/power_kw)  < 18.5,
+   !.
+
+h203(18.5, "Maximum applicable motor capacity (kw)"):-
+   !.
+
+h203(0.0, default).
 
 h004(Poles, "1st Motor Poles"):-
     b_getval(spec, S),

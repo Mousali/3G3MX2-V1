@@ -46,7 +46,7 @@ motor:
     2nd :
         brand : HQD
         model : GDZ-24
-        power_kw : 3.0
+        power_kw : 1.5
         rpm :
             min : 3000
             base : 18000

@@ -9,8 +9,10 @@
 		"Mousali",
 		"OMRON",
 		"optparse",
+		"readutil",
 		"setval",
 		"shortflags",
+		"swipl",
 		"vfdparam",
 		"writef"
 	],
