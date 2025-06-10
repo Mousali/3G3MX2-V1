@@ -40,7 +40,7 @@ motor:
         speed_response: 110
         stabilization_parameter: 110
 
-        permanent_magnet: true
+        permanent_magnet: false
         inductive_voltage: 0.1254
 
     2nd :

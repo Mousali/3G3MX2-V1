@@ -46,6 +46,37 @@ This project introduces an expert system that automates parameter generation. Us
 | ❌ Requires deep expertise | ✅ Accessible to all engineers |
 | ❌ Difficult to verify | ✅ Transparent calculations |
 
+## Why Prolog?
+
+Because I can!
+
+Also because Prolog is well suited for logical and relation rules base systems. Which is exactly calculating VFD parameters from specification is. Genreally, a prolog program is 10 to 120 lines less that equivalent Python or C program. 
+
+In Prolog, code is data and data is code. As a result, the main program is actually extremely simple.  One line to load the rules -
+```prolog
+    ...
+    load_param_def(Yaml_spec.get(inverter/brand), Yaml_spec.get(inverter/model)),
+    ...
+```
+, and one line to eacute the rules -
+```prolog
+findall([Param, Value], (
+            ...
+            call(Param,Value, Msg),
+            ...
+        ))
+```
+
+Rules for a particular VFD model are defined in a separate files and are loaded dynamically.  Rule files can be thought of as a database containing the logical relations between VFD parameters and their values based on a set of input specifications. This has several advantages:
+- **Separation of Concerns**: The main program logic is clean and focused on execution, while rules are defined separately.
+- **Extensibility**: New rules can be added without modifying the core logic, allowing for easy expansion to support more VFD models.
+- **Reusability**: Rules can be reused across different projects or versions, promoting consistency and reducing duplication.
+- **Flexibility**: Rules can be easily modified or extended to accommodate new requirements or changes in specifications.
+- **Performance**: Prolog's logical inference engine efficiently handles complex relationships, making it suitable for this type of problem.
+- **Modularity**: Each VFD model can have its own set of rules, making it easy to add or modify without affecting the core logic.
+- **Maintainability**: Rules can be updated independently, allowing for quick adjustments as new models or requirements emerge.
+- **Scalability**: New VFD models can be added by simply creating a new rules file, without changing the main program logic.
+
 ## Minimum System Requirements:
 Docker is a requirement. 
 Docker will download SWI prolog image and execute the script inside a container.
