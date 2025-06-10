@@ -2,7 +2,7 @@
 {
     "name": "Prolog",
     "image": "swipl:9.3.23",
-    "onCreateCommand": "apt-get update && apt-get install -yq --fix-missing --no-install-recommends wget git python3-pip; pip3 install --upgrade ipykernel prolog_kernel requests --break-system-packages; python3 -m prolog_kernel.install",
+    "onCreateCommand": "apt-get update && apt-get install -yq --fix-missing --no-install-recommends wget git python3-pip; pip3 install --upgrade ipykernel prolog_kernel requests --break-system-packages; python3 -m prolog_kernel.install; swipl -g 'pack_install(prolog_lsp,[interactive(false)]), halt.'",
     "mounts": [
         {
             "source": "/etc/localtime",
@@ -15,7 +15,8 @@
         "hargettp.pure-prolog-language-support",
         "streetsidesoftware.code-spell-checker",
         "yzhang.markdown-all-in-one",
-        "github.copilot"
+        "github.copilot",
+        "streetsidesoftware.code-spell-checker-australian-english"
     ],
     "remoteUser": "root",
     "postCreateCommand ": "",
