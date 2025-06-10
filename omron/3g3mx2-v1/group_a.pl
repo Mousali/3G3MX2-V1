@@ -128,25 +128,25 @@ a002(04, "Option"):-
 
 a002(02, default).
 
-% A202 2st RUN Command Selection
+% A202 2nd RUN Command Selection
 a202(01, "Control terminal block (Drive-Programming)"):- 
     b_getval(spec, S),
-    #fuzzy_match_key_value(S.get(motor/'2st'/'run_command_source'),"Control terminal block (Drive-Programming)"),
+    #fuzzy_match_key_value(S.get(motor/'2nd'/'run_command_source'),"Control terminal block (Drive-Programming)"),
 	!.
 
 a202(02, "Digital Operator"):- 
     b_getval(spec, S),
-    #fuzzy_match_key_value(S.get(motor/'2st'/'run_command_source'),"Digital Operator"),
+    #fuzzy_match_key_value(S.get(motor/'2nd'/'run_command_source'),"Digital Operator"),
 	!.
 
 a202(03, "Modbus communication"):- 
     b_getval(spec, S),
-    #fuzzy_match_key_value(S.get(motor/'2st'/'run_command_source'),"Modbus communication"),
+    #fuzzy_match_key_value(S.get(motor/'2nd'/'run_command_source'),"Modbus communication"),
 	!.
 
 a202(04, "Option"):- 
     b_getval(spec, S),
-    #fuzzy_match_key_value(S.get(motor/'2st'/'run_command_source'),"Option"),
+    #fuzzy_match_key_value(S.get(motor/'2nd'/'run_command_source'),"Option"),
 	!.
 
 a202(02, default).
