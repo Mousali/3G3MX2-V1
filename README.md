@@ -1,6 +1,6 @@
 # VFD (Variable Frequency Drive) Parameter Calculator
 
-An expert system that calculate VFD parameter values given a VFD and motor specification YAML file.
+An expert system that calculate VFD parameter values from YAML specification files.
 
 ## Disclaimer
 Use this code at your own risk. The author is not responsible for any damages or losses that may occur from using this code. Always test in a safe environment before deploying in production.
