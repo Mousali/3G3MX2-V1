@@ -1,0 +1,22 @@
+inputs:
+    s1:
+        function: FW (Forward)
+        normally_closed: true # default is false (or not specified)
+    s2: 
+        function: RV (Reverse)
+        normally_closed: true # default is false (or not specified)
+    s3: 
+        function: RS (Reset)
+        normally_closed: true # default is false (or not specified)
+    s4: 
+        function: EXT (External trip)
+        normally_closed: true # default is false (or not specified)
+    s5: 
+        function: CF1 (Multi-step speed setting binary 1)
+        normally_closed: true # default is false (or not specified)
+    s6: 
+        function: CF2 (Multi-step speed setting binary 2)
+        normally_closed: true # default is false (or not specified)
+    s7: 
+        function: JG (Jogging)
+        normally_closed: true # default is false (or not specified)

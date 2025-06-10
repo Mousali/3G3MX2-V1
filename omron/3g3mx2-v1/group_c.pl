@@ -1,31 +1,537 @@
+value_function_text(00, Text, Function) :-
+    Function = "FW (Forward)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(01, Text, Function) :-
+    Function = "RV (Reverse)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(02, Text, Function) :-
+    Function = "CF1 (Multi-step speed setting binary 1)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(03, Text, Function) :-
+    Function = "CF2 (Multi-step speed setting binary 2)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(04, Text, Function) :-
+    Function = "CF3 (Multi-step speed setting binary 3)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(05, Text, Function) :-
+    Function = "CF4 (Multi-step speed setting binary 4)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(06, Text, Function) :-
+    Function = "JG (Jogging)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(07, Text, Function) :-
+    Function = "DB (External DC injection braking)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(08, Text, Function) :-
+    Function = "SET (2nd control)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(09, Text, Function) :-
+    Function = "2CH (2-step acceleration/deceleration)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(11, Text, Function) :-
+    Function = "FRS (Free-run stop)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(12, Text, Function) :-
+    Function = "EXT (External trip)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(13, Text, Function) :-
+    Function = "USP (Power recovery restart prevention function)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(14, Text, Function) :-
+    Function = "CS (Commercial switching)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(15, Text, Function) :-
+    Function = "SFT (Soft lock)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(16, Text, Function) :-
+    Function = "AT (Analog input switching)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(18, Text, Function) :-
+    Function = "RS (Reset)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(19, Text, Function) :-
+    Function = "TH (PTC thermistor thermal protection, C005 only)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(20, Text, Function) :-
+    Function = "STA (3-wire start)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(21, Text, Function) :-
+    Function = "STP (3-wire stop)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(22, Text, Function) :-
+    Function = "F/R (3-wire forward/reverse)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(23, Text, Function) :-
+    Function = "PID (PID disabled)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(24, Text, Function) :-
+    Function = "PIDC (PID integral reset)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(27, Text, Function) :-
+    Function = "UP (Remote operation accelerated)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(28, Text, Function) :-
+    Function = "DWN (Remote operation decelerated)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(29, Text, Function) :-
+    Function = "UDC (Remote operation data clear)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(31, Text, Function) :-
+    Function = "OPE (Forced operator function)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(32, Text, Function) :-
+    Function = "SF1 (Multi-step speed setting bit 1)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(33, Text, Function) :-
+    Function = "SF2 (Multi-step speed setting bit 2)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(34, Text, Function) :-
+    Function = "SF3 (Multi-step speed setting bit 3)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(35, Text, Function) :-
+    Function = "SF4 (Multi-step speed setting bit 4)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(36, Text, Function) :-
+    Function = "SF5 (Multi-step speed setting bit 5)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(37, Text, Function) :-
+    Function = "SF6 (Multi-step speed setting bit 6)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(38, Text, Function) :-
+    Function = "SF7 (Multi-step speed setting bit 7)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(39, Text, Function) :-
+    Function = "OLR (Overload limit switching)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(40, Text, Function) :-
+    Function = "TL (Torque limit enabled)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(41, Text, Function) :-  
+    Function = "TRQ1 (Torque limit switching 1)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(42, Text, Function) :-
+    Function = "TRQ2 (Torque limit switching 2)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(44, Text, Function) :-
+    Function = "BOK (Brake confirmation)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(46, Text, Function) :-
+    Function = "LAC (LAD cancel)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(47, Text, Function) :-
+    Function = "PCLR (Current position clear)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(50, Text, Function) :-
+    Function = "ADD (Set frequency A145 addition)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(51, Text, Function) :-
+    Function = "F-TM (Forced terminal block)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(52, Text, Function) :-
+    Function = "ATR (Torque command input permission)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(53, Text, Function) :-
+    Function = "KHC (Integrated power clear)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(56, Text, Function) :-
+    Function = "MI1 (General-purpose input 1)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(57, Text, Function) :-
+    Function = "MI2 (General-purpose input 2)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(58, Text, Function) :-
+    Function = "MI3 (General-purpose input 3)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(59, Text, Function) :-
+    Function = "MI4 (General-purpose input 4)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(60, Text, Function) :-
+    Function = "MI5 (General-purpose input 5)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(61, Text, Function) :-
+    Function = "MI6 (General-purpose input 6)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(62, Text, Function) :-
+    Function = "MI7 (General-purpose input 7)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(65, Text, Function) :-
+    Function = "AHD (Analog command held)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(66, Text, Function) :-
+    Function = "CP1 (Position command selection 1)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(67, Text, Function) :-
+    Function = "CP2 (Position command selection 2)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(68, Text, Function) :-
+    Function = "CP3 (Position command selection 3)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(69, Text, Function) :-
+    Function = "ORL (Origin search limit signal)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(70, Text, Function) :-
+    Function = "ORG (Origin search startup signal)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(73, Text, Function) :-
+    Function = "SPD (Speed/Position switching)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(77, Text, Function) :-
+    Function = "GS1 (GS1 input, C003 only)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(78, Text, Function) :-
+    Function = "GS2 (GS2 input, C004 only)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(81, Text, Function) :-
+    Function = "485 (Start co-inverter communication)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(82, Text, Function) :-
+    Function = "PRG (DriveProgramming start)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(83, Text, Function) :-
+    Function = "HLD (Retain output frequency)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(84, Text, Function) :-
+    Function = "ROK (Permission of RUN command)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(85, Text, Function) :-
+    Function = "EB (Rotation direction detection, C007 only)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(86, Text, Function) :-
+    Function = "DISP (Display fixed)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(91, Text, Function) :-
+    Function = "PSET (Preset position)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(255, Text, Function) :-
+    Function = "no (No allocation)",
+    #fuzzy_match_key_value(Text,Function).
+
+value_function_text(00, Text, Function) :-
+    Function = "RUN (Signal during RUN)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(01, Text, Function) :-
+    Function = "FA1 (Constant speed arrival signal)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(02, Text, Function) :-
+    Function = "FA2 (Set frequency exceeded signal)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(03, Text, Function) :-
+    Function = "OL (Overload warning)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(04, Text, Function) :-
+    Function = "OD (Excessive PID deviation)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(05, Text, Function) :-
+    Function = "AL (Alarm signal)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(06, Text, Function) :-
+    Function = "FA3 (Set-frequency only signal)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(07, Text, Function) :-
+    Function = "OTQ (Overtorque/Undertorque signal)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(09, Text, Function) :-
+    Function = "UV (Signal during undervoltage)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(10, Text, Function) :-
+    Function = "TRQ (Torque limit)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(11, Text, Function) :-
+    Function = "RNT (RUN time over)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(12, Text, Function) :-
+    Function = "ONT (Power ON time over)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(13, Text, Function) :-
+    Function = "THM (Electronic thermal warning)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(19, Text, Function) :-
+    Function = "BRK (Brake release)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(20, Text, Function) :-
+    Function = "BER (Brake error)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(21, Text, Function) :-
+    Function = "ZS (0-Hz detection signal)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(22, Text, Function) :-
+    Function = "DSE (Excessive speed deviation)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(23, Text, Function) :-
+    Function = "POK (Position ready)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(24, Text, Function) :-
+    Function = "FA4 (Set frequency exceeded signal 2)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(25, Text, Function) :-
+    Function = "FA5 (Set-frequency only signal 2)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(26, Text, Function) :-
+    Function = "OL2 (Overload warning 2)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(27, Text, Function) :-
+    Function = "FVDc (Analog FV disconnection detection)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(28, Text, Function) :-
+    Function = "FIDc (Analog FI disconnection detection)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(31, Text, Function) :-
+    Function = "FBV (PID feedback comparison signal)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(32, Text, Function) :-
+    Function = "NDc (Communications disconnection detection)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(33, Text, Function) :-
+    Function = "LOG1 (Logic operation output 1)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(34, Text, Function) :-
+    Function = "LOG2 (Logic operation output 2)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(35, Text, Function) :-
+    Function = "LOG3 (Logic operation output 3)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(39, Text, Function) :-
+    Function = "WAC (Capacitor life warning signal)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(40, Text, Function) :-
+    Function = "WAF (Cooling fan life warning signal)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(41, Text, Function) :-
+    Function = "FR (Starting contact signal)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(42, Text, Function) :-
+    Function = "OHF (Cooling fin overheat warning)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(43, Text, Function) :-
+    Function = "LOC (Low current signal)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(44, Text, Function) :-
+    Function = "MO1 (General-purpose output 1)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(45, Text, Function) :-
+    Function = "MO2 (General-purpose output 2)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(46, Text, Function) :-
+    Function = "MO3 (General-purpose output 3)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(50, Text, Function) :-
+    Function = "IRDY (Operation ready)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(51, Text, Function) :-
+    Function = "FWR (Forward run signal)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(52, Text, Function) :-
+    Function = "RVR (Reverse run signal)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(53, Text, Function) :-
+    Function = "MJA (Fatal fault signal)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(54, Text, Function) :-
+    Function = "WCFV (Window comparator FV)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(55, Text, Function) :-
+    Function = "WCFI (Window comparator FI)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(58, Text, Function) :-
+    Function = "FREF (Frequency reference source)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(59, Text, Function) :-
+    Function = "REF (RUN command source)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(60, Text, Function) :-
+    Function = "SETM (Motor 2 selection)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(62, Text, Function) :-
+    Function = "EDM (Safety device monitor)*1",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(63, Text, Function) :-
+    Function = "OPO (Option)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(00, Text, Function) :-  
+    Function = "Output frequency",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(01, Text, Function) :-
+    Function = "Output current",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(02, Text, Function) :-
+    Function = "Output torque (Only in the sensorless vector control)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(03, Text, Function) :-
+    Function = "Digital output frequency",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(04, Text, Function) :-
+    Function = "Output voltage",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(05, Text, Function) :-
+    Function = "Input power",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(06, Text, Function) :-
+    Function = "Electronic thermal load rate",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(07, Text, Function) :-
+    Function = "LAD frequency",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(08, Text, Function) :-
+    Function = "Digital current monitor",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(10, Text, Function) :-
+    Function = "Cooling fin temperature",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(11, Text, Function) :-
+    Function = "Output torque (signed) (Only in the sensorless vector control)",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(12, Text, Function) :-
+    Function = "DriveProgramming (YA(0))",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(13, Text, Function) :-
+    Function = "DriveProgramming (YA(1))",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(15, Text, Function) :-
+    Function = "Pulse train input monitor",
+    #fuzzy_match_key_value(Text,Function).
+value_function_text(16, Text, Function) :-
+    Function = "Option (No applicable Option)",
+    #fuzzy_match_key_value(Text,Function).
+
+
+c001(V, Text):-
+    value_function_text(V, S.get(inputs/s1/function), Text),
+    !.
 c001(00, default).
+
+c002(V, Text):-
+    value_function_text(V, S.get(inputs/s2/function), Text),
+    !.
 c002(01, default).
+
+c003(V, Text):-
+    value_function_text(V, S.get(inputs/s3/function), Text),
+    !.
 c003(18, default).
+
+c004(V, Text):-
+    value_function_text(V, S.get(inputs/s4/function), Text),
+    !.
 c004(12, default).
+
+c005(V, Text):-
+    value_function_text(V, S.get(inputs/s5/function), Text),
+    !.
 c005(02, default).
+
+c006(V, Text):-
+    value_function_text(V, S.get(inputs/s6/function), Text),
+    !.
 c006(03, default).
+
+c007(V, Text):-
+    value_function_text(V, S.get(inputs/s7/function), Text),
+    !.
 c007(06, default).
 
+
+c011(01, "Normally Closed (NC)") :-
+    b_getval(spec, S),
+    S.get(inputs/s1/normally_closed),
+    \+ c001(18, _),
+    !.
+
 c011(00, default).
+
+c012(01, "Normally Open (NO)") :-
+    b_getval(spec, S),
+    S.get(inputs/s2/normally_open),
+    \+ c002(18, _),
+    !.
+
 c012(00, default).
+
+c013(01, "Normally Closed (NC)") :-
+    b_getval(spec, S),
+    S.get(inputs/s3/normally_closed),
+    \+ c003(18, _),
+    !.
+
 c013(00, default).
+
+c014(01, "Normally Open (NO)") :-
+    b_getval(spec, S),
+    S.get(inputs/s4/normally_open),
+    \+ c004(18, _),
+    !.
+
 c014(00, default).
+
+c015(01, "Normally Closed (NC)") :-
+    b_getval(spec, S),
+    S.get(inputs/s5/normally_closed),
+    \+ c005(18, _),
+    !.
+
 c015(00, default).
+
+c016(01, "Normally Open (NO)") :-
+    b_getval(spec, S),
+    S.get(inputs/s6/normally_open),
+    \+ c006(18, _),
+    !.
+
 c016(00, default).
+
+c017(01, "Normally Closed (NC)") :-
+    b_getval(spec, S),
+    S.get(inputs/s7/normally_closed),
+    \+ c007(18, _),
+    !.
+
 c017(00, default).
 
+% outputs
+
+c021(V, Text):-
+    value_function_text(V, S.get(outputs/p1/function), Text),
+    !.
 c021(00, default).
+c022(V, Text):-
+    value_function_text(V, S.get(outputs/p2/function), Text),
+    !.
 c022(01, default).
+c026(V, Text):-
+    value_function_text(V, S.get(outputs/relay/function), Text),
+    !.
 c026(05, default).
 
+% Analog monitor
+c027(V, Text):-
+    value_function_text(V, S.get(outputs/MP/function), Text),
+    !.
 c027(07, default).
+
+c028(V, Text):-
+    value_function_text(V, S.get(outputs/AM/function), Text),
+    !.
 c028(07, default).
+
 c030([], default).
 
+% Multi-function output terminals
+c031(V, Text):-
+    b_getval(spec, S),
+    S.get(inputs/p1/normally_closed),
+    !.
 c031(00, default).
+c032(V, Text):-
+    b_getval(spec, S),
+    S.get(inputs/p2/normally_closed),
+    !.
 c032(00, default).
+c036(V, Text):-
+    b_getval(spec, S),
+    S.get(inputs/relay/normally_closed),
+    !.
 c036(01, default).
 
+% Level and output terminal status
 c038(01, default).
 c039([], default).
 c040(01, default).
