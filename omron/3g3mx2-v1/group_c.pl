@@ -517,33 +517,97 @@ c030([], default).
 % Multi-function output terminals
 c031(V, Text):-
     b_getval(spec, S),
-    S.get(inputs/p1/normally_closed),
+    S.get(outputs/p1/normally_closed),
     !.
 c031(00, default).
 c032(V, Text):-
     b_getval(spec, S),
-    S.get(inputs/p2/normally_closed),
+    S.get(outputs/p2/normally_closed),
     !.
 c032(00, default).
 c036(V, Text):-
     b_getval(spec, S),
-    S.get(inputs/relay/normally_closed),
+    S.get(outputs/relay/normally_closed),
     !.
 c036(01, default).
 
 % Level and output terminal status
+
+% Low Current Signal Output Selection
+
+c038(00, "Enabled during acceleration/deceleration and constant speed") :-
+    b_getval(spec, S),
+	(
+		c021(_,"LOC (Low current signal)");
+		c022(_,"LOC (Low current signal)");
+		c027(_,"LOC (Low current signal)")
+	),
+    S.get(outputs/p1/low_current_signal) == "accel_decel_and_constant",
+    !.
+
+c038(01, "Enabled during constant speed") :-
+    b_getval(spec, S),
+	(
+		c021(_,"LOC (Low current signal)");
+		c022(_,"LOC (Low current signal)");
+		c027(_,"LOC (Low current signal)")
+	),
+    S.get(outputs/p1/low_current_signal) == "constant_speed",
+    !.
+
 c038(01, default).
+
+% Low Current Detection Level
 c039([], default).
+
+c040(00, "Enabled during acceleration/deceleration and constant speed") :-
+    b_getval(spec, S),
+	(
+		c021(_,"OL (Overload warning)");
+		c022(_,"OL (Overload warning)");
+		c027(_,"OL (Overload warning)");
+		c021(_,"OL2 (Overload warning 2)");
+		c022(_,"OL2 (Overload warning 2)");
+		c027(_,"OL2 (Overload warning 2)")
+	),
+    S.get(outputs/p1/overload_warning_signal) == "accel_decel_and_constant",
+    !.
+
+c040(01, "Enabled during constant speed") :-
+    b_getval(spec, S),
+	(
+		c021(_,"OL (Overload warning)");
+		c022(_,"OL (Overload warning)");
+		c027(_,"OL (Overload warning)");
+		c021(_,"OL2 (Overload warning 2)");
+		c022(_,"OL2 (Overload warning 2)");
+		c027(_,"OL2 (Overload warning 2)")
+	),
+    S.get(outputs/p1/overload_warning_signal) == "constant_speed",
+    !.
+
 c040(01, default).
 c041([], default).
 c241([], default).
 
+
+02: FA2 (Set frequency exceeded signal)
+06: FA3 (Set-frequency only signal)
+
+24: FA4 (Set frequency exceeded signal 2)
+25: FA5 (Set-frequency only signal 2)
+
 c042(0.00, default).
 c043(0.00, default).
+
+
 c044(3.0, default).
+
 c045(0.00, default).
 c046(0.00, default).
+
 c047(1.00, default).
+
 c052(100.0, default).
 c053(0.0, default).
 c054(00, default).

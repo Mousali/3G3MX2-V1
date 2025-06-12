@@ -63,10 +63,10 @@ main(Args):-
         [opt(help), type(boolean), shortflags([h]), longflags([help]), help('Show this help message'), default(false)],
         [opt(outfile), meta('FILE'), type(atom), shortflags([o]), longflags(['output-file']),help('write output to FILE'), default(std_out)]
     ],
-    opt_parse( OptsSpec, Args, Ops, PositionalArgs),
+    opt_parse( OptsSpec, Args, Opts, PositionalArgs),
 
     (
-        Ops.help == true ->
+        Opts.help == true ->
         (
             opt_help(OptsSpec, Help),
             format('USAGE:~n~+vfdparam [OPTIONS] [<spec_file> ...]~n~nCalculate Omron VFD configuration parameters from YAML VFD and motor specification file.~n~nOPTIONS:~n~w~n', [Help]),
@@ -84,9 +84,9 @@ main(Args):-
     load_param_def(Yaml_spec.get(inverter/brand), Yaml_spec.get(inverter/model)),
 
     (
-        Ops.outfile \= std_out ->  
+        Opts.outfile \= std_out ->  
         (
-            open(Ops.outfile, write, Out),
+            open(Opts.outfile, write, Out),
             set_output(Out)
         )
     ; true
@@ -104,7 +104,7 @@ main(Args):-
             member(Param, UniqueParams), 
             call(Param,Value, Msg),
             (
-                Ops.calculated_only ->
+                Opts.calculated_only ->
                 Msg \= default 
             ; true
             ),
