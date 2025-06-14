@@ -537,22 +537,38 @@ c036(01, default).
 
 c038(00, "Enabled during acceleration/deceleration and constant speed") :-
     b_getval(spec, S),
-	(
-		c021(_,"LOC (Low current signal)");
-		c022(_,"LOC (Low current signal)");
-		c027(_,"LOC (Low current signal)")
-	),
+	c021(_,"LOC (Low current signal)"),
     S.get(outputs/p1/low_current_signal) == "accel_decel_and_constant",
     !.
 
 c038(01, "Enabled during constant speed") :-
     b_getval(spec, S),
-	(
-		c021(_,"LOC (Low current signal)");
-		c022(_,"LOC (Low current signal)");
-		c027(_,"LOC (Low current signal)")
-	),
+	c021(_,"LOC (Low current signal)"),
     S.get(outputs/p1/low_current_signal) == "constant_speed",
+    !.
+
+c038(00, "Enabled during acceleration/deceleration and constant speed") :-
+    b_getval(spec, S),
+	c022(_,"LOC (Low current signal)"),
+    S.get(outputs/p2/low_current_signal) == "accel_decel_and_constant",
+    !.
+
+c038(01, "Enabled during constant speed") :-
+    b_getval(spec, S),
+	c022(_,"LOC (Low current signal)"),
+    S.get(outputs/p1/low_current_signal) == "constant_speed",
+    !.
+
+c038(00, "Enabled during acceleration/deceleration and constant speed") :-
+    b_getval(spec, S),
+	c026(_,"LOC (Low current signal)"),
+    S.get(outputs/relay/low_current_signal) == "accel_decel_and_constant",
+    !.
+
+c038(01, "Enabled during constant speed") :-
+    b_getval(spec, S),
+	c026(_,"LOC (Low current signal)"),
+    S.get(outputs/relay/low_current_signal) == "constant_speed",
     !.
 
 c038(01, default).
@@ -564,11 +580,7 @@ c040(00, "Enabled during acceleration/deceleration and constant speed") :-
     b_getval(spec, S),
 	(
 		c021(_,"OL (Overload warning)");
-		c022(_,"OL (Overload warning)");
-		c027(_,"OL (Overload warning)");
-		c021(_,"OL2 (Overload warning 2)");
-		c022(_,"OL2 (Overload warning 2)");
-		c027(_,"OL2 (Overload warning 2)")
+		c021(_,"OL2 (Overload warning 2)")
 	),
     S.get(outputs/p1/overload_warning_signal) == "accel_decel_and_constant",
     !.
@@ -577,13 +589,45 @@ c040(01, "Enabled during constant speed") :-
     b_getval(spec, S),
 	(
 		c021(_,"OL (Overload warning)");
-		c022(_,"OL (Overload warning)");
-		c027(_,"OL (Overload warning)");
-		c021(_,"OL2 (Overload warning 2)");
-		c022(_,"OL2 (Overload warning 2)");
-		c027(_,"OL2 (Overload warning 2)")
+		c021(_,"OL2 (Overload warning 2)")
 	),
     S.get(outputs/p1/overload_warning_signal) == "constant_speed",
+    !.
+
+c040(00, "Enabled during acceleration/deceleration and constant speed") :-
+    b_getval(spec, S),
+    (
+        c022(_,"OL (Overload warning)");
+        c022(_,"OL2 (Overload warning 2)")
+    ),
+    S.get(outputs/p2/overload_warning_signal) == "accel_decel_and_constant",
+    !.
+    
+c040(01, "Enabled during constant speed") :-
+    b_getval(spec, S),
+    (
+        c022(_,"OL (Overload warning)");
+        c022(_,"OL2 (Overload warning 2)")
+    ),
+    S.get(outputs/p2/overload_warning_signal) == "constant_speed",
+    !.
+
+c040(00, "Enabled during acceleration/deceleration and constant speed") :-
+    b_getval(spec, S),
+    (
+        c026(_,"OL (Overload warning)");
+        c026(_,"OL2 (Overload warning 2)")
+    ),
+    S.get(outputs/relay/overload_warning_signal) == "accel_decel_and_constant",
+    !.
+
+c040(01, "Enabled during constant speed") :-
+    b_getval(spec, S),
+    (
+        c026(_,"OL (Overload warning)");
+        c026(_,"OL2 (Overload warning 2)")
+    ),
+    S.get(outputs/relay/overload_warning_signal) == "constant_speed",
     !.
 
 c040(01, default).
@@ -591,34 +635,433 @@ c041([], default).
 c241([], default).
 
 
-02: FA2 (Set frequency exceeded signal)
-06: FA3 (Set-frequency only signal)
-
-24: FA4 (Set frequency exceeded signal 2)
-25: FA5 (Set-frequency only signal 2)
-
+c042(F, "Arrival Frequency During Acceleration signal 1 (Hz)"):-
+    b_getval(spec, S),
+	(
+		c021(_,"FA2 (Set frequency exceeded signal)");
+		c021(_,"FA3 (Set-frequency only signal)")
+	),
+    F #= S.get(outputs/p1/acceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+ 
+c042(F, "Arrival Frequency During Acceleration signal 2 (Hz)"):-
+    b_getval(spec, S),
+	(
+		c021(_,"FA4 (Set frequency exceeded signal 2)");
+		c021(_,"FA5 (Set-frequency only signal 2)")
+	),
+    F #= S.get(outputs/p1/acceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+ 
+c042(F, "Arrival Frequency During Acceleration signal 1 (Hz)"):-
+    b_getval(spec, S),
+	(
+		c022(_,"FA2 (Set frequency exceeded signal)");
+		c022(_,"FA3 (Set-frequency only signal)")
+	),
+    F #= S.get(outputs/p2/acceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+ 
+c042(F, "Arrival Frequency During Acceleration signal 2 (Hz)"):-
+    b_getval(spec, S),
+	(
+		c022(_,"FA4 (Set frequency exceeded signal 2)");
+		c022(_,"FA5 (Set-frequency only signal 2)")
+	),
+    F #= S.get(outputs/p2/acceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+ 
+c042(F, "Arrival Frequency During Acceleration signal 1 (Hz)"):-
+    b_getval(spec, S),
+	(
+		c026(_,"FA2 (Set frequency exceeded signal)");
+		c026(_,"FA3 (Set-frequency only signal)")
+	),
+    F #= S.get(outputs/relay/acceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+ 
+c042(F, "Arrival Frequency During Acceleration signal 2 (Hz)"):-
+    b_getval(spec, S),
+	(
+		c026(_,"FA4 (Set frequency exceeded signal 2)");
+		c026(_,"FA5 (Set-frequency only signal 2)")
+	),
+    F #= S.get(outputs/relay/acceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+ 
 c042(0.00, default).
+
+% deceleration_arrival_signal_rpm
+c043(F, "Arrival Frequency During Deceleration signal 1 (Hz)"):-
+    b_getval(spec, S),
+	(
+		c021(_,"FA2 (Set frequency exceeded signal)");
+		c021(_,"FA3 (Set-frequency only signal)")
+	),
+    F #= S.get(outputs/p1/deceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+
+c043(F, "Arrival Frequency During Deceleration signal 2 (Hz)"):-
+    b_getval(spec, S),
+    (
+        c021(_,"FA4 (Set frequency exceeded signal 2)");
+        c021(_,"FA5 (Set-frequency only signal 2)")
+    ),
+    F #= S.get(outputs/p1/deceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.  
+
+c043(F, "Arrival Frequency During Deceleration signal 1 (Hz)"):-
+    b_getval(spec, S),
+    (
+        c022(_,"FA2 (Set frequency exceeded signal)");
+        c022(_,"FA3 (Set-frequency only signal)")
+    ),
+    F #= S.get(outputs/p2/deceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+
+c043(F, "Arrival Frequency During Deceleration signal 2 (Hz)"):-
+    b_getval(spec, S),
+    (
+        c022(_,"FA4 (Set frequency exceeded signal 2)");
+        c022(_,"FA5 (Set-frequency only signal 2)")
+    ),
+    F #= S.get(outputs/p2/deceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+
+c043(F, "Arrival Frequency During Deceleration signal 1 (Hz)"):-
+    b_getval(spec, S),
+    (
+        c026(_,"FA2 (Set frequency exceeded signal)");
+        c026(_,"FA3 (Set-frequency only signal)")
+    ),
+    F #= S.get(outputs/relay/deceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+
+c043(F, "Arrival Frequency During Deceleration signal 2 (Hz)"):-
+    b_getval(spec, S),
+    (
+        c026(_,"FA4 (Set frequency exceeded signal 2)");
+        c026(_,"FA5 (Set-frequency only signal 2)")
+    ),
+    F #= S.get(outputs/relay/deceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+
 c043(0.00, default).
 
+c044(P, "OD signal output judgment level"):-
+    b_getval(spec, S),
+    P #= S.get("PID"/deviation_excessive_level),
+    !.
 
 c044(3.0, default).
 
+c045(F, "Arrival Frequency During Acceleration signal 1 (Hz)"):-
+    b_getval(spec, S),
+	(
+		c021(_,"FA2 (Set frequency exceeded signal)");
+		c021(_,"FA3 (Set-frequency only signal)")
+	),
+    F #= S.get(outputs/p1/acceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+
+c045(F, "Arrival Frequency During Acceleration signal 2 (Hz)"):-
+    b_getval(spec, S),
+    (
+        c021(_,"FA4 (Set frequency exceeded signal 2)");
+        c021(_,"FA5 (Set-frequency only signal 2)")
+    ),
+    F #= S.get(outputs/p1/acceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+
+c045(F, "Arrival Frequency During Acceleration signal 1 (Hz)"):-
+    b_getval(spec, S),
+    (
+        c022(_,"FA2 (Set frequency exceeded signal)");
+        c022(_,"FA3 (Set-frequency only signal)")
+    ),
+    F #= S.get(outputs/p2/acceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+
+c045(F, "Arrival Frequency During Acceleration signal 2 (Hz)"):-
+    b_getval(spec, S),
+    (
+        c022(_,"FA4 (Set frequency exceeded signal 2)");
+        c022(_,"FA5 (Set-frequency only signal 2)")
+    ),
+    F #= S.get(outputs/p2/acceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+
+c045(F, "Arrival Frequency During Acceleration signal 1 (Hz)"):-
+    b_getval(spec, S),
+    (
+        c026(_,"FA2 (Set frequency exceeded signal)");
+        c026(_,"FA3 (Set-frequency only signal)")
+    ),
+    F #= S.get(outputs/relay/acceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+
+c045(F, "Arrival Frequency During Acceleration signal 2 (Hz)"):-
+    b_getval(spec, S),
+    (
+        c026(_,"FA4 (Set frequency exceeded signal 2)");
+        c026(_,"FA5 (Set-frequency only signal 2)")
+    ),
+    F #= S.get(outputs/relay/acceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
 c045(0.00, default).
+
+c046(F, "Arrival Frequency During Deceleration signal 1 (Hz)"):-
+    b_getval(spec, S),
+    (
+        c021(_,"FA2 (Set frequency exceeded signal)");
+        c021(_,"FA3 (Set-frequency only signal)")
+    ),
+    F #= S.get(outputs/p1/deceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+
+c046(F, "Arrival Frequency During Deceleration signal 2 (Hz)"):-
+    b_getval(spec, S),
+    (
+        c021(_,"FA4 (Set frequency exceeded signal 2)");
+        c021(_,"FA5 (Set-frequency only signal 2)")
+    ),
+    F #= S.get(outputs/p1/deceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+
+c046(F, "Arrival Frequency During Deceleration signal 1 (Hz)"):-
+    b_getval(spec, S),
+    (
+        c022(_,"FA2 (Set frequency exceeded signal)");
+        c022(_,"FA3 (Set-frequency only signal)")
+    ),
+    F #= S.get(outputs/p2/deceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+
+c046(F, "Arrival Frequency During Deceleration signal 2 (Hz)"):-
+    b_getval(spec, S),
+    (
+        c022(_,"FA4 (Set frequency exceeded signal 2)");
+        c022(_,"FA5 (Set-frequency only signal 2)")
+    ),
+    F #= S.get(outputs/p2/deceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+c046(F, "Arrival Frequency During Deceleration signal 1 (Hz)"):-
+    b_getval(spec, S),
+    (
+        c026(_,"FA2 (Set frequency exceeded signal)");
+        c026(_,"FA3 (Set-frequency only signal)")
+    ),
+    F #= S.get(outputs/relay/deceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+
+c046(F, "Arrival Frequency During Deceleration signal 2 (Hz)"):-
+    b_getval(spec, S),
+    (
+        c026(_,"FA4 (Set frequency exceeded signal 2)");
+        c026(_,"FA5 (Set-frequency only signal 2)")
+    ),
+    F #= S.get(outputs/relay/deceleration_arrival_signal_rpm) * S.get(motor/'1st'/poles) // 120,
+    !.
+
 c046(0.00, default).
 
 c047(1.00, default).
 
+c052(P, "FBV signal output judgment level (%)"):-
+    b_getval(spec, S),
+    P #= S.get("PID"/feedback_comparison_signal_off_level),
+    !.
+
 c052(100.0, default).
+
+c053(P, "FBV signal output judgment level (%)"):-
+    b_getval(spec, S),
+    P #= S.get("PID"/feedback_comparison_signal_on_level),
+    !.
 c053(0.0, default).
+
+c054(00, "Overtorque") :-
+    b_getval(spec, S),
+    c021(_,"OTQ (Overtorque/Undertorque signal)"),
+    S.get(outputs/p1/overtorque_undertorque_selection) == "overtorque",
+    !.
+c054(01, "Undertorque") :-
+    b_getval(spec, S),
+    c021(_,"OTQ (Overtorque/Undertorque signal)"),
+    S.get(outputs/p1/overtorque_undertorque_selection) == "undertorque",
+    !.
+c054(00, "Overtorque") :-
+    b_getval(spec, S),
+    c022(_,"OTQ (Overtorque/Undertorque signal)"),
+    S.get(outputs/p2/overtorque_undertorque_selection) == "overtorque",
+    !.
+c054(01, "Undertorque") :-
+    b_getval(spec, S),
+    c022(_,"OTQ (Overtorque/Undertorque signal)"),
+    S.get(outputs/p2/overtorque_undertorque_selection) == "undertorque",
+    !.
+c054(00, "Overtorque") :-
+    b_getval(spec, S),
+    c026(_,"OTQ (Overtorque/Undertorque signal)"),
+    S.get(outputs/relay/overtorque_undertorque_selection) == "overtorque",
+    !.
+c054(01, "Undertorque") :-
+    b_getval(spec, S),
+    c026(_,"OTQ (Overtorque/Undertorque signal)"),
+    S.get(outputs/relay/overtorque_undertorque_selection) == "undertorque",
+    !.
 c054(00, default).
+
+c055(P, "OTQ signal output level during Forward Power Running (%)"):-
+    b_getval(spec, S),
+    c021(_,"OTQ (Overtorque/Undertorque signal)"),
+    P #= S.get(outputs/p1/overtorque_undertorque_level_forward_power_running),
+    !.
+c055(P, "OTQ signal output level during Forward Regeneration (%)"):-
+    b_getval(spec, S),
+    c022(_,"OTQ (Overtorque/Undertorque signal)"),
+    P #= S.get(outputs/p2/overtorque_undertorque_level_forward_power_running),
+    !.
+c055(P, "OTQ signal output level during Forward Power Running (%)"):-
+    b_getval(spec, S),
+    c026(_,"OTQ (Overtorque/Undertorque signal)"),
+    P #= S.get(outputs/relay/overtorque_undertorque_level_forward_power_running),
+    !.
 c055(100, default).
+
+c056(P, "OTQ signal output level during Revers Regeneration (%)"):-
+    b_getval(spec, S),
+    c021(_,"OTQ (Overtorque/Undertorque signal)"),
+    P #= S.get(outputs/p1/overtorque_undertorque_level_reverse_regeneration),
+    !.
+c056(P, "OTQ signal output level during Reverse Power Running (%)"):-
+    b_getval(spec, S),
+    c022(_,"OTQ (Overtorque/Undertorque signal)"),
+    P #= S.get(outputs/p2/overtorque_undertorque_level_reverse_regeneration),
+    !.
+c056(P, "OTQ signal output level during Reverse Regeneration (%)"):-
+    b_getval(spec, S),
+    c026(_,"OTQ (Overtorque/Undertorque signal)"),
+    P #= S.get(outputs/relay/overtorque_undertorque_level_reverse_regeneration),
+    !.
 c056(100, default).
+
+c057(P, "OTQ signal output level during Reverse Power Running (%)"):-
+    b_getval(spec, S),
+    c021(_,"OTQ (Overtorque/Undertorque signal)"),
+    P #= S.get(outputs/p1/overtorque_undertorque_level_reverse_power_running),
+    !.
+c057(P, "OTQ signal output level during Forward Regeneration (%)"):-
+    b_getval(spec, S),
+    c022(_,"OTQ (Overtorque/Undertorque signal)"),
+    P #= S.get(outputs/p2/overtorque_undertorque_level_reverse_power_running),
+    !.
+c057(P, "OTQ signal output level during Reverse Power Running (%)"):-
+    b_getval(spec, S),
+    c026(_,"OTQ (Overtorque/Undertorque signal)"),
+    P #= S.get(outputs/relay/overtorque_undertorque_level_reverse_power_running),
+    !.
 c057(100, default).
+
+c058(P, "OTQ signal output level during Forward Regeneration (%)"):-
+    b_getval(spec, S),
+    c021(_,"OTQ (Overtorque/Undertorque signal)"),
+    P #= S.get(outputs/p1/overtorque_undertorque_level_forward_regeneration),
+    !.
+c058(P, "OTQ signal output level during Reverse Power Running (%)"):-
+    b_getval(spec, S),
+    c022(_,"OTQ (Overtorque/Undertorque signal)"),
+    P #= S.get(outputs/p2/overtorque_undertorque_level_forward_regeneration),
+    !.
+c058(P, "OTQ signal output level during Forward Regeneration (%)"):-
+    b_getval(spec, S),
+    c026(_,"OTQ (Overtorque/Undertorque signal)"),
+    P #= S.get(outputs/relay/overtorque_undertorque_level_forward_regeneration),
+    !.
 c058(100, default).
+
+c059(00, "OTQ signal output during acceleration/deceleration and constant speed") :-
+    b_getval(spec, S),
+    c021(_,"OTQ (Overtorque/Undertorque signal)"),
+    S.get(outputs/p1/overtorque_undertorque_signal_operation) == "accel_decel_and_constant",
+    !.
+c059(01, "OTQ signal output during constant speed") :-
+    b_getval(spec, S),
+    c021(_,"OTQ (Overtorque/Undertorque signal)"),
+    S.get(outputs/p1/overtorque_undertorque_signal_operation) == "constant_speed",
+    !.
+c059(00, "OTQ signal output during acceleration/deceleration and constant speed") :-
+    b_getval(spec, S),
+    c022(_,"OTQ (Overtorque/Undertorque signal)"),
+    S.get(outputs/p2/overtorque_undertorque_signal_operation) == "accel_decel_and_constant",
+    !.
+c059(01, "OTQ signal output during constant speed") :-
+    b_getval(spec, S),
+    c022(_,"OTQ (Overtorque/Undertorque signal)"),
+    S.get(outputs/p2/overtorque_undertorque_signal_operation) == "constant_speed",
+    !.
+c059(00, "OTQ signal output during acceleration/deceleration and constant speed") :-
+    b_getval(spec, S),
+    c026(_,"OTQ (Overtorque/Undertorque signal)"),
+    S.get(outputs/relay/overtorque_undertorque_signal_operation) == "accel_decel_and_constant",
+    !.
+c059(01, "OTQ signal output during constant speed") :-
+    b_getval(spec, S),
+    c026(_,"OTQ (Overtorque/Undertorque signal)"),
+    S.get(outputs/relay/overtorque_undertorque_signal_operation) == "constant_speed",
+    !.
 c059(01, default).
+
+c061(P, "Electronic thermal warning signal output level (%)") :-
+    b_getval(spec, S),
+    c021(_,"THM (Electronic thermal warning)"),
+    P #= S.get(outputs/p1/thermal_warning_signal_level),
+    !.
+c061(P, "Electronic thermal warning signal output level (%)") :-
+    b_getval(spec, S),
+    c022(_,"THM (Electronic thermal warning)"),
+    P #= S.get(outputs/p2/thermal_warning_signal_level),
+    !.
+c061(P, "Electronic thermal warning signal output level (%)") :-
+    b_getval(spec, S),
+    c026(_,"THM (Electronic thermal warning)"),
+    P #= S.get(outputs/relay/thermal_warning_signal_level),
+    !.
 c061(90, default).
-c062(0.00, default).
-c063(100, default).
+
+c063(F, "0 Hz detection signal output level (Hz)") :-
+    b_getval(spec, S),
+    c021(_,"ZS (0 Hz detection signal)"),
+    F #= S.get(outputs/p1/zero_speed_detection_level),
+    !.
+c063(F, "0 Hz detection signal output level (Hz)") :-
+    b_getval(spec, S),
+    c022(_,"ZS (0 Hz detection signal)"),
+    F #= S.get(outputs/p2/zero_speed_detection_level),
+    !.
+c063(F, "0 Hz detection signal output level (Hz)") :-
+    b_getval(spec, S),
+    c026(_,"ZS (0 Hz detection signal)"),
+    F #= S.get(outputs/relay/zero_speed_detection_level),
+    !.
+c063(0.00, default).
+
+c064(T, "Cooling fin overheat warning signal output level (°C)") :-
+    b_getval(spec, S),
+    c021(_,"OHF (Cooling fin overheat warning)"),
+    T #= S.get(outputs/p1/cooling_fin_overheat_warning_level),
+    !.
+c064(T, "Cooling fin overheat warning signal output level (°C)") :-
+    b_getval(spec, S),
+    c022(_,"OHF (Cooling fin overheat warning)"),
+    T #= S.get(outputs/p2/cooling_fin_overheat_warning_level),
+    !.
+c064(T, "Cooling fin overheat warning signal output level (°C)") :-
+    b_getval(spec, S),
+    c026(_,"OHF (Cooling fin overheat warning)"),
+    T #= S.get(outputs/relay/cooling_fin_overheat_warning_level),
+    !.
+
 c064(100, default).
 
 c071(05, default).
