@@ -1209,40 +1209,317 @@ c096(02, "Co-inverter communication (management inverter)") :-
     !.
 c096(00, default).
 
-
+c098,(N, "Co-inverter Communication Starting Station Number"):-
+    b_getval(spec, S),
+    N #= S.get(modbus/co_inverter_communication_starting_station_number),
+    N #>= 1,
+    N #=< 63,
+    !.
 c098(1, default).
+
+c099(N, "Co-inverter Communication Ending Station Number"):-
+    b_getval(spec, S),
+    N #= S.get(modbus/co_inverter_communication_ending_station_number),
+    N #>= 1,
+    N #=< 63,
+    !.
 c099(1, default).
+
+c100(00, "Start via RS485 terminal") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(modbus/co_inverter_communication_start_selection), "start_via_rs485_terminal"),
+    !.
+c100(01, "Constant communication") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(modbus/co_inverter_communication_start_selection), "constant_communication"),
+    !.
 c100(00, default).
 
+% Auxiliary
+
+c101(00, "Not store frequency data") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary/up_down_Storage), "not_store_frequency_data"),
+    !.
+c101(01, "Store frequency data") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary/up_down_Storage), "store_frequency_data"),
+    !.
 c101(00, default).
+
+c102(00, "Trip reset at power-on") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary/reset_selection), "trip_reset_at_power_on"),
+    !.
+c102(01, "Trip reset at power-off") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary/reset_selection), "trip_reset_at_power_off"),
+    !.
+c102(02, "Enabled only during trip") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary/reset_selection), "enabled_only_during_trip"),
+    !.
+c102(03, "Trip reset only") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary/reset_selection), "trip_reset_only"),
+    !.
 c102(02, default).
+
+c103(00, "0-Hz restart") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary/reset_restart_selection), "0_hz_restart"),
+    !.
+c103(01, "Frequency matching restart") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary/reset_restart_selection), "frequency_matching_restart"),
+    !.
+c103(02, "Frequency pull-in restart") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary/reset_restart_selection), "frequency_pull_in_restart"),
+    !.
 c103(00, default).
+
+c104(00, "0-Hz  clear selection") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary/up_down_clear_selection), "0_hz"),
+    !.
+c104(01, "EEPROM data at power-on clear selection") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary/up_down_clear_selection), "eeprom_data_at_power_on"),
+    !.
 c104(00, default).
+
+c105(P, "MP Gain Setting (%)") :-
+    b_getval(spec, S),
+    P #= S.get(auxiliary/mp_gain),
+    P #>= 50.0,
+    P #=< 200.0,
+    !.
 c105(100, default).
+
+c105(P, "AM Gain Setting (%)") :-
+    b_getval(spec, S),
+    P #= S.get(auxiliary/am_gain),
+    P #>= 50.0,
+    P #=< 200.0,
+    !.
 c106(100, default).
+
+c105(P, "AM Bias Setting (%)") :-
+    b_getval(spec, S),
+    P #= S.get(auxiliary/am_bias),
+    P #>= 0.0,
+    P #=< 200.0,
+    !.
 c109(0, default).
+
+c111(C, "1st Overload Warning Level 2 (A)") :-
+    b_getval(spec, S),
+    c021(_,"OL (Overload warning)"),
+    C #= S.get(outputs/p1/current_overload_warning_level_2),
+    !.
+c111(C, "1st Overload Warning Level 2 (A)") :-  
+    b_getval(spec, S),
+    c022(_,"OL (Overload warning)"),
+    C #= S.get(outputs/p2/current_overload_warning_level_2),
+    !.
+c111(C, "1st Overload Warning Level 2 (A)") :-
+    b_getval(spec, S),
+    c026(_,"OL (Overload warning)"),
+    C #= S.get(outputs/relay/current_overload_warning_level_2),
+    !.
 c111([], default).
 
+c130(T, "Multi-function Output P1 ON Delay Time (s)"):-
+    b_getval(spec, S),
+    T #= S.get(outputs/p1/on_delay_time),
+    T #>= 0.0,
+    T #=< 100.0,
+    !.
+    c131(T, "Multi-function Output P1 OFF Delay Time (s)"):-
+    b_getval(spec, S),
+    T #= S.get(outputs/p1/off_delay_time),
+    T #>= 0.0,
+    T #=< 100.0,
+    !.
+c132(T, "Multi-function Output P2 ON Delay Time (s)"):-
+    b_getval(spec, S),
+    T #= S.get(outputs/p2/on_delay_time),
+    T #>= 0.0,
+    T #=< 100.0,
+    !.
+c133(T, "Multi-function Output P2 OFF Delay Time (s)"):-
+    b_getval(spec, S),
+    T #= S.get(outputs/p2/off_delay_time),
+    T #>= 0.0,
+    T #=< 100.0,
+    !.
+c140(T, "Multi-function Relay Output ON Delay Time (s)"):-
+    b_getval(spec, S),
+    T #= S.get(outputs/relay/on_delay_time),
+    T #>= 0.0,
+    T #=< 100.0,
+    !.
+c141(T, "Multi-function Relay Output OFF Delay Time (s)"):-
+    b_getval(spec, S),
+    T #= S.get(outputs/relay/off_delay_time),
+    T #>= 0.0,
+    T #=< 100.0,
+    !.
 c130(0.0, default).
 c131(0.0, default).
 c132(0.0, default).
 c133(0.0, default).
 c140(0.0, default).
 c141(0.0, default).
+
+c142(V, Text):-
+    b_getval(spec, S),
+    c021(_,"LOG1 (Logic output signal 1)"),
+    value_function_text(V, S.get(outputs/p1/logic_output_signal_1_1), Text),
+    \+ member(V, [33, 34, 35, 36. 255]), 
+    !.
+c143(V, Text):-
+    b_getval(spec, S),
+    c021(_,"LOG2 (Logic output signal 2)"),
+    value_function_text(V, S.get(outputs/p1/logic_output_signal_1_2), Text),
+    \+ member(V, [33, 34, 35, 36. 255]), 
+    !.
+c144(00, "AND"):-
+    b_getval(spec, S),
+    c021(_,"LOG1 (Logic output signal 1)"),
+    #fuzzy_match_key_value(S.get(outputs/p1/logic_output_signal_1_operation), "and"),
+    !.
+c144(01, "OR"):-
+    b_getval(spec, S),
+    c021(_,"LOG1 (Logic output signal 1)"),
+    #fuzzy_match_key_value(S.get(outputs/p1/logic_output_signal_1_operation), "or"),
+    !.
+c144(02, "XOR"):-
+    b_getval(spec, S),
+    c021(_,"LOG1 (Logic output signal 1)"),
+    #fuzzy_match_key_value(S.get(outputs/p1/logic_output_signal_1_operation), "xor"),
+    !.
 c142(00, default).
 c143(00, default).
 c144(00, default).
+
+c145(V, Text):-
+    b_getval(spec, S),
+    c022(_,"LOG2 (Logic output signal 2)"),
+    value_function_text(V, S.get(outputs/p2/logic_output_signal_2_1), Text),
+    \+ member(V, [33, 34, 35, 36. 255]), 
+    !.
+c146(V, Text):-
+    b_getval(spec, S),
+    c022(_,"LOG2 (Logic output signal 2)"),
+    value_function_text(V, S.get(outputs/p2/logic_output_signal_2_2), Text),
+    \+ member(V, [33, 34, 35, 36. 255]), 
+    !.
+c147(00, "AND"):-
+    b_getval(spec, S),
+    c022(_,"LOG2 (Logic output signal 2)"),
+    #fuzzy_match_key_value(S.get(outputs/p2/logic_output_signal_2_operation), "and"),
+    !.
+c147(01, "OR"):-
+    b_getval(spec, S),
+    c022(_,"LOG2 (Logic output signal 2)"),
+    #fuzzy_match_key_value(S.get(outputs/p2/logic_output_signal_2_operation), "or"),
+    !.
+c147(02, "XOR"):-
+    b_getval(spec, S),
+    c022(_,"LOG2 (Logic output signal 2)"),
+    #fuzzy_match_key_value(S.get(outputs/p2/logic_output_signal_2_operation), "xor"),
+    !.
 c145(00, default).
 c146(00, default).
 c147(00, default).
+
+c148(V, Text):-
+    b_getval(spec, S),
+    c026(_,"LOG3 (Logic output signal 3)"),
+    value_function_text(V, S.get(outputs/relay/logic_output_signal_3_1), Text),
+    \+ member(V, [33, 34, 35, 36. 255]), 
+    !.
+c149(V, Text):-
+    b_getval(spec, S),
+    c026(_,"LOG3 (Logic output signal 3)"),
+    value_function_text(V, S.get(outputs/relay/logic_output_signal_3_2), Text),
+    \+ member(V, [33, 34, 35, 36. 255]), 
+    !.
+c150(00, "AND"):-
+    b_getval(spec, S),
+    c026(_,"LOG3 (Logic output signal 3)"),
+    #fuzzy_match_key_value(S.get(outputs/relay/logic_output_signal_3_operation), "and"),
+    !.
+c150(01, "OR"):-
+    b_getval(spec, S),
+    c026(_,"LOG3 (Logic output signal 3)"),
+    #fuzzy_match_key_value(S.get(outputs/relay/logic_output_signal_3_operation), "or"),
+    !.
+c150(02, "XOR"):-
+    b_getval(spec, S),
+    c026(_,"LOG3 (Logic output signal 3)"),
+    #fuzzy_match_key_value(S.get(outputs/relay/logic_output_signal_3_operation), "xor"),
+    !.
 c148(00, default).
 c149(00, default).
 c150(00, default).
+
+c160(T, "Multi-function Input S1 Response Time (ms)"):-
+    b_getval(spec, S),
+    T #= S.get(inputs/s1/response_time) / 2,
+    T #>= 0.0,
+    T #=< 200.0,
+    !.
 c160(1, default).
+c161(T, "Multi-function Input S2 Response Time (ms)"):-
+    b_getval(spec, S),
+    T #= S.get(inputs/s2/response_time) / 2,
+    T #>= 0.0,
+    T #=< 200.0,
+    !.  
 c161(1, default).
+c162(T, "Multi-function Input S3 Response Time (ms)"):-
+    b_getval(spec, S),
+    T #= S.get(inputs/s3/response_time) / 2,
+    T #>= 0.0,
+    T #=< 200.0,
+    !.
 c162(1, default).
+c163(T, "Multi-function Input S4 Response Time (ms)"):-
+    b_getval(spec, S),
+    T #= S.get(inputs/s4/response_time) / 2,
+    T #>= 0.0,
+    T #=< 200.0,
+    !.
 c163(1, default).
+c164(T, "Multi-function Input S5 Response Time (ms)"):-
+    b_getval(spec, S),
+    T #= S.get(inputs/s5/response_time) / 2,
+    T #>= 0.0,
+    T #=< 200.0,
+    !.
 c164(1, default).
+c165(T, "Multi-function Input S6 Response Time (ms)"):-
+    b_getval(spec, S),
+    T #= S.get(inputs/s6/response_time) / 2,
+    T #>= 0.0,
+    T #=< 200.0,
+    !.
 c165(1, default).
+c166(T, "Multi-function Input S7 Response Time (ms)"):-
+    b_getval(spec, S),
+    T #= S.get(inputs/s7/response_time) / 2,
+    T #>= 0.0,
+    T #=< 200.0,
+    !.
 c166(1, default).
+
+c169(T, "Multi-step Speed/Position Determination Time (ms)"):-
+    b_getval(spec, S),
+    T #= S.get(inputs/multi_step_speed_position_determination_time) / 10,
+    T #>= 0,
+    T #=< 200,
+    !.
 c169(0, default).
