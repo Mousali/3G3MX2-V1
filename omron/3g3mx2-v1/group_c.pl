@@ -983,32 +983,32 @@ c058(100, default).
 c059(00, "OTQ signal output during acceleration/deceleration and constant speed") :-
     b_getval(spec, S),
     c021(_,"OTQ (Overtorque/Undertorque signal)"),
-    S.get(outputs/p1/overtorque_undertorque_signal_operation) == "accel_decel_and_constant",
+    #fuzzy_match_key_value(S.get(outputs/p1/overtorque_undertorque_signal_operation),"accel_decel_and_constant"),
     !.
 c059(01, "OTQ signal output during constant speed") :-
     b_getval(spec, S),
     c021(_,"OTQ (Overtorque/Undertorque signal)"),
-    S.get(outputs/p1/overtorque_undertorque_signal_operation) == "constant_speed",
+    #fuzzy_match_key_value(S.get(outputs/p1/overtorque_undertorque_signal_operation),"constant_speed"),
     !.
 c059(00, "OTQ signal output during acceleration/deceleration and constant speed") :-
     b_getval(spec, S),
     c022(_,"OTQ (Overtorque/Undertorque signal)"),
-    S.get(outputs/p2/overtorque_undertorque_signal_operation) == "accel_decel_and_constant",
+    #fuzzy_match_key_value(S.get(outputs/p1/overtorque_undertorque_signal_operation),"accel_decel_and_constant"),
     !.
 c059(01, "OTQ signal output during constant speed") :-
     b_getval(spec, S),
     c022(_,"OTQ (Overtorque/Undertorque signal)"),
-    S.get(outputs/p2/overtorque_undertorque_signal_operation) == "constant_speed",
+    #fuzzy_match_key_value(S.get(outputs/p1/overtorque_undertorque_signal_operation),"constant_speed"),
     !.
 c059(00, "OTQ signal output during acceleration/deceleration and constant speed") :-
     b_getval(spec, S),
     c026(_,"OTQ (Overtorque/Undertorque signal)"),
-    S.get(outputs/relay/overtorque_undertorque_signal_operation) == "accel_decel_and_constant",
+    #fuzzy_match_key_value(S.get(outputs/p1/overtorque_undertorque_signal_operation),"accel_decel_and_constant"),
     !.
 c059(01, "OTQ signal output during constant speed") :-
     b_getval(spec, S),
     c026(_,"OTQ (Overtorque/Undertorque signal)"),
-    S.get(outputs/relay/overtorque_undertorque_signal_operation) == "constant_speed",
+    #fuzzy_match_key_value(S.get(outputs/p1/overtorque_undertorque_signal_operation),"constant_speed"),
     !.
 c059(01, default).
 
@@ -1064,20 +1064,152 @@ c064(T, "Cooling fin overheat warning signal output level (°C)") :-
 
 c064(100, default).
 
+c071(03, "2400 bps"):-
+    b_getval(spec, S),
+    S.get(modbus/bps) = '2400',
+    !.
+c071(04, "4800 bps"):-
+    b_getval(spec, S),
+    S.get(modbus/bps) = '4800',
+    !.
+c071(05, "9600 bps"):-
+    b_getval(spec, S),
+    S.get(modbus/bps) = '9600',
+    !.
+c071(06, "19.2 kbps"):-
+    b_getval(spec, S),
+    S.get(modbus/bps) = '19200',
+    !.
+c071(07, "38.4 kbps"):-
+    b_getval(spec, S),
+    S.get(modbus/bps) = '38400',
+    !.
+c071(08, "57.6 kbps"):-
+    b_getval(spec, S),
+    S.get(modbus/bps) = '57600',
+    !.
+c071(09, "76.8 kbps"):-
+    b_getval(spec, S),
+    S.get(modbus/bps) = '76800',
+    !.
+c071(10, "115.2 kbps"):-
+    b_getval(spec, S),
+    S.get(modbus/bps) = '115200',
+    !.
 c071(05, default).
+
+c072(V, "station number (slave address)"):-
+    b_getval(spec, S),
+    S.get(modbus/station_number) = V,
+    !.
+
 c072(1, default).
+
+c074(00, "No parity") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(modbus/communication_parity),"No parity"),
+    !.
+c074(01, "Even parity") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(modbus/communication_parity),"Even parity"),
+    !.
+c074(02, "Odd parity") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(modbus/communication_parity),"Odd parity"),
+    !.
 c074(00, default).
+
+
+Parameter C075 is the Communication Stop Bit Selection. Below is the relevant information:
+
+c075(1, "1 bit") :-
+    b_getval(spec, S),
+    S.get(modbus/communication_stop_bit) = '1',
+    !.
+c075(2, "2 bits") :-
+    b_getval(spec, S),
+    S.get(modbus/communication_stop_bit) = '2',
+    !.
 c075(1, default).
+
+c076(00, "Trip") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(modbus/communication_error_operation),'trip'),
+    !.
+c076(01, "Trip after deceleration stop") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(modbus/communication_error_operation),'trip_after_deceleration_stop'),
+    !.
+c076(02, "Ignore or Free-run stop") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(modbus/communication_error_operation),'ignore_or_free_run_stop'),
+    !.
+c076(03, "Free-run stop or Deceleration stop + trip") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(modbus/communication_error_operation),'free_run_stop_or_deceleration_stop_trip'),
+    !.
+c076(04, "Deceleration stop or Free-run stop + trip") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(modbus/communication_error_operation),'deceleration_stop_or_free_run_stop_trip'),
+    !.
 c076(02, default).
+
+c077(T, "Communication Error Timeout Time (s)") :-
+    b_getval(spec, S),
+    T #= S.get(modbus/communication_error_timeout_time),
+    T #>= 0.01,
+    T #=< 9999,
+    !.
 c077(0.00, default).
+
+c078(Ms, "Communication Wait Time (ms)") :-
+    b_getval(spec, S),
+    Ms #= S.get(modbus/communication_wait_time),
+    Ms #>= 0,
+    Ms #=< 1000,
+    !.
 c078(0, default).
 
+c081(P, "FV Adjustment (%)") :-
+    b_getval(spec, S),
+    P #= S.get(inputs/fv_adjustment),
+    P #>= 0.0,
+    P #=< 200.0,
+    !.
 c081(100.0, default).
+c082(P, "FI Adjustment (%)") :-
+    b_getval(spec, S),
+    P #= S.get(inputs/fv_adjustment),
+    P #>= 0.0,
+    P #=< 200.0,
+    !.
 c082(100.0, default).
+
+c085(P, "Thermistor Adjustment (%)") :-
+    b_getval(spec, S),
+    P #= S.get(inputs/thermistor_adjustment),
+    P #>= 0.0,
+    P #=< 200.0,
+    !.
 c085(100.0, default).
+
 c091(00, default).
 
+c096(00, "Modbus communication") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(modbus/communication_selection), 'modbus'),
+    !.
+c096(01, "Co-inverter communication") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(modbus/communication_selection), 'co_inverter'),
+    !.
+c096(02, "Co-inverter communication (management inverter)") :-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(modbus/communication_selection), 'co_inverter_management'),
+    !.
 c096(00, default).
+
+
 c098(1, default).
 c099(1, default).
 c100(00, default).
