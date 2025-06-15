@@ -395,36 +395,43 @@ value_function_text(16, Text, Function) :-
 
 
 c001(V, Text):-
+    b_getval(spec, S),
     value_function_text(V, S.get(inputs/s1/function), Text),
     !.
 c001(00, default).
 
 c002(V, Text):-
+    b_getval(spec, S),
     value_function_text(V, S.get(inputs/s2/function), Text),
     !.
 c002(01, default).
 
 c003(V, Text):-
+    b_getval(spec, S),
     value_function_text(V, S.get(inputs/s3/function), Text),
     !.
 c003(18, default).
 
 c004(V, Text):-
+    b_getval(spec, S),
     value_function_text(V, S.get(inputs/s4/function), Text),
     !.
 c004(12, default).
 
 c005(V, Text):-
+    b_getval(spec, S),
     value_function_text(V, S.get(inputs/s5/function), Text),
     !.
 c005(02, default).
 
 c006(V, Text):-
+    b_getval(spec, S),
     value_function_text(V, S.get(inputs/s6/function), Text),
     !.
 c006(03, default).
 
 c007(V, Text):-
+    b_getval(spec, S),
     value_function_text(V, S.get(inputs/s7/function), Text),
     !.
 c007(06, default).
@@ -489,43 +496,48 @@ c017(00, default).
 % outputs
 
 c021(V, Text):-
+    b_getval(spec, S),
     value_function_text(V, S.get(outputs/p1/function), Text),
     !.
 c021(00, default).
 c022(V, Text):-
+    b_getval(spec, S),
     value_function_text(V, S.get(outputs/p2/function), Text),
     !.
 c022(01, default).
 c026(V, Text):-
+    b_getval(spec, S),
     value_function_text(V, S.get(outputs/relay/function), Text),
     !.
 c026(05, default).
 
 % Analog monitor
 c027(V, Text):-
-    value_function_text(V, S.get(outputs/MP/function), Text),
+    b_getval(spec, S),
+    value_function_text(V, S.get(outputs/'MP'/function), Text),
     !.
 c027(07, default).
 
 c028(V, Text):-
-    value_function_text(V, S.get(outputs/AM/function), Text),
+    b_getval(spec, S),
+    value_function_text(V, S.get(outputs/'AM'/function), Text),
     !.
 c028(07, default).
 
 c030([], default).
 
 % Multi-function output terminals
-c031(V, Text):-
+c031(01, "Normally Closed"):-
     b_getval(spec, S),
     S.get(outputs/p1/normally_closed),
     !.
 c031(00, default).
-c032(V, Text):-
+c032(01, "Normally Closed"):-
     b_getval(spec, S),
     S.get(outputs/p2/normally_closed),
     !.
 c032(00, default).
-c036(V, Text):-
+c036(01, "Normally Closed"):-
     b_getval(spec, S),
     S.get(outputs/relay/normally_closed),
     !.
@@ -750,7 +762,7 @@ c043(0.00, default).
 
 c044(P, "OD signal output judgment level"):-
     b_getval(spec, S),
-    P #= S.get("PID"/deviation_excessive_level),
+    P #= S.get('PID'/deviation_excessive_level),
     !.
 
 c044(3.0, default).
@@ -869,14 +881,14 @@ c047(1.00, default).
 
 c052(P, "FBV signal output judgment level (%)"):-
     b_getval(spec, S),
-    P #= S.get("PID"/feedback_comparison_signal_off_level),
+    P #= S.get('PID'/feedback_comparison_signal_off_level),
     !.
 
 c052(100.0, default).
 
 c053(P, "FBV signal output judgment level (%)"):-
     b_getval(spec, S),
-    P #= S.get("PID"/feedback_comparison_signal_on_level),
+    P #= S.get('PID'/feedback_comparison_signal_on_level),
     !.
 c053(0.0, default).
 
@@ -1119,9 +1131,6 @@ c074(02, "Odd parity") :-
     !.
 c074(00, default).
 
-
-Parameter C075 is the Communication Stop Bit Selection. Below is the relevant information:
-
 c075(1, "1 bit") :-
     b_getval(spec, S),
     S.get(modbus/communication_stop_bit) = '1',
@@ -1209,7 +1218,7 @@ c096(02, "Co-inverter communication (management inverter)") :-
     !.
 c096(00, default).
 
-c098,(N, "Co-inverter Communication Starting Station Number"):-
+c098(N, "Co-inverter Communication Starting Station Number"):-
     b_getval(spec, S),
     N #= S.get(modbus/co_inverter_communication_starting_station_number),
     N #>= 1,
@@ -1297,7 +1306,7 @@ c105(P, "MP Gain Setting (%)") :-
     !.
 c105(100, default).
 
-c105(P, "AM Gain Setting (%)") :-
+c106(P, "AM Gain Setting (%)") :-
     b_getval(spec, S),
     P #= S.get(auxiliary/am_gain),
     P #>= 50.0,
@@ -1305,7 +1314,7 @@ c105(P, "AM Gain Setting (%)") :-
     !.
 c106(100, default).
 
-c105(P, "AM Bias Setting (%)") :-
+c109(P, "AM Bias Setting (%)") :-
     b_getval(spec, S),
     P #= S.get(auxiliary/am_bias),
     P #>= 0.0,
@@ -1336,55 +1345,57 @@ c130(T, "Multi-function Output P1 ON Delay Time (s)"):-
     T #>= 0.0,
     T #=< 100.0,
     !.
-    c131(T, "Multi-function Output P1 OFF Delay Time (s)"):-
+c130(0.0, default).
+c131(T, "Multi-function Output P1 OFF Delay Time (s)"):-
     b_getval(spec, S),
     T #= S.get(outputs/p1/off_delay_time),
     T #>= 0.0,
     T #=< 100.0,
     !.
+c131(0.0, default).
 c132(T, "Multi-function Output P2 ON Delay Time (s)"):-
     b_getval(spec, S),
     T #= S.get(outputs/p2/on_delay_time),
     T #>= 0.0,
     T #=< 100.0,
     !.
+c132(0.0, default).
 c133(T, "Multi-function Output P2 OFF Delay Time (s)"):-
     b_getval(spec, S),
     T #= S.get(outputs/p2/off_delay_time),
     T #>= 0.0,
     T #=< 100.0,
     !.
+c133(0.0, default).
 c140(T, "Multi-function Relay Output ON Delay Time (s)"):-
     b_getval(spec, S),
     T #= S.get(outputs/relay/on_delay_time),
     T #>= 0.0,
     T #=< 100.0,
     !.
+c140(0.0, default).
 c141(T, "Multi-function Relay Output OFF Delay Time (s)"):-
     b_getval(spec, S),
     T #= S.get(outputs/relay/off_delay_time),
     T #>= 0.0,
     T #=< 100.0,
     !.
-c130(0.0, default).
-c131(0.0, default).
-c132(0.0, default).
-c133(0.0, default).
-c140(0.0, default).
 c141(0.0, default).
 
 c142(V, Text):-
     b_getval(spec, S),
     c021(_,"LOG1 (Logic output signal 1)"),
     value_function_text(V, S.get(outputs/p1/logic_output_signal_1_1), Text),
-    \+ member(V, [33, 34, 35, 36. 255]), 
+    \+ member(V, [33, 34, 35, 36, 255]),
     !.
+c142(00, default).
 c143(V, Text):-
     b_getval(spec, S),
     c021(_,"LOG2 (Logic output signal 2)"),
     value_function_text(V, S.get(outputs/p1/logic_output_signal_1_2), Text),
-    \+ member(V, [33, 34, 35, 36. 255]), 
+    \+ member(V, [33, 34, 35, 36, 255]),
     !.
+c143(00, default).
 c144(00, "AND"):-
     b_getval(spec, S),
     c021(_,"LOG1 (Logic output signal 1)"),
@@ -1400,22 +1411,22 @@ c144(02, "XOR"):-
     c021(_,"LOG1 (Logic output signal 1)"),
     #fuzzy_match_key_value(S.get(outputs/p1/logic_output_signal_1_operation), "xor"),
     !.
-c142(00, default).
-c143(00, default).
 c144(00, default).
 
 c145(V, Text):-
     b_getval(spec, S),
     c022(_,"LOG2 (Logic output signal 2)"),
     value_function_text(V, S.get(outputs/p2/logic_output_signal_2_1), Text),
-    \+ member(V, [33, 34, 35, 36. 255]), 
+    \+ member(V, [33, 34, 35, 36, 255]),
     !.
+c145(00, default).
 c146(V, Text):-
     b_getval(spec, S),
     c022(_,"LOG2 (Logic output signal 2)"),
     value_function_text(V, S.get(outputs/p2/logic_output_signal_2_2), Text),
-    \+ member(V, [33, 34, 35, 36. 255]), 
+    \+ member(V, [33, 34, 35, 36, 255]),
     !.
+c146(00, default).
 c147(00, "AND"):-
     b_getval(spec, S),
     c022(_,"LOG2 (Logic output signal 2)"),
@@ -1431,22 +1442,22 @@ c147(02, "XOR"):-
     c022(_,"LOG2 (Logic output signal 2)"),
     #fuzzy_match_key_value(S.get(outputs/p2/logic_output_signal_2_operation), "xor"),
     !.
-c145(00, default).
-c146(00, default).
 c147(00, default).
 
 c148(V, Text):-
     b_getval(spec, S),
     c026(_,"LOG3 (Logic output signal 3)"),
     value_function_text(V, S.get(outputs/relay/logic_output_signal_3_1), Text),
-    \+ member(V, [33, 34, 35, 36. 255]), 
+    \+ member(V, [33, 34, 35, 36, 255]),
     !.
+c148(00, default).
 c149(V, Text):-
     b_getval(spec, S),
     c026(_,"LOG3 (Logic output signal 3)"),
     value_function_text(V, S.get(outputs/relay/logic_output_signal_3_2), Text),
-    \+ member(V, [33, 34, 35, 36. 255]), 
+    \+ member(V, [33, 34, 35, 36, 255]),
     !.
+c149(00, default).
 c150(00, "AND"):-
     b_getval(spec, S),
     c026(_,"LOG3 (Logic output signal 3)"),
@@ -1462,8 +1473,6 @@ c150(02, "XOR"):-
     c026(_,"LOG3 (Logic output signal 3)"),
     #fuzzy_match_key_value(S.get(outputs/relay/logic_output_signal_3_operation), "xor"),
     !.
-c148(00, default).
-c149(00, default).
 c150(00, default).
 
 c160(T, "Multi-function Input S1 Response Time (ms)"):-
