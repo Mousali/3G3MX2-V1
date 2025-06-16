@@ -63,22 +63,168 @@ b005(01, "No limit"):-
     !.
 b005(00, default).
 
-
+b007(F, "Frequency Matching Lower Limit Frequency (Hz)"):- 
+    b_getval(spec, S),
+    F #= S.get(power_interruption/frequency_matching_lower_limit_frequency),
+    \+ #fuzzy_match_key_value(S.get(operations/inverter_mode),"Induction motor high-frequency"),
+    F #>= 0.00, 
+    F #=< 400.0,
+    !.
+b007(F, "Frequency Matching Lower Limit Frequency (Hz) High-Frequency Mode"):-
+    b_getval(spec, S),
+    F #= S.get(power_interruption/frequency_matching_lower_limit_frequency),
+    #fuzzy_match_key_value(S.get(operations/inverter_mode),"Induction motor high-frequency"),
+    F #>= 100.0, 
+    F #=< 580.0,
+    !.
 b007(0.00, default).
+
+b008(00, "Trip"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(power_interruption/overvoltage_overcurrent_restart_selection),"trip"),
+    !.
+b008(01, "0-Hz restart"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(power_interruption/overvoltage_overcurrent_restart_selection),"0-Hz restart"),
+    !.
+b008(02, "Frequency matching restart"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(power_interruption/overvoltage_overcurrent_restart_selection),"frequency matching restart"),
+    !.
+b008(03, "Trip after frequency matching deceleration stop"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(power_interruption/overvoltage_overcurrent_restart_selection),"trip after frequency matching deceleration stop"),
+    !.
+b008(04, "Frequency pull-in restart"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(power_interruption/overvoltage_overcurrent_restart_selection),"frequency pull-in restart"),
+    !.
 b008(00, default).
+
+b010(T, "Overvoltage/Overcurrent Restart Count"):- 
+    b_getval(spec, S),
+    T #= S.get(power_interruption/overvoltage_overcurrent_restart_count),
+    T #>= 1, 
+    T #=< 3,
+    !.
 b010(3, default).
+
+b011(T, "Overvoltage/Overcurrent Restart Standby Time (s)"):- 
+    b_getval(spec, S),
+    T #= S.get(power_interruption/overvoltage_overcurrent_restart_standby_time),
+    T #>= 0.3, 
+    T #=< 100.0,
+    !.
 b011(1.0, default).
 
 %% Electronic thermal
+b012(Ti, "1st Electronic Thermal Level (A)"):- 
+    b_getval(spec, S),
+    Ti #= S.get(electronic_thermal/first_level),
+    rated_current(RatedCurrent),
+    Ti #>= 0.20 * RatedCurrent, 
+    Ti #=< 1.00 * RatedCurrent,
+    !.
 b012([], default).
+
+b212(Ti,"2nd Electronic Thermal Level (A)"):- 
+    b_getval(spec, S),
+    Ti #= S.get(electronic_thermal/second_level),
+    rated_current(RatedCurrent),
+    Ti #>= 0.20 * RatedCurrent, 
+    Ti #=< 1.00 * RatedCurrent,
+    !.
 b212([], default).
+
+b013(00, "Reduced torque characteristics"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(electronic_thermal/first_characteristics_selection),"reduced torque characteristics"),
+    !.
+b013(01, "Constant torque characteristics"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(electronic_thermal/first_characteristics_selection),"constant torque characteristics"),
+    !.
+b013(02, "Free setting"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(electronic_thermal/first_characteristics_selection),"free setting"),
+    !.
 b013(01, default).
+
+b014(00, "Reduced torque characteristics"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(electronic_thermal/second_characteristics_selection),"reduced torque characteristics"),
+    !.
+b014(01, "Constant torque characteristics"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(electronic_thermal/second_characteristics_selection),"constant torque characteristics"),
+    !.
+b014(02, "Free setting"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(electronic_thermal/second_characteristics_selection),"free setting"),
+    !.
 b213(01, default).
+
+b015(F, "Free Electronic Thermal Speed 1 (RPM)"):- 
+    b_getval(spec, S),
+    Rpm #= S.get(electronic_thermal/free_electronic_thermal_speed_1),
+    F #= Rpm * S.get(motor/'1st'/poles) // 120,
+    F #>= 0.00, 
+    F #=< S.get(electronic_thermal/free_electronic_thermal_speed_2) * S.get(motor/'1st'/poles) // 120,
+    !.
 b015(0, default).
+
+b016(Ti, "Free Electronic Thermal Current 1 (A)"):- 
+    b_getval(spec, S),
+    Ti #= S.get(electronic_thermal/free_electronic_thermal_current_1),
+    rated_current(RatedCurrent),
+    Ti #>= 0.00, 
+    Ti #=< RatedCurrent,
+    !.
 b016(0.00, default).
+
+b017(F, "Free Electronic Thermal Speed 2 (RPM)"):- 
+    b_getval(spec, S),
+    Rpm #= S.get(electronic_thermal/free_electronic_thermal_speed_2),
+    F #= Rpm * S.get(motor/'1st'/poles) // 120,
+    F #>= S.get(electronic_thermal/free_electronic_thermal_speed_1) * S.get(motor/'1st'/poles) // 120, 
+    F #=< S.get(electronic_thermal/free_electronic_thermal_speed_3) * S.get(motor/'1st'/poles) // 120,
+    !.
 b017(0, default).
+
+b018(Ti, "Free Electronic Thermal Current 2 (A)"):- 
+    b_getval(spec, S),
+    Ti #= S.get(electronic_thermal/free_electronic_thermal_current_2),
+    rated_current(RatedCurrent),
+    Ti #>= 0.00, 
+    Ti #=< RatedCurrent,
+    !.
 b018(0.00, default).
+
+b019(F, "Free Electronic Thermal Speed 3 (RPM)"):- 
+    b_getval(spec, S),
+    \+ #fuzzy_match_key_value(S.get(operations/inverter_mode),"Induction motor high-frequency"),
+    Rpm #= S.get(electronic_thermal/free_electronic_thermal_speed_3),
+    F #= Rpm * S.get(motor/'1st'/poles) // 120,
+    F #>= S.get(electronic_thermal/free_electronic_thermal_speed_2) * S.get(motor/'1st'/poles) // 120, 
+    F #=< 400,
+    !.
+b019(F, "Free Electronic Thermal Speed 3 (RPM) High-Frequency Mode"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(operations/inverter_mode),"Induction motor high-frequency"),
+    Rpm #= S.get(electronic_thermal/free_electronic_thermal_speed_3),
+    F #= Rpm * S.get(motor/'1st'/poles) // 120,
+    F #>= S.get(electronic_thermal/free_electronic_thermal_speed_2) * S.get(motor/'1st'/poles) // 120, 
+    F #=< 580,
+    !.
 b019(0, default).
+
+b020(Ti, "Free Electronic Thermal Current 3 (A)"):- 
+    b_getval(spec, S),
+    Ti #= S.get(electronic_thermal/free_electronic_thermal_current_3),
+    rated_current(RatedCurrent),
+    Ti #>= 0.00, 
+    Ti #=< RatedCurrent,
+    !.
 b020(0.00, default).
 
 %% Overload limit, over current protection
