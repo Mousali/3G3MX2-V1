@@ -150,15 +150,15 @@ b013(02, "Free setting"):-
     !.
 b013(01, default).
 
-b014(00, "Reduced torque characteristics"):-
+b213(00, "Reduced torque characteristics"):-
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(electronic_thermal/second_characteristics_selection),"reduced torque characteristics"),
     !.
-b014(01, "Constant torque characteristics"):-
+b213(01, "Constant torque characteristics"):-
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(electronic_thermal/second_characteristics_selection),"constant torque characteristics"),
     !.
-b014(02, "Free setting"):-
+b213(02, "Free setting"):-
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(electronic_thermal/second_characteristics_selection),"free setting"),
     !.
@@ -228,64 +228,638 @@ b020(Ti, "Free Electronic Thermal Current 3 (A)"):-
 b020(0.00, default).
 
 %% Overload limit, over current protection
+b021(00, "Disabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(overload_limit_overcurrent_protection/overload_limit_settings),"disabled"),
+    !.
+b021(01, "Enabled during acceleration and constant speed"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(overload_limit_overcurrent_protection/overload_limit_settings),"enabled during acceleration and constant speed"),
+    !.
+b021(02, "Enabled during constant speed"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(overload_limit_overcurrent_protection/overload_limit_settings),"enabled during constant speed"),
+    !.
+b021(03, "Enabled during acceleration and constant speed (Accelerated during regeneration)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(overload_limit_overcurrent_protection/overload_limit_settings),"enabled during acceleration and constant speed (accelerated during regeneration)"),
+    !.
 b021(01, default).
+
+b221(00, "disabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(overload_limit_overcurrent_protection/overload_limit_settings),"disabled"),
+    !.
+b221(01, "enabled during acceleration and constant speed"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(overload_limit_overcurrent_protection/overload_limit_settings),"enabled during acceleration and constant speed"),
+    !.  
+b221(02, "enabled during constant speed"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(overload_limit_overcurrent_protection/overload_limit_settings),"enabled during constant speed"),
+    !.
+b221(03, "enabled during acceleration and constant speed (accelerated during regeneration)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(overload_limit_overcurrent_protection/overload_limit_settings),"enabled during acceleration and constant speed (accelerated during regeneration)"),
+    !.
 b221(01, default).
+
+b022 1st Overload Limit  Level 
+b222 2nd Overload Limit  Level
+
+values:
+0.20 × Rated current to 2.00 × Rated current (Heavy load)
+0.20 × Rated current to 1.50 × Rated current (Light load)
+
+
+b022(Ti, "1st Overload Limit Level (A)"):- 
+    b_getval(spec, S),
+    Ti #= S.get(overload_limit_overcurrent_protection/first_overload_limit_level),
+    rated_current(RatedCurrent),
+    Ti #>= 0.20 * RatedCurrent, 
+    Ti #=< 2.00 * RatedCurrent,
+    !.
 b022([], default).
+
+b222(Ti, "2nd Overload Limit Level (A)"):- 
+    b_getval(spec, S),
+    Ti #= S.get(overload_limit_overcurrent_protection/second_overload_limit_level),
+    rated_current(RatedCurrent),
+    Ti #>= 0.20 * RatedCurrent, 
+    Ti #=< 1.50 * RatedCurrent,
+    !.
 b222([], default).
+
+b023(T, "1st Overload Limit Time (s)"):- 
+    b_getval(spec, S),
+    T #= S.get(overload_limit_overcurrent_protection/first_overload_limit_time),
+    T #>= 0.1, 
+    T #=< 3000.0,
+    !.
 b023(1.0, default).
+b223(T, "2nd Overload Limit Time (s)"):- 
+    b_getval(spec, S),
+    T #= S.get(overload_limit_overcurrent_protection/second_overload_limit_time),
+    T #>= 0.1, 
+    T #=< 3000.0,
+    !.
 b223(1.0, default).
+
+b024(00, "Disabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(overload_limit_overcurrent_protection/overcurrent_suppression_selection),"disabled"),
+    !.
+b024(01, "Enabled during acceleration and constant speed"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(overload_limit_overcurrent_protection/overcurrent_suppression_selection),"enabled during acceleration and constant speed"),
+    !.
+b024(02, "Enabled during constant speed"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(overload_limit_overcurrent_protection/overcurrent_suppression_selection),"enabled during constant speed"),
+    !.
+b024(03, "Enabled during acceleration and constant speed (Accelerated during regeneration)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(overload_limit_overcurrent_protection/overcurrent_suppression_selection),"enabled during acceleration and constant speed (accelerated during regeneration)"),
+    !.
 b024(01, default).
+
+b025(Ti, "1st Overload Limit Level 2 (A)"):- 
+    b_getval(spec, S),
+    Ti #= S.get(overload_limit_overcurrent_protection/first_overload_limit_level_2),
+    rated_current(RatedCurrent),
+    Ti #>= 0.20 * RatedCurrent, 
+    Ti #=< 2.00 * RatedCurrent,
+    !.
 b025([], default).
+
+b026(T, "1st Overload Limit Time 2 (s)"):- 
+    b_getval(spec, S),
+    T #= S.get(overload_limit_overcurrent_protection/first_overload_limit_time_2),
+    T #>= 0.1, 
+    T #=< 3000.0,
+    !.
 b026(1.0, default).
+
+b027(00, "Disabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(overload_limit_overcurrent_protection/overcurrent_suppression_selection),"disabled"),
+    !.
+b027(01, "Enabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(overload_limit_overcurrent_protection/overcurrent_suppression_selection),"enabled"),
+    !.
+b027(02, "Enabled (at reduced voltage startup)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(overload_limit_overcurrent_protection/overcurrent_suppression_selection),"enabled (at reduced voltage startup)"),
+    !.
 b027(01, default).
+
+b0028(T, "Frequency Pull-in Restart Level (A)"):- 
+    b_getval(spec, S),
+    T #= S.get(overload_limit_overcurrent_protection/frequency_pull_in_restart_level),
+    rated_current(RatedCurrent),
+    T #>= 0.20 * RatedCurrent, 
+    T #=< 2.00 * RatedCurrent,
+    !.
 b028([], default).
+
+b029(T, "Frequency Pull-in Restart Time (s)"):- 
+    b_getval(spec, S),
+    T #= S.get(overload_limit_overcurrent_protection/frequency_pull_in_restart_time),
+    T #>= 0.1, 
+    T #=< 3000.0,
+    !.
 b029(0.5, default).
+
+Starting Frequency  Selection at  Frequency Pull-in  Restart
+00: Frequency at interruption
+01: Maximum frequency
+02: Set frequency (Frequency  reference)
+
+b030(00, "Frequency at interruption"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(overload_limit_overcurrent_protection/frequency_pull_in_restart_starting_frequency_selection),"frequency at interruption"),
+    !.
+b030(01, "Maximum frequency"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(overload_limit_overcurrent_protection/frequency_pull_in_restart_starting_frequency_selection),"maximum frequency"),
+    !.
+b030(02, "Set frequency (Frequency reference)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(overload_limit_overcurrent_protection/frequency_pull_in_restart_starting_frequency_selection),"set frequency (frequency reference)"),
+    !.
 b030(00, default).
 
 %% Lock
+b031(00, "Data other than b031 cannot be changed when terminal SFT is ON"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(lock/soft_lock_selection),"data other than b031 cannot be changed when terminal SFT is ON"),
+    !.
+b031(01, "Data other than b031 and the set frequency cannot be changed when terminal SFT is ON"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(lock/soft_lock_selection),"data other than b031 and the set frequency cannot be changed when terminal SFT is ON"),
+    !.
+b031(02, "Data other than b031 cannot be changed"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(lock/soft_lock_selection),"data other than b031 cannot be changed"),
+    !.  
+b031(03, "Data other than b031 and specified frequency parameter can not be changed"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(lock/soft_lock_selection),"data other than b031 and specified frequency parameter can not be changed"),
+    !.
+b031(10, "Data can be changed during RUN"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(lock/soft_lock_selection),"data can be changed during RUN"),
+    !.
 b031(01, default).
 
 %% Auxiliary function
+b033(L, "Motor Cable Length (m)"):- 
+    b_getval(spec, S),
+    L #= S.get(motor/'1st'/motor_cable_length),
+    L #>= 5, 
+    L #=< 20,
+    !.
+b033(L, "Motor Cable Length (m)"):- 
+    b_getval(spec, S),
+    L #= S.get(motor/'2nd'/motor_cable_length),
+    L #>= 5, 
+    L #=< 20,
+    !.
 b033(10, default).
+
+b034(T, "RUN Time/Power ON Time Detection Level (h)"):- 
+    b_getval(spec, S),
+    T #= S.get(auxiliary_function/running_time_power_on_time_detection_level),
+    T #>= 1, 
+    T #=< 9999,
+    !.
 b034(0, default).
+
+b035(00, "No direction limit"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/running_direction_limit_selection),"no direction limit"),
+    !.
+b035(01, "Only Forward is enabled (Reverse is limited)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/running_direction_limit_selection),"only forward is enabled (reverse is limited)"),
+    !.
+b035(02, "Only Reverse is enabled (Forward is limited)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/running_direction_limit_selection),"only reverse is enabled (forward is limited)"),
+    !.
 b035(00, default).
+
+b036(T, "Reduced Voltage Startup Time (s)"):- 
+    b_getval(spec, S),
+    T #= S.get(auxiliary_function/reduced_voltage_startup_selection),
+    T #>= 1, 
+    T #=< 255,
+    !.
 b036(2, default).
+
+b037(00, "Complete display"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/display_selection),"complete display"),
+    !.
+b037(01, "Individual display of functions"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/display_selection),"individual display of functions"),
+    !.
+b037(02, "User setting + d001, F001, b037"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/display_selection),"user setting + d001, F001, b037"),
+    !.
+b037(03, "Data comparison display"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/display_selection),"data comparison display"),
+    !.
+b037(04, "Basic display"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/display_selection),"basic display"),
+    !.
+b037(05, "Monitor display + b037"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/display_selection),"monitor display + b037"),
+    !.
 b037(00, default).
+
+%% Initial screen selection
+b038(000, "Screen on which the Enter key was last pressed"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"screen on which the Enter key was last pressed"),
+    !.
+b038(001, "d001: Output Frequency Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d001: output frequency monitor"),
+    !.
+b038(002, "d002: Output Current Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d002: output current monitor"),
+    !.
+b038(003, "d003: RUN Direction Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d003: run direction monitor"),
+    !.
+b038(004, "d004: PID Feedback Value Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d004: pid feedback value monitor"),
+    !.
+b038(005, "d005: Multi-function Input Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d005: multi-function input monitor"),
+    !.
+b038(006, "d006: Multi-function Output Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d006: multi-function output monitor"),
+    !.
+b038(007, "d007: Output Frequency Monitor (After Conversion)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d007: output frequency monitor (after conversion)"),
+    !.
+b038(008, "d008: Real Frequency Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d008: real frequency monitor"),
+    !.
+b038(009, "d009: Torque Reference Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d009: torque reference monitor"),
+    !.
+b038(010, "d010: Torque Bias Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d010: torque bias monitor"),
+    !.
+b038(012, "d012: Output Torque Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d012: output torque monitor"),
+    !.
+b038(013, "d013: Output Voltage Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d013: output voltage monitor"),
+    !.
+b038(014, "d014: Input Power Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d014: input power monitor"),
+    !.
+b038(015, "d015: Integrated Power Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d015: integrated power monitor"),
+    !.
+b038(016, "d016: Total RUN Time Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d016: total run time monitor"),
+    !.
+b038(017, "d017: Total Power ON Time Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d017: total power on time monitor"),
+    !.
+b038(018, "d018: Fin Temperature Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d018: fin temperature monitor"),
+    !.
+b038(022, "d022: Life Assessment Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d022: life assessment monitor"),
+    !.
+b038(023, "d023: Program Counter (DriveProgramming)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d023: program counter (driveprogramming)"),
+    !.
+b038(024, "d024: Program Number (DriveProgramming)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d024: program number (driveprogramming)"),
+    !.
+b038(025, "d025: User Monitor 0 (DriveProgramming)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d025: user monitor 0 (driveprogramming)"),
+    !.
+b038(026, "d026: User Monitor 1 (DriveProgramming)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d026: user monitor 1 (driveprogramming)"),
+    !.
+b038(027, "d027: User Monitor 2 (DriveProgramming)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d027: user monitor 2 (driveprogramming)"),
+    !.
+b038(029, "d029: Position Command Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d029: position command monitor"),
+    !.
+b038(030, "d030: Current Position Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d030: current position monitor"),
+    !.
+b038(050, "d050: Dual User Monitor (2 types of data)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d050: dual user monitor (2 types of data)"),
+    !.
+b038(060, "d060: Inverter Mode Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_selection),"d060: inverter mode monitor"),
+    !.
 b038(001, default).
+
+b039(00, "Disabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_parameter_automatic_setting_function),"disabled"),
+    !.
+b039(01, "Enabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_parameter_automatic_setting_function),"enabled"),
+    !.
 b039(00, default).
 
 %% Torque limit
+b040(00, "Four-quadrant separate setting"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(torque_limit/torque_limit_selection),"four-quadrant separate setting"),
+    !.
+b040(01, "Terminal switching"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(torque_limit/torque_limit_selection),"terminal switching"),
+    !.
+b040(02, "Analog voltage input"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(torque_limit/torque_limit_selection),"analog voltage input"),
+    !.
+b040(03, "Option (No applicable Option)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(torque_limit/torque_limit_selection),"option (no applicable option)"),
+    !.
 b040(00, default).
+
+b041(T, "Torque Limit 1 (Four-quadrant Mode Forward Power Running) (%)"):- 
+    b_getval(spec, S),
+    T #= S.get(torque_limit/torque_limit_1),
+    T #>= 0, 
+    T #=< 200,
+    !.
+b041(255, "Torque Limit 1 Disabled"):- 
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(torque_limit/torque_limit_1),"disabled"),
+    !.
 b041(200, default).
+
+b042(T, "Torque Limit 2 (Four-quadrant Mode Reverse Regeneration) (%)"):- 
+    b_getval(spec, S),
+    T #= S.get(torque_limit/torque_limit_2),
+    T #>= 0, 
+    T #=< 200,
+    !.
+b042(255, "Torque Limit 2 Disabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(torque_limit/torque_limit_2),"disabled"),
+    !.
 b042(200, default).
+
+b043(T, "Torque Limit 3 (Four-quadrant Mode Reverse Power Running) (%)"):- 
+    b_getval(spec, S),
+    T #= S.get(torque_limit/torque_limit_3),
+    T #>= 0, 
+    T #=< 200,
+    !.
+b043(255, "Torque Limit 3 Disabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(torque_limit/torque_limit_3),"disabled"),
+    !.
 b043(200, default).
+
+b044(T, "Torque Limit 4 (Four-quadrant Mode Forward Regeneration) (%)"):- 
+    b_getval(spec, S),
+    T #= S.get(torque_limit/torque_limit_4),
+    T #>= 0, 
+    T #=< 200,
+    !.
+b044(255, "Torque Limit 4 Disabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(torque_limit/torque_limit_4),"disabled"),
+    !.
 b044(200, default).
+
+b045(00, "Disabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(torque_limit/torque_ladstop_selection),"disabled"),
+    !.
+b045(01, "Enabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(torque_limit/torque_ladstop_selection),"enabled"),
+    !.
 b045(00, default).
+
+b046(00, "Disabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(torque_limit/reverse_rotation_prevention_selection),"disabled"),
+    !.
+b046(01, "Enabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(torque_limit/reverse_rotation_prevention_selection),"enabled"),
+    !.
 b046(00, default).
 
 %% Mode
+b049(00, "Heavy Load Mode (CT)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(mode/heavy_load_light_load_selection),"heavy load mode (ct)"),
+    !.
+b049(01, "Light Load Mode (VT)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(mode/heavy_load_light_load_selection),"light load mode (vt)"),
+    !.
 b049(00, default).
 
 %% Deceleration Stop on Power Interruption
+b050(00, "Disabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(deceleration_stop_on_power_interruption/deceleration_stop_on_power_interruption_selection),"disabled"),
+    !.
+b050(01, "Enabled (Deceleration stop)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(deceleration_stop_on_power_interruption/deceleration_stop_on_power_interruption_selection),"enabled (deceleration stop)"),
+    !.
+b050(02, "Enabled (Constant voltage, without recovery)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(deceleration_stop_on_power_interruption/deceleration_stop_on_power_interruption_selection),"enabled (constant voltage, without recovery)"),
+    !.
+b050(03, "Enabled (Constant voltage, with recovery)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(deceleration_stop_on_power_interruption/deceleration_stop_on_power_interruption_selection),"enabled (constant voltage, with recovery)"),
+    !.
 b050(00, default).
+
+b051(V, "Starting Voltage on Power Interruption (V)"):-
+    b_getval(spec, S),
+    V #= S.get(deceleration_stop_on_power_interruption/starting_voltage_on_power_interruption),
+    V #>= 0.0, 
+    V #=< 1000,
+    !.
 b051([], default).
+
+b052(V, "Deceleration Hold Level on Power Interruption (V)"):-
+    b_getval(spec, S),
+    V #= S.get(deceleration_stop_on_power_interruption/deceleration_hold_level_on_power_interruption),
+    V #>= 0.0, 
+    V #=< 1000,
+    !.
 b052([], default).
+
+b053(T, "Deceleration Time on Power Interruption (s)"):-
+    b_getval(spec, S),
+    T #= S.get(deceleration_stop_on_power_interruption/deceleration_time_on_power_interruption),
+    T #>= 0.01, 
+    T #=< 3600,
+    !.
 b053(1.00, default).
+
+b054(F, "Deceleration Starting Width on Power Interruption (Hz)"):-
+    b_getval(spec, S),
+    F #= S.get(deceleration_stop_on_power_interruption/deceleration_starting_width_on_power_interruption),
+    F #>= 0.00, 
+    F #=< 10.00,
+    \+ #fuzzy_match_key_value(S.get(operations/inverter_mode),"Induction motor high-frequency"),
+    !.
+b054(F, "Deceleration Starting Width on Power Interruption (high-frequency mode) (Hz)"):-
+    b_getval(spec, S),
+    F #= S.get(deceleration_stop_on_power_interruption/deceleration_starting_width_on_power_interruption),
+    F #>= 0.00, 
+    F #=< 100.0,
+    #fuzzy_match_key_value(S.get(operations/inverter_mode),"Induction motor high-frequency"),
+    !.    
 b054(0.00, default).
 
 %% Window comparator
+
+b060(F, "Window Comparator FV Upper Limit Level (%)"):- 
+    b_getval(spec, S),
+    F #= S.get(window_comparator/window_comparator_fv_upper_limit_level),
+    F #>= 0.0, 
+    F #=< 100.0,
+    !.
 b060(100, default).
+
+b061(F, "Window Comparator FV Lower Limit Level (%)"):- 
+    b_getval(spec, S),
+    F #= S.get(window_comparator/window_comparator_fv_lower_limit_level),
+    F #>= 0.0, 
+    F #=< 100.0,
+    !.
 b061(0, default).
+
+b062(F, "Window Comparator FV Hysteresis Width (%)"):- 
+    b_getval(spec, S),
+    F #= S.get(window_comparator/window_comparator_fv_hysteresis_width),
+    F #>= 0.0, 
+    F #=< 10.0,
+    !.
 b062(0, default).
+
+b063(F, "Window Comparator FI Upper Limit Level (%)"):- 
+    b_getval(spec, S),
+    F #= S.get(window_comparator/window_comparator_fi_upper_limit_level),
+    F #>= 0.0, 
+    F #=< 100.0,
+    !.
 b063(0, default).
+
+b064(F, "Window Comparator FI Lower Limit Level (%)"):- 
+    b_getval(spec, S),
+    F #= S.get(window_comparator/window_comparator_fi_lower_limit_level),
+    F #>= 0.0, 
+    F #=< 100.0,
+    !.
 b064(100, default).
+
+b065(F, "Window Comparator FI Hysteresis Width (%)"):- 
+    b_getval(spec, S),
+    F #= S.get(window_comparator/window_comparator_fi_hysteresis_width),
+    F #>= 0.0, 
+    F #=< 10.0,
+    !.
 b065(0, default).
+
+b070(L, "Analog Operation Level at FV Disconnection"):- 
+    b_getval(spec, S),
+    L #= S.get(window_comparator/analog_operation_level_at_fv_disconnection),
+    L #>= 0, 
+    L #=< 100,
+    !.
+b070(255, "Analog Operation Disabled at FV Disconnection"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(window_comparator/analog_operation_level_at_fv_disconnection),"disabled"),
+    !.
 b070(255, default).
+
+b071(L, "Analog Operation Level at FI Disconnection"):- 
+    b_getval(spec, S),
+    L #= S.get(window_comparator/analog_operation_level_at_fi_disconnection),
+    L #>= 0, 
+    L #=< 100,
+    !.
+b071(255, "Analog Operation Disabled at FI Disconnection"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(window_comparator/analog_operation_level_at_fi_disconnection),"disabled"),
+    !.
 b071(255, default).
 
 %% Auxiliary function
+b075(T, "Ambient Temperature (°C)"):- 
+    b_getval(spec, S),
+    T #= S.get(auxiliary_function/ambient_temperature),
+    T #>= -10, 
+    T #=< 50,
+    !.
 b075(40, default).
+
+b078(00, "Clear disabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/integrated_power_clear),"clear disabled"),
+    !.
+b078(01, "Clear with Enter key"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/integrated_power_clear),"clear with enter key"),
+    !.
 b078(00, default).
+
+
 b079(1, default).
 b082(1.50, default).
 b083(10.0, default).
@@ -362,1113 +936,412 @@ b911(600.00, default).
 b912(120.00, default).
 b913(100.0, default).
 
+group: Auxiliary function
 
-% group: power_interruption
 
-% Parameter b001
+Parameter b075: Ambient Temperature ​
 
-% Function Name: Power Interruption/Undervoltage Restart Selection ​
-% Monitor: Not applicable
-% Data Range:
+Range: −10 to 50 °C ​
+Default Data: 40 °C ​
+Set Data: Adjustable
+Description: Sets the ambient temperature in the operating environment of the inverter. ​
 
-% 00: Trip ​
-% 01: 0-Hz restart ​
-% 02: Frequency matching restart ​
-% 03: Trip after frequency matching deceleration stop ​
-% 04: Frequency pull-in restart ​
 
 
-% Method of Calculation: Selects the restart method after power interruption or undervoltage. ​
+Parameter b078: Integrated Power Clear ​
 
+Range: 00 (Clear disabled), 01 (Clear with Enter key)
+Default Data: 00 ​
+Set Data: Adjustable
+Description: Clears the integrated power monitor data when enabled. ​
 
-% Parameter b002
 
-% Function Name: Allowable Power Interruption Time ​
-% Monitor: Not applicable
-% Data Range: 0.3 to 25.0 seconds
-% Method of Calculation: Sets the maximum allowable time for power interruption before the inverter trips. ​
 
+Parameter b079: Integrated Power Display Scale ​
 
-% Parameter b003
+Range: 1.0 to 1000.0 ​
+Default Data: 1.0
+Set Data: Adjustable
+Description: Sets the scaling factor for the integrated power display. ​
 
-% Function Name: Restart Standby Time ​
-% Monitor: Not applicable
-% Data Range: 0.3 to 100.0 seconds
-% Method of Calculation: Sets the time the inverter waits before restarting after power interruption. ​
 
 
-% Parameter b004
+Parameter b082: Starting Frequency ​
 
-% Function Name: Power Interruption/Undervoltage Trip Selection During Stop ​
-% Monitor: Not applicable
-% Data Range:
+Range: 0.01 to 9.99 Hz (100.0 Hz in high-frequency mode)
+Default Data: 1.50 Hz ​
+Set Data: Adjustable
+Description: Sets the frequency at which the inverter starts operation. ​
 
-% 00: Disabled ​
-% 01: Enabled ​
-% 02: Disabled during stop and deceleration stop by turning off the RUN command ​
 
 
-% Method of Calculation: Determines whether the inverter trips during stop due to power interruption or undervoltage. ​
+Parameter b083: Carrier Frequency ​
 
+Range: 2.0 to 15.0 kHz (Heavy load mode), 2.0 to 10.0 kHz (Light load mode) ​
+Default Data: 10.0 kHz (Heavy load mode), 2.0 kHz (Light load mode)
+Set Data: Adjustable
+Description: Sets the carrier frequency for the inverter. ​
 
-% Parameter b005
 
-% Function Name: Power Interruption Restart Count
-% Monitor: Not applicable
-% Data Range:
 
-% 00: 16 times
-% 01: No limit ​
+Parameter b084: Initialization Selection ​
 
+Range: 00 (Disabled), 01 (Clearing Fault Monitor), 02 (Initialize data), 03 (Clear fault monitor + Initialize data), 04 (Clear fault monitor + Initialize data + Clear DriveProgramming) ​
+Default Data: 00 ​
+Set Data: Adjustable
+Description: Selects the type of initialization to perform on the inverter. ​
 
-% Method of Calculation: Sets the maximum number of restart attempts after power interruption.
 
 
-% Parameter b007
+Parameter b085: Initialization Data Selection ​
 
-% Function Name: Frequency Matching Lower Limit Frequency ​
-% Monitor: Not applicable
-% Data Range: 0.00 to 99.99 Hz (100.0 to 400.0 Hz in high-frequency mode)
-% Method of Calculation: Sets the lower limit frequency for frequency matching during restart. ​
+Range: Fixed at 00
+Default Data: 00 ​
+Set Data: Fixed
+Description: Reserved for initialization data selection. ​
 
 
-% Parameter b008
 
-% Function Name: Overvoltage/Overcurrent Restart Selection ​
-% Monitor: Not applicable
-% Data Range:
+Parameter b086: Frequency Conversion Coefficient ​
 
-% 00: Trip ​
-% 01: 0-Hz restart ​
-% 02: Frequency matching restart ​
-% 03: Trip after frequency matching deceleration stop ​
-% 04: Frequency pull-in restart ​
+Range: 0.01 to 99.99 ​
+Default Data: 1.00
+Set Data: Adjustable
+Description: Converts the output frequency value for monitoring purposes. ​
 
 
-% Method of Calculation: Selects the restart method after overvoltage or overcurrent trip. ​
 
+Parameter b087: STOP Key Selection ​
 
-% Parameter b010
+Range: 00 (Enabled), 01 (Disabled), 02 (Only RESET enabled)
+Default Data: 00 ​
+Set Data: Adjustable
+Description: Configures the functionality of the STOP key on the Digital Operator. ​
 
-% Function Name: Overvoltage/Overcurrent Restart Count ​
-% Monitor: Not applicable
-% Data Range: 1 to 3 times
-% Method of Calculation: Sets the maximum number of restart attempts after overvoltage or overcurrent trip. ​
 
 
-% Parameter b011
+Parameter b088: Free-run Stop Selection ​
 
-% Function Name: Overvoltage/Overcurrent Restart Standby Time ​
-% Monitor: Not applicable
-% Data Range: 0.3 to 100.0 seconds
-% Method of Calculation: Sets the time the inverter waits before restarting after overvoltage or overcurrent trip. ​
+Range: 00 (0-Hz restart), 01 (Frequency matching restart), 02 (Frequency pull-in restart) ​
+Default Data: 00 ​
+Set Data: Adjustable
+Description: Configures the inverter's behavior during free-run stop. ​
 
 
-% group: Electronic thermal
 
-% Parameter b012
+Parameter b089: Automatic Carrier Reduction ​
 
-% Function Name: 1st Electronic Thermal Level ​
-% Monitor: Not applicable
-% Data Range: 0.20 × Rated current to 1.00 × Rated current
-% Method of Calculation: Sets the electronic thermal protection level for the motor. ​
+Range: 00 (Disabled), 01 (Enabled based on current), 02 (Enabled based on cooling fin temperature) ​
+Default Data: 01 ​
+Set Data: Adjustable
+Description: Enables automatic carrier frequency reduction based on current or cooling fin temperature. ​
 
 
-% Parameter b013
 
-% Function Name: 1st Electronic Thermal Characteristics Selection
-% Monitor: Not applicable
-% Data Range:
+Parameter b090: Usage Rate of Regenerative Braking ​
 
-% 00: Reduced torque characteristics ​
-% 01: Constant torque characteristics ​
-% 02: Free setting ​
+Range: 0.0 to 100.0 % ​
+Default Data: 0.0 %
+Set Data: Adjustable
+Description: Sets the usage rate of regenerative braking. ​
 
 
-% Method of Calculation: Selects the thermal protection characteristics for the motor.
 
+Parameter b091: Stop Selection ​
 
-% Parameter b015 to b020
+Range: 00 (Deceleration stop), 01 (Free-run stop) ​
+Default Data: 00 ​
+Set Data: Adjustable
+Description: Configures the stop method for the inverter. ​
 
-% Function Name: Free-electronic Thermal Settings (Frequency and Current Levels)
-% Monitor: Not applicable
-% Data Range:
 
-% Frequency: 0.00 to 400.0 Hz (580.0 Hz in high-frequency mode) ​
-% Current: 0.00 to 1.00 × Rated current
 
+Parameter b092: Cooling Fan Operation ​
 
-% Method of Calculation: Configures custom thermal protection settings based on frequency and current levels.
+Range: 00 (Always enabled), 01 (Enabled only during operation), 02 (Dependent on cooling fin temperature) ​
+Default Data: 01 ​
+Set Data: Adjustable
+Description: Configures the cooling fan operation mode based on inverter status or temperature. ​
 
 
-% group: Overload limit, overcurrent protection
 
-% Parameter b021 to b025
+Parameter b093: Total Fan Operation Time Clear ​
 
-% Function Name: Overload Limit Settings ​
-% Monitor: Not applicable
-% Data Range:
+Range: 00 (Clear disabled), 01 (Clear with Enter key)
+Default Data: 00 ​
+Set Data: Adjustable
+Description: Clears the total fan operation time, typically done when replacing the cooling fan. ​
 
-% Level: 0.20 × Rated current to 2.00 × Rated current (Heavy load) ​
-% Time: 0.1 to 3000 seconds
 
 
-% Method of Calculation: Sets overload protection levels and time parameters. ​
+Parameter b097: Not specified in the provided document.
 
 
-% Parameter b027
 
-% Function Name: Overcurrent Suppression Selection ​
-% Monitor: Not applicable
-% Data Range:
+group: V/f free function
+Parameters b100 to b113 are used to configure the Free V/f function, which allows adjustment of the inverter's output voltage and frequency characteristics at specific breakpoints. The parameters include frequency and voltage settings for up to seven breakpoints, enabling custom V/f characteristics for specialized motor control scenarios. ​
 
-% 00: Disabled ​
-% 01: Enabled ​
-% 02: Enabled (at reduced voltage startup) ​
 
+Frequency Parameters:
 
-% Method of Calculation: Enables or disables overcurrent suppression. ​
+b100: Free V/f Frequency 1 ​
+b102: Free V/f Frequency 2 ​
+b104: Free V/f Frequency 3 ​
+b106: Free V/f Frequency 4 ​
+b108: Free V/f Frequency 5 ​
+b110: Free V/f Frequency 6 ​
+b112: Free V/f Frequency 7 ​
 
 
-% Parameter b028 to b030
 
-% Function Name: Frequency Pull-in Restart Settings ​
-% Monitor: Not applicable
-% Data Range:
+Voltage Parameters:
 
-% Level: 0.20 × Rated current to 2.00 × Rated current ​
-% Time: 0.1 to 3000 seconds
+b101: Free V/f Voltage 1 ​
+b103: Free V/f Voltage 2 ​
+b105: Free V/f Voltage 3 ​
+b107: Free V/f Voltage 4 ​
+b109: Free V/f Voltage 5 ​
+b111: Free V/f Voltage 6 ​
+b113: Free V/f Voltage 7 ​
 
 
-% Method of Calculation: Configures restart settings for frequency pull-in after a trip. ​
 
-% group: Lock
+Notes:
 
-% Parameter b031
+Frequency values must be set in ascending order: f1 ≤ f2 ≤ f3 ≤ f4 ≤ f5 ≤ f6 ≤ f7. ​
+Voltage values correspond to the respective frequency points. ​
+The Free V/f function is disabled by default and can be enabled by setting the 1st/2nd Control Method (A044/A244) to 02 (Free V/f setting).
+When enabled, torque boost, base frequency, and maximum frequency settings are disabled. ​
+Frequency ranges are typically 0.0 to 400.0 Hz (580.0 Hz in high-frequency mode), and voltage ranges are 0.0 to 800.0 V.
 
-% Function Name: Soft Lock Selection ​
-% Monitor: Not applicable
-% Data Range:
 
-% 00 to 10: Various lock settings
 
+group: Brake control
+Parameters b120 to b127 are used to configure the Brake Control Function in the inverter, which is essential for managing external brakes in applications like elevators, cranes, or systems requiring precise braking control. ​ Below are the details of each parameter:
 
-% Method of Calculation: Restricts parameter changes based on lock settings. ​
 
+b120: Brake Control Function Selection ​
 
-% group: Auxiliary function
+Range:
 
-% Parameter b033
+00: Disabled ​
+01: Enabled (DC Injection Braking enabled during stop) ​
+02: Enabled (DC Injection Braking disabled during stop) ​
 
-% Function Name: Motor Cable Length ​
-% Monitor or Data Range: 5 to 20 meters
-% Default Data: 10 meters
-% Set Data: Adjustable
-% Setting During RUN: Enabled
-% Changes During RUN: Enabled ​
-% Unit: meters
-% Description: Sets the cable length between the inverter and the motor to optimize operation. ​
 
-% Parameter b034
+Default Data: 00 ​
+Description: Enables or disables the brake control function and specifies DC Injection Braking behavior during stop. ​
 
-% Function Name: RUN Time/Power ON Time Detection Level ​
-% Monitor or Data Range:
 
-% 0: Disabled (Function does not activate) ​
-% 1 to 9999: Detection level in hours ​
-% 1000 to 6553: Extended detection level (10-hour increments) ​
 
+b121: Brake Release Wait Time ​
 
-% Default Data: 0 (Disabled) ​
-% Set Data: Adjustable
-% Setting During RUN: Enabled
-% Changes During RUN: Enabled ​
-% Unit: 10 hours ​
-% Description: Sets the detection level for total RUN time or power ON time. ​
+Range: 0.00 to 5.00 seconds
+Default Data: 0.00 seconds ​
+Description: Sets the time the inverter waits after reaching the Brake Release Frequency before outputting the brake release signal. ​
 
-% Parameter b035
 
-% Function Name: RUN Direction Limit Selection ​
-% Monitor or Data Range:
 
-% 00: No direction limit ​
-% 01: Only Forward is enabled (Reverse is limited) ​
-% 02: Only Reverse is enabled (Forward is limited) ​
+b122: Acceleration Wait Time on Brake Control ​
 
+Range: 0.00 to 5.00 seconds
+Default Data: 0.00 seconds ​
+Description: Sets the mechanical delay time from when the brake release signal turns ON until the brake is fully released. ​
 
-% Default Data: 00 (No direction limit) ​
-% Set Data: Adjustable
-% Setting During RUN: Disabled ​
-% Changes During RUN: Disabled ​
-% Unit: None
-% Description: Restricts the motor's rotation direction to forward or reverse. ​
 
-% Parameter b036
 
-% Function Name: Reduced Voltage Startup Selection ​
-% Monitor or Data Range:
+b123: Stop Wait Time on Brake Control ​
 
-% 0: Reduced voltage startup disabled ​
-% 1 to 255: Reduced voltage startup time (short to long) ​
+Range: 0.00 to 5.00 seconds
+Default Data: 0.00 seconds ​
+Description: Sets the mechanical delay time from when the brake release signal turns OFF until the brake is fully applied. ​
 
 
-% Default Data: 2
-% Set Data: Adjustable
-% Setting During RUN: Disabled ​
-% Changes During RUN: Enabled ​
-% Unit: None
-% Description: Configures the reduced voltage startup time to prevent inrush current. ​
 
-% Parameter b037 ​
+b124: Brake Error Detection Time ​
 
-% Function Name: Display Selection ​
-% Monitor or Data Range:
+Range: 0.00 to 5.00 seconds
+Default Data: 0.00 seconds ​
+Description: Sets the time the inverter waits for the brake confirmation signal to turn ON after outputting the brake release signal. ​ If the signal does not turn ON within this time, the inverter detects a brake error. ​
 
-% 00: Complete display ​
-% 01: Individual display of functions ​
-% 02: User setting + d001, F001, b037 ​
-% 03: Data comparison display ​
-% 04: Basic display ​
-% 05: Monitor display + b037 ​
 
 
-% Default Data: 00 (Complete display) ​
-% Set Data: Adjustable
-% Setting During RUN: Disabled
-% Changes During RUN: Enabled ​
-% Unit: None ​
-% Description: Configures the display mode for the Digital Operator. ​
+b125: Brake Release Frequency ​
 
-% Parameter b038
+Range: 0.00 to 400.0 Hz ​
+Default Data: 0.00 Hz ​
+Description: Sets the frequency at which the brake release signal is output. ​
 
-% Function Name: Initial Screen Selection ​
-% Monitor or Data Range:
 
-% 000: Screen on which the Enter key was last pressed ​
-% 001 to 060: d001 to d060
-% 201: F001 ​
-% 202: Do not set ​
 
+b126: Brake Release Current ​
 
-% Default Data: 001 (d001: Output Frequency Monitor) ​
-% Set Data: Adjustable
-% Setting During RUN: Disabled
-% Changes During RUN: Enabled ​
-% Unit: None ​
-% Description: Sets the initial screen displayed on the Digital Operator after power-on. ​
+Range: 0.00 to 2.00 × Rated current of inverter ​
+Default Data: Rated current of inverter ​
+Description: Sets the output current value sufficient to support the load and output the brake release signal. ​
 
-% Parameter b039 ​
 
-% Function Name: User Parameter Automatic Setting Function ​
-% Monitor or Data Range:
 
-% 00: Disabled ​
-% 01: Enabled ​
+b127: Brake Force Frequency ​
 
+Range: 0.00 to 400.0 Hz
+Default Data: 0.00 Hz ​
+Description: Sets the frequency at which the brake release signal turns OFF and forces the brake during stop. ​
 
-% Default Data: 00 (Disabled) ​
-% Set Data: Adjustable
-% Setting During RUN: Disabled
-% Changes During RUN: Enabled ​
-% Unit: None
-% Description: Enables or disables automatic registration of changed parameters as user parameters. ​
 
 
-% group: Torque limit
-% Parameter b040
+Notes:
 
-% Function Name: Torque Limit Selection
-% Monitor or Data Range:
+Proper configuration of these parameters ensures smooth operation and prevents mechanical damage or load fall accidents. ​
+It is recommended to use Sensorless Vector Control for high torque during startup. ​
+Ensure the frequency set in b125 is higher than the Starting Frequency (b082) to avoid overload detection.
 
-% 00: Four-quadrant separate setting ​
-% 01: Terminal switching ​
-% 02: Analog voltage input ​
-% 03: Option (No applicable option) ​
 
 
-% Default Data: 00 (Four-quadrant separate setting) ​
-% Set Data: Adjustable
-% Setting During RUN: Disabled
-% Changes During RUN: Enabled ​
-% Unit: None ​
-% Description: Configures the torque limit mode for the inverter. ​
+group: Overvoltage suppression during deceleration
+Parameters b130 to b134 are used to configure the Overvoltage Suppression Function During Deceleration, which prevents overvoltage trips caused by regenerative energy during motor deceleration. Below are the details of each parameter:
 
-% Parameter b041
 
-% Function Name: Torque Limit 1 (Forward Power Running) ​
-% Monitor or Data Range:
+b130: Overvoltage Suppression Function Selection During Deceleration ​
 
-% 0.0 to 200.0: Torque limit percentage ​
-% 255: No (Torque limit disabled) ​
+Range:
 
+00: Disabled ​
+01: Enabled (DC voltage kept constant) ​
+02: Enabled (Acceleration enabled)
 
-% Default Data: 200.0
-% Set Data: Adjustable
-% Setting During RUN: Disabled
-% Changes During RUN: Enabled ​
-% Unit: %
-% Description: Sets the torque limit for forward power running in four-quadrant mode. ​
 
-% Parameter b042
+Default Data: 01 (Enabled: DC voltage kept constant) ​
+Description: Enables or disables the overvoltage suppression function during deceleration. ​ When enabled, the inverter adjusts the deceleration rate or accelerates to suppress overvoltage. ​
 
-% Function Name: Torque Limit 2 (Reverse Regeneration)
-% Monitor or Data Range:
 
-% 0.0 to 200.0: Torque limit percentage ​
-% 255: No (Torque limit disabled) ​
 
+b131: Overvoltage Suppression Level During Deceleration ​
 
-% Default Data: 200.0
-% Set Data: Adjustable ​
-% Setting During RUN: Disabled
-% Changes During RUN: Enabled ​
-% Unit: %
-% Description: Sets the torque limit for reverse regeneration in four-quadrant mode. ​
+Range:
 
-% Parameter b043
+200-V class: 330.0 to 395.0 V
+400-V class: 660.0 to 790.0 V
 
-% Function Name: Torque Limit 3 (Reverse Power Running) ​
-% Monitor or Data Range:
 
-% 0.0 to 200.0: Torque limit percentage ​
-% 255: No (Torque limit disabled) ​
+Default Data:
 
+200-V class: 380.0 V
+400-V class: 760.0 V
 
-% Default Data: 200.0
-% Set Data: Adjustable
-% Setting During RUN: Disabled ​
-% Changes During RUN: Enabled ​
-% Unit: %
-% Description: Sets the torque limit for reverse power running in four-quadrant mode. ​
 
-% Parameter b044
+Description: Sets the DC voltage level at which the overvoltage suppression function activates. Ensure this value is higher than the input voltage multiplied by √2 to avoid deceleration issues. ​
 
-% Function Name: Torque Limit 4 (Forward Regeneration) ​
-% Monitor or Data Range:
 
-% 0.0 to 200.0: Torque limit percentage ​
-% 255: No (Torque limit disabled) ​
 
+b132: Overvoltage Suppression Parameter During Deceleration ​
 
-% Default Data: 200.0
-% Set Data: Adjustable
-% Setting During RUN: Disabled
-% Changes During RUN: Enabled ​
-% Unit: %
-% Description: Sets the torque limit for forward regeneration in four-quadrant mode. ​
+Range: 0.10 to 30.00 seconds
+Default Data: 1.00 seconds
+Description: Sets the acceleration rate or deceleration time for the output frequency when the overvoltage suppression function is enabled. ​ This determines how quickly the suppression function reacts.
 
-% Parameter b045
 
-% Function Name: Torque LADSTOP Selection ​
-% Monitor or Data Range:
 
-% 00: Disabled ​
-% 01: Enabled ​
+b133: Overvoltage Suppression Proportional Gain During Deceleration ​
 
+Range: 0.00 to 5.00 ​
+Default Data: 0.20 ​
+Description: Sets the proportional gain for DC voltage constant control. ​ Higher values result in faster suppression response but may increase the risk of overcurrent trips. ​
 
-% Default Data: 00 (Disabled) ​
-% Set Data: Adjustable
-% Setting During RUN: Disabled ​
-% Changes During RUN: Enabled ​
-% Unit: None
-% Description: Temporarily stops the frequency acceleration/deceleration function (LAD) when the torque limit function is activated. ​
 
-% Parameter b046
 
-% Function Name: Reverse Rotation Prevention Selection ​
-% Monitor or Data Range:
+b134: Overvoltage Suppression Integral Time During Deceleration ​
 
-% 00: Disabled ​
-% 01: Enabled (Motor does not rotate in reverse) ​
+Range: 0.0 to 150.0 seconds
+Default Data: 1.0 seconds
+Description: Sets the integral time for DC voltage constant control. ​ Lower values provide faster response but may increase the risk of overcurrent trips. ​
 
 
-% Default Data: 00 (Disabled) ​
-% Set Data: Adjustable
-% Setting During RUN: Disabled ​
-% Changes During RUN: Enabled ​
-% Unit: None
-% Description: Prevents the motor from rotating in the reverse direction when sensorless vector control is enabled. ​
 
+Notes:
 
-% group: Mode
-% Parameter b049 ​
+Proper configuration of these parameters ensures smooth deceleration without overvoltage trips. ​
+Adjust b133 and b134 carefully to balance suppression speed and stability. ​
+If regenerative braking units or braking resistors are used, these settings may need adjustment to optimize performance. ​
+For applications with high inertia loads, such as elevators or conveyors, these parameters are critical to prevent overvoltage errors caused by regenerative energy. ​
 
-% Function Name: Heavy Load/Light Load Selection ​
-% Monitor or Data Range:
+group: Auxiliary function
 
-% 00: Heavy load mode (CT - Constant Torque) ​
-% 01: Light load mode (VT - Variable Torque) ​
+b145 GS Input Operation Selection
+00: No trip (shut off by hardware)
+01: Trip
 
+b150 Inverter Display on Operator Connection
+001 to 060 (Corresponding to d001 to d060)
 
-% Default Data: 00 (Heavy load mode) ​
-% Set Data: Adjustable
-% Setting During RUN: Disabled
-% Changes During RUN: Disabled ​
-% Unit: None ​
+b160 User Monitor Selection 1
+001 to 030 (Corresponding to d001 to d030)
 
-% Description:
-% This parameter configures the inverter's operating mode based on the load type:
+b161 User Monitor Selection 2
+001 to 030 (Corresponding to d001 to d030)
 
+b163 d001/d007 Data Setting Selection
+00: Disabled
+01: Enabled
 
-% Heavy Load Mode (CT):
+b164 Initial Screen Automatic Return Function
+00: Disabled
+01: Enabled
 
-% Provides an overload capacity of 150% of the rated current for 1 minute. ​
-% Suitable for applications requiring high torque, such as elevators, cranes, conveyors, mixers, or hoists. ​
-% Supports high-frequency mode. ​
+b165 Operation Selection at External Operator Disconnection
+00: Trip
+01: Trip after deceleration stop
+02: Ignore
+03: Free-run stop
+04: Deceleration stop
 
+b166 (Reserved) Do not change the default 00
 
 
-% Light Load Mode (VT):
 
-% Provides an overload capacity of 120% of the rated current for 1 minute. ​
-% Suitable for applications with lower torque requirements, such as fans, pumps, air conditioners, or other variable torque applications. ​
 
+group: Mode
+b171 Inverter Mode Selection
+00: Selection disabled
+01: Induction motor mode
+02: Induction motor high-frequency mode
+03: PM motor mode
 
+group: Auxiliary function
 
-% Precautions for Correct Use:
+b180 Initialization Execution
+00: Function disabled
+01: Execute initialization
 
-% Switching between modes affects the inverter's rated current, overload detection settings, and carrier frequency range. ​
-% Changing from heavy load mode to light load mode causes parameter settings to be initialized, requiring reconfiguration. ​
-% Switching modes requires the inverter to be stopped. ​
-% Some functions, such as sensorless vector control, are unavailable in light load mode. ​
+b190 Password A Setting
+0000: Function disabled
+0001 to FFFF: Password
 
+b191 Password A for Authentication 
+0000 to FFFF
 
-% group: Deceleration Stop on Power Interruption
-% Parameter b050
+b192 Password B Setting
+0000: Function disabled
+0001 to FFFF: Password
 
-% Function Name: Deceleration Stop Selection on Power Interruption ​
-% Monitor or Data Range:
+b193 Password B for Authentication 
+0000 to FFFF
 
-% 00: Disabled ​
-% 01: Enabled (Deceleration stop) ​
-% 02: Enabled (Constant voltage, without recovery) ​
-% 03: Enabled (Constant voltage, with recovery) ​
 
+group: Electronic thermal
+b910 Motor Electronic Thermal Selection
+00: Disabled
+01: Enabled (Fixed subtraction ratio)
+02: Enabled (b911 subtraction ratio)
+03: Enabled (b912 time parameter subtraction)
 
-% Default Data: 00 (Disabled) ​
-% Set Data: Adjustable
-% Setting During RUN: Disabled ​
-% Changes During RUN: Disabled ​
-% Unit: None
-% Description: Configures the inverter's behavior during power interruptions. ​ Options include no deceleration stop, deceleration stop, maintaining constant voltage without recovery, or maintaining constant voltage with recovery. ​
+b911 Motor Electronic Thermal Subtraction Ratio
+0.10 to 100000.00
+(Displays upper 4 digits)
 
-% Parameter b051 ​
+b912 Motor Electronic Thermal Subtraction Time Constant
+0.10 to 100000.00
+(Displays upper 4 digits)
 
-% Function Name: Starting Voltage on Power Interruption ​
-% Monitor or Data Range:
-
-% 200-V class: 0.0 to 999.9
-% 400-V class: 0.0 to 999.9
-
-
-% Default Data:
-
-% 200-V class: 220.0 ​
-% 400-V class: 440.0 ​
-
-
-% Set Data: Adjustable
-% Setting During RUN: Disabled ​
-% Changes During RUN: Disabled ​
-% Unit: V ​
-% Description: Sets the voltage level at which the inverter starts deceleration during a power interruption. ​
-
-% Parameter b052
-
-% Function Name: Deceleration Hold Level on Power Interruption ​
-% Monitor or Data Range:
-
-% 200-V class: 0.0 to 999.9
-% 400-V class: 0.0 to 999.9
-
-
-% Default Data:
-
-% 200-V class: 360.0
-% 400-V class: 720.0
-
-
-% Set Data: Adjustable
-% Setting During RUN: Disabled ​
-% Changes During RUN: Disabled ​
-% Unit: V ​
-% Description: Sets the voltage level at which the inverter holds deceleration during a power interruption to prevent overvoltage. ​
-
-% Parameter b053
-
-% Function Name: Deceleration Time on Power Interruption ​
-% Monitor or Data Range:
-
-% 0.01 to 99.99 ​
-% 100.0 to 999.9 ​
-% 1000. to 3600. ​
-
-
-% Default Data: 1.00
-% Set Data: Adjustable
-% Setting During RUN: Disabled ​
-% Changes During RUN: Disabled
-% Unit: s
-% Description: Sets the deceleration time for the inverter to stop during a power interruption. ​
-
-% Parameter b054
-
-% Function Name: Deceleration Starting Width on Power Interruption ​
-% Monitor or Data Range:
-
-% 0.00 to 10.00 ​
-% 100.0 (High-frequency mode)
-
-
-% Default Data: 0.00
-% Set Data: Adjustable
-% Setting During RUN: Disabled ​
-% Changes During RUN: Disabled
-% Unit: Hz ​
-% Description: Sets the frequency width at which deceleration starts during a power interruption. ​ Proper configuration is necessary to avoid overcurrent or undervoltage issues.
-
-
-% group: Window comparator
-% Parameter b060
-
-% Function Name: Window Comparator FV Upper Limit Level ​
-% Monitor or Data Range:
-
-% 0.0 to 100.0 ​
-
-
-% Default Data: 100.0
-% Set Data: Adjustable
-% Setting During RUN: Enabled
-% Changes During RUN: Enabled ​
-% Unit: %
-% Description: Sets the upper limit level for the window comparator function for the FV (Analog Voltage Input). ​
-
-
-% Parameter b061
-
-% Function Name: Window Comparator FV Lower Limit Level ​
-% Monitor or Data Range:
-
-% 0.0 to 100.0 ​
-
-
-% Default Data: 0.0
-% Set Data: Adjustable
-% Setting During RUN: Enabled
-% Changes During RUN: Enabled ​
-% Unit: %
-% Description: Sets the lower limit level for the window comparator function for the FV (Analog Voltage Input). ​
-
-
-% Parameter b062
-
-% Function Name: Window Comparator FV Hysteresis Width ​
-% Monitor or Data Range:
-
-% 0.0 to 10.0 ​
-
-
-% Default Data: 0.0
-% Set Data: Adjustable
-% Setting During RUN: Enabled
-% Changes During RUN: Enabled ​
-% Unit: %
-% Description: Sets the hysteresis width for the upper and lower limit levels of the window comparator for the FV input. ​
-
-
-% Parameter b063
-
-% Function Name: Window Comparator FI Upper Limit Level ​
-% Monitor or Data Range:
-
-% 0.0 to 100.0 ​
-
-
-% Default Data: 100.0
-% Set Data: Adjustable
-% Setting During RUN: Enabled
-% Changes During RUN: Enabled ​
-% Unit: %
-% Description: Sets the upper limit level for the window comparator function for the FI (Analog Current Input). ​
-
-
-% Parameter b064
-
-% Function Name: Window Comparator FI Lower Limit Level ​
-% Monitor or Data Range:
-
-% 0.0 to 100.0 ​
-
-
-% Default Data: 0.0
-% Set Data: Adjustable
-% Setting During RUN: Enabled
-% Changes During RUN: Enabled ​
-% Unit: %
-% Description: Sets the lower limit level for the window comparator function for the FI (Analog Current Input). ​
-
-
-% Parameter b065
-
-% Function Name: Window Comparator FI Hysteresis Width ​
-% Monitor or Data Range:
-
-% 0.0 to 10.0 ​
-
-
-% Default Data: 0.0
-% Set Data: Adjustable
-% Setting During RUN: Enabled
-% Changes During RUN: Enabled ​
-% Unit: %
-% Description: Sets the hysteresis width for the upper and lower limit levels of the window comparator for the FI input. ​
-
-
-% Parameter b070
-
-% Function Name: Analog Operation Level at FV Disconnection ​
-% Monitor or Data Range:
-
-% 0.0 to 100.0 ​
-% 255: No (Disabled) ​
-
-
-% Default Data: No ​
-% Set Data: Adjustable
-% Setting During RUN: Disabled ​
-% Changes During RUN: Enabled ​
-% Unit: None ​
-% Description: Sets the operation level for the inverter when the FV (Analog Voltage Input) is disconnected. ​
-
-
-% Parameter b071
-
-% Function Name: Analog Operation Level at FI Disconnection ​
-% Monitor or Data Range:
-
-% 0.0 to 100.0 ​
-% 255: No (Disabled) ​
-
-
-% Default Data: No ​
-% Set Data: Adjustable
-% Setting During RUN: Disabled ​
-% Changes During RUN: Enabled ​
-% Unit: None
-% Description: Sets the operation level for the inverter when the FI (Analog Current Input) is disconnected. ​Description: Sets the operation level for the inverter when the FI (Analog Current Input) is disconnected. ​
-
-
-
-
-
-% group: Auxiliary function
-% Parameters b075 to b097
-
-
-% Parameter b075: Ambient Temperature ​
-
-% Range: −10 to 50 °C ​
-% Default Data: 40 °C ​
-% Set Data: Adjustable
-% Description: Sets the ambient temperature in the operating environment of the inverter. ​
-
-
-
-% Parameter b078: Integrated Power Clear ​
-
-% Range: 00 (Clear disabled), 01 (Clear with Enter key)
-% Default Data: 00 ​
-% Set Data: Adjustable
-% Description: Clears the integrated power monitor data when enabled. ​
-
-
-
-% Parameter b079: Integrated Power Display Scale ​
-
-% Range: 1.0 to 1000.0 ​
-% Default Data: 1.0
-% Set Data: Adjustable
-% Description: Sets the scaling factor for the integrated power display. ​
-
-
-
-% Parameter b082: Starting Frequency ​
-
-% Range: 0.01 to 9.99 Hz (100.0 Hz in high-frequency mode)
-% Default Data: 1.50 Hz ​
-% Set Data: Adjustable
-% Description: Sets the frequency at which the inverter starts operation. ​
-
-
-
-% Parameter b083: Carrier Frequency ​
-
-% Range: 2.0 to 15.0 kHz (Heavy load mode), 2.0 to 10.0 kHz (Light load mode) ​
-% Default Data: 10.0 kHz (Heavy load mode), 2.0 kHz (Light load mode)
-% Set Data: Adjustable
-% Description: Sets the carrier frequency for the inverter. ​
-
-
-
-% Parameter b084: Initialization Selection ​
-
-% Range: 00 (Disabled), 01 (Clearing Fault Monitor), 02 (Initialize data), 03 (Clear fault monitor + Initialize data), 04 (Clear fault monitor + Initialize data + Clear DriveProgramming) ​
-% Default Data: 00 ​
-% Set Data: Adjustable
-% Description: Selects the type of initialization to perform on the inverter. ​
-
-
-
-% Parameter b085: Initialization Data Selection ​
-
-% Range: Fixed at 00
-% Default Data: 00 ​
-% Set Data: Fixed
-% Description: Reserved for initialization data selection. ​
-
-
-
-% Parameter b086: Frequency Conversion Coefficient ​
-
-% Range: 0.01 to 99.99 ​
-% Default Data: 1.00
-% Set Data: Adjustable
-% Description: Converts the output frequency value for monitoring purposes. ​
-
-
-
-% Parameter b087: STOP Key Selection ​
-
-% Range: 00 (Enabled), 01 (Disabled), 02 (Only RESET enabled)
-% Default Data: 00 ​
-% Set Data: Adjustable
-% Description: Configures the functionality of the STOP key on the Digital Operator. ​
-
-
-
-% Parameter b088: Free-run Stop Selection ​
-
-% Range: 00 (0-Hz restart), 01 (Frequency matching restart), 02 (Frequency pull-in restart) ​
-% Default Data: 00 ​
-% Set Data: Adjustable
-% Description: Configures the inverter's behavior during free-run stop. ​
-
-
-
-% Parameter b089: Automatic Carrier Reduction ​
-
-% Range: 00 (Disabled), 01 (Enabled based on current), 02 (Enabled based on cooling fin temperature) ​
-% Default Data: 01 ​
-% Set Data: Adjustable
-% Description: Enables automatic carrier frequency reduction based on current or cooling fin temperature. ​
-
-
-
-% Parameter b090: Usage Rate of Regenerative Braking ​
-
-% Range: 0.0 to 100.0 % ​
-% Default Data: 0.0 %
-% Set Data: Adjustable
-% Description: Sets the usage rate of regenerative braking. ​
-
-
-
-% Parameter b091: Stop Selection ​
-
-% Range: 00 (Deceleration stop), 01 (Free-run stop) ​
-% Default Data: 00 ​
-% Set Data: Adjustable
-% Description: Configures the stop method for the inverter. ​
-
-
-
-% Parameter b092: Cooling Fan Operation ​
-
-% Range: 00 (Always enabled), 01 (Enabled only during operation), 02 (Dependent on cooling fin temperature) ​
-% Default Data: 01 ​
-% Set Data: Adjustable
-% Description: Configures the cooling fan operation mode based on inverter status or temperature. ​
-
-
-
-% Parameter b093: Total Fan Operation Time Clear ​
-
-% Range: 00 (Clear disabled), 01 (Clear with Enter key)
-% Default Data: 00 ​
-% Set Data: Adjustable
-% Description: Clears the total fan operation time, typically done when replacing the cooling fan. ​
-
-
-
-% Parameter b097: Not specified in the provided document.
-
-
-
-% group: V/f free function
-% Parameters b100 to b113 are used to configure the Free V/f function, which allows adjustment of the inverter's output voltage and frequency characteristics at specific breakpoints. The parameters include frequency and voltage settings for up to seven breakpoints, enabling custom V/f characteristics for specialized motor control scenarios. ​
-
-
-% Frequency Parameters:
-
-% b100: Free V/f Frequency 1 ​
-% b102: Free V/f Frequency 2 ​
-% b104: Free V/f Frequency 3 ​
-% b106: Free V/f Frequency 4 ​
-% b108: Free V/f Frequency 5 ​
-% b110: Free V/f Frequency 6 ​
-% b112: Free V/f Frequency 7 ​
-
-
-
-% Voltage Parameters:
-
-% b101: Free V/f Voltage 1 ​
-% b103: Free V/f Voltage 2 ​
-% b105: Free V/f Voltage 3 ​
-% b107: Free V/f Voltage 4 ​
-% b109: Free V/f Voltage 5 ​
-% b111: Free V/f Voltage 6 ​
-% b113: Free V/f Voltage 7 ​
-
-
-
-% Notes:
-
-% Frequency values must be set in ascending order: f1 ≤ f2 ≤ f3 ≤ f4 ≤ f5 ≤ f6 ≤ f7. ​
-% Voltage values correspond to the respective frequency points. ​
-% The Free V/f function is disabled by default and can be enabled by setting the 1st/2nd Control Method (A044/A244) to 02 (Free V/f setting).
-% When enabled, torque boost, base frequency, and maximum frequency settings are disabled. ​
-% Frequency ranges are typically 0.0 to 400.0 Hz (580.0 Hz in high-frequency mode), and voltage ranges are 0.0 to 800.0 V.
-
-
-
-% group: Brake control
-% Parameters b120 to b127 are used to configure the Brake Control Function in the inverter, which is essential for managing external brakes in applications like elevators, cranes, or systems requiring precise braking control. ​ Below are the details of each parameter:
-
-
-% b120: Brake Control Function Selection ​
-
-% Range:
-
-% 00: Disabled ​
-% 01: Enabled (DC Injection Braking enabled during stop) ​
-% 02: Enabled (DC Injection Braking disabled during stop) ​
-
-
-% Default Data: 00 ​
-% Description: Enables or disables the brake control function and specifies DC Injection Braking behavior during stop. ​
-
-
-
-% b121: Brake Release Wait Time ​
-
-% Range: 0.00 to 5.00 seconds
-% Default Data: 0.00 seconds ​
-% Description: Sets the time the inverter waits after reaching the Brake Release Frequency before outputting the brake release signal. ​
-
-
-
-% b122: Acceleration Wait Time on Brake Control ​
-
-% Range: 0.00 to 5.00 seconds
-% Default Data: 0.00 seconds ​
-% Description: Sets the mechanical delay time from when the brake release signal turns ON until the brake is fully released. ​
-
-
-
-% b123: Stop Wait Time on Brake Control ​
-
-% Range: 0.00 to 5.00 seconds
-% Default Data: 0.00 seconds ​
-% Description: Sets the mechanical delay time from when the brake release signal turns OFF until the brake is fully applied. ​
-
-
-
-% b124: Brake Error Detection Time ​
-
-% Range: 0.00 to 5.00 seconds
-% Default Data: 0.00 seconds ​
-% Description: Sets the time the inverter waits for the brake confirmation signal to turn ON after outputting the brake release signal. ​ If the signal does not turn ON within this time, the inverter detects a brake error. ​
-
-
-
-% b125: Brake Release Frequency ​
-
-% Range: 0.00 to 400.0 Hz ​
-% Default Data: 0.00 Hz ​
-% Description: Sets the frequency at which the brake release signal is output. ​
-
-
-
-% b126: Brake Release Current ​
-
-% Range: 0.00 to 2.00 × Rated current of inverter ​
-% Default Data: Rated current of inverter ​
-% Description: Sets the output current value sufficient to support the load and output the brake release signal. ​
-
-
-
-% b127: Brake Force Frequency ​
-
-% Range: 0.00 to 400.0 Hz
-% Default Data: 0.00 Hz ​
-% Description: Sets the frequency at which the brake release signal turns OFF and forces the brake during stop. ​
-
-
-
-% Notes:
-
-% Proper configuration of these parameters ensures smooth operation and prevents mechanical damage or load fall accidents. ​
-% It is recommended to use Sensorless Vector Control for high torque during startup. ​
-% Ensure the frequency set in b125 is higher than the Starting Frequency (b082) to avoid overload detection.
-
-
-
-% group: Overvoltage suppression during deceleration
-% Parameters b130 to b134 are used to configure the Overvoltage Suppression Function During Deceleration, which prevents overvoltage trips caused by regenerative energy during motor deceleration. Below are the details of each parameter:
-
-
-% b130: Overvoltage Suppression Function Selection During Deceleration ​
-
-% Range:
-
-% 00: Disabled ​
-% 01: Enabled (DC voltage kept constant) ​
-% 02: Enabled (Acceleration enabled)
-
-
-% Default Data: 01 (Enabled: DC voltage kept constant) ​
-% Description: Enables or disables the overvoltage suppression function during deceleration. ​ When enabled, the inverter adjusts the deceleration rate or accelerates to suppress overvoltage. ​
-
-
-
-% b131: Overvoltage Suppression Level During Deceleration ​
-
-% Range:
-
-% 200-V class: 330.0 to 395.0 V
-% 400-V class: 660.0 to 790.0 V
-
-
-% Default Data:
-
-% 200-V class: 380.0 V
-% 400-V class: 760.0 V
-
-
-% Description: Sets the DC voltage level at which the overvoltage suppression function activates. Ensure this value is higher than the input voltage multiplied by √2 to avoid deceleration issues. ​
-
-
-
-% b132: Overvoltage Suppression Parameter During Deceleration ​
-
-% Range: 0.10 to 30.00 seconds
-% Default Data: 1.00 seconds
-% Description: Sets the acceleration rate or deceleration time for the output frequency when the overvoltage suppression function is enabled. ​ This determines how quickly the suppression function reacts.
-
-
-
-% b133: Overvoltage Suppression Proportional Gain During Deceleration ​
-
-% Range: 0.00 to 5.00 ​
-% Default Data: 0.20 ​
-% Description: Sets the proportional gain for DC voltage constant control. ​ Higher values result in faster suppression response but may increase the risk of overcurrent trips. ​
-
-
-
-% b134: Overvoltage Suppression Integral Time During Deceleration ​
-
-% Range: 0.0 to 150.0 seconds
-% Default Data: 1.0 seconds
-% Description: Sets the integral time for DC voltage constant control. ​ Lower values provide faster response but may increase the risk of overcurrent trips. ​
-
-
-
-% Notes:
-
-% Proper configuration of these parameters ensures smooth deceleration without overvoltage trips. ​
-% Adjust b133 and b134 carefully to balance suppression speed and stability. ​
-% If regenerative braking units or braking resistors are used, these settings may need adjustment to optimize performance. ​
-% For applications with high inertia loads, such as elevators or conveyors, these parameters are critical to prevent overvoltage errors caused by regenerative energy. ​
-
-% group: Auxiliary function
-
-% b145 GS Input Operation Selection
-% 00: No trip (shut off by hardware)
-% 01: Trip
-
-% b150 Inverter Display on Operator Connection
-% 001 to 060 (Corresponding to d001 to d060)
-
-% b160 User Monitor Selection 1
-% 001 to 030 (Corresponding to d001 to d030)
-
-% b161 User Monitor Selection 2
-% 001 to 030 (Corresponding to d001 to d030)
-
-% b163 d001/d007 Data Setting Selection
-% 00: Disabled
-% 01: Enabled
-
-% b164 Initial Screen Automatic Return Function
-% 00: Disabled
-% 01: Enabled
-
-% b165 Operation Selection at External Operator Disconnection
-% 00: Trip
-% 01: Trip after deceleration stop
-% 02: Ignore
-% 03: Free-run stop
-% 04: Deceleration stop
-
-% b166 (Reserved) Do not change the default 00
-
-
-
-
-% group: Mode
-% b171 Inverter Mode Selection
-% 00: Selection disabled
-% 01: Induction motor mode
-% 02: Induction motor high-frequency mode
-% 03: PM motor mode
-
-% group: Auxiliary function
-
-% b180 Initialization Execution
-% 00: Function disabled
-% 01: Execute initialization
-
-% b190 Password A Setting
-% 0000: Function disabled
-% 0001 to FFFF: Password
-
-% b191 Password A for Authentication 
-% 0000 to FFFF
-
-% b192 Password B Setting
-% 0000: Function disabled
-% 0001 to FFFF: Password
-
-% b193 Password B for Authentication 
-% 0000 to FFFF
-
-
-% group: Electronic thermal
-% b910 Motor Electronic Thermal Selection
-% 00: Disabled
-% 01: Enabled (Fixed subtraction ratio)
-% 02: Enabled (b911 subtraction ratio)
-% 03: Enabled (b912 time parameter subtraction)
-
-% b911 Motor Electronic Thermal Subtraction Ratio
-% 0.10 to 100000.00
-% (Displays upper 4 digits)
-
-% b912 Motor Electronic Thermal Subtraction Time Constant
-% 0.10 to 100000.00
-% (Displays upper 4 digits)
-
-% b913 Motor Electronic Thermal Integration Gain
-% 1.0 to 200.0
+b913 Motor Electronic Thermal Integration Gain
+1.0 to 200.0
