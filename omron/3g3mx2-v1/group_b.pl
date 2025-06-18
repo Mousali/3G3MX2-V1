@@ -859,15 +859,134 @@ b078(01, "Clear with Enter key"):-
     !.
 b078(00, default).
 
-
+b079(S, "Integrated Power Display Scale"):- 
+    b_getval(spec, S),
+    S #= S.get(auxiliary_function/integrated_power_display_scale),
+    S #>= 1.0, 
+    S #=< 1000.0,
+    !.
 b079(1, default).
+
+b082(F, "Starting Frequency (Hz)"):- 
+    b_getval(spec, S),
+    F #= S.get(auxiliary_function/starting_frequency),
+    F #>= 0.01, 
+    F #=< 9.99,
+    \+ #fuzzy_match_key_value(S.get(operations/inverter_mode),"Induction motor high-frequency"),
+    !.
+b082(F, "Starting Frequency (high-frequency mode) (Hz)"):-
+    b_getval(spec, S),
+    F #= S.get(auxiliary_function/starting_frequency),
+    F #>= 0.01, 
+    F #=< 100.0,
+    #fuzzy_match_key_value(S.get(operations/inverter_mode),"Induction motor high-frequency"),
+    !.
 b082(1.50, default).
+
+% TODO: see if checking for high-frequency mode is necessary
+b083(F, "Carrier Frequency (kHz)"):- 
+    b_getval(spec, S),
+    F #= S.get(auxiliary_function/carrier_frequency),
+    F #>= 2.0, 
+    F #=< 15.0,
+    \+ #fuzzy_match_key_value(S.get(mode/heavy_load_light_load_selection),"Light Load Mode (VT)"),
+    !.
+b083(F, "Carrier Frequency (Light Load Mode) (kHz)"):-
+    b_getval(spec, S),
+    F #= S.get(auxiliary_function/carrier_frequency),
+    F #>= 2.0, 
+    F #=< 10.0,
+    #fuzzy_match_key_value(S.get(mode/heavy_load_light_load_selection),"Light Load Mode (VT)"),
+    !.
+b083(10.0, "Carrier Frequency (Heavy Load Mode) (kHz)"):-
+    b_getval(spec, S),
+    F #= S.get(auxiliary_function/carrier_frequency),
+    F #>= 2.0, 
+    F #=< 15.0,
+    #fuzzy_match_key_value(S.get(mode/heavy_load_light_load_selection),"Heavy Load Mode (CT)"),
+    !.
+b083(2.0, "Carrier Frequency (Light Load Mode) (kHz)"):-
+    b_getval(spec, S),
+    F #= S.get(auxiliary_function/carrier_frequency),
+    F #>= 2.0, 
+    F #=< 10.0,
+    #fuzzy_match_key_value(S.get(mode/heavy_load_light_load_selection),"Heavy Load Mode (CT)"),
+    !.
 b083(10.0, default).
+
+b084(00, "Initialization Selection"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initialization_selection),"disabled"),
+    !.
+b084(01, "Clearing Fault Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initialization_selection),"clearing fault monitor"),
+    !.
+b084(02, "Initialize data"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initialization_selection),"initialize data"),
+    !.
+b084(03, "Clear fault monitor + Initialize data"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initialization_selection),"clear fault monitor + initialize data"),
+    !.
+b084(04, "Clear fault monitor + Initialize data + Clear DriveProgramming"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initialization_selection),"clear fault monitor + initialize data + clear driveprogramming"),
+    !.
 b084(00, default).
+
 b085(00, default).
+
+b086(F, "Frequency Conversion Coefficient"):- 
+    b_getval(spec, S),
+    F #= S.get(auxiliary_function/frequency_conversion_coefficient),
+    F #>= 0.01, 
+    F #=< 99.99,
+    !.
 b086(1.00, default).
+
+b087(00, "STOP Key Selection"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/stop_key_selection),"enabled"),
+    !.
+b087(01, "Disabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/stop_key_selection),"disabled"),
+    !.
+b087(02, "Only RESET enabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/stop_key_selection),"only RESET enabled"),
+    !.
 b087(00, default).
+
+
+b088(00, "Free-run Stop Selection (0-Hz restart)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/free_run_stop_selection),"0-hz restart"),
+    !.
+b088(01, "Free-run Stop Selection (Frequency matching restart)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/free_run_stop_selection),"frequency matching restart"),
+    !.
+b088(02, "Free-run Stop Selection (Frequency pull-in restart)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/free_run_stop_selection),"frequency pull-in restart"),
+    !.
 b088(00, default).
+
+b089(00, "Automatic Carrier Reduction Disabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/automatic_carrier_reduction),"disabled"),
+    !.
+b089(01, "Automatic Carrier Reduction Enabled (based on current)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/automatic_carrier_reduction),"enabled (based on current)"),
+    !.
+b089(02, "Automatic Carrier Reduction Enabled (based on cooling fin temperature)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/automatic_carrier_reduction),"enabled (based on cooling fin temperature)"),
+    !.
 b089(01, default).
 b090(0.0, default).
 b091(00, default).
