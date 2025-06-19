@@ -988,479 +988,803 @@ b089(02, "Automatic Carrier Reduction Enabled (based on cooling fin temperature)
     #fuzzy_match_key_value(S.get(auxiliary_function/automatic_carrier_reduction),"enabled (based on cooling fin temperature)"),
     !.
 b089(01, default).
+
+b090(R, "Usage Rate of Regenerative Braking (%)"):- 
+    b_getval(spec, S),
+    R #= S.get(auxiliary_function/usage_rate_of_regenerative_braking),
+    R #>= 0.0, 
+    R #=< 100.0,
+    !.
 b090(0.0, default).
+
+b091(00, "Stop Selection (Deceleration stop)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/stop_selection),"deceleration stop"),
+    !.
+b091(01, "Stop Selection (Free-run stop)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/stop_selection),"free-run stop"),
+    !.
 b091(00, default).
+
+b092(00, "Cooling Fan Operation Always Enabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/cooling_fan_operation),"always enabled"),
+    !.
+b092(01, "Cooling Fan Operation Enabled Only During Operation"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/cooling_fan_operation),"enabled only during operation"),
+    !.
+b092(02, "Cooling Fan Operation Dependent on Cooling Fin Temperature"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/cooling_fan_operation),"dependent on cooling fin temperature"),
+    !.
 b092(01, default).
+
+b093(00, "Total Fan Operation Time Clear Disabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/total_fan_operation_time_clear),"clear disabled"),
+    !.
+b093(01, "Total Fan Operation Time Clear with Enter Key"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/total_fan_operation_time_clear),"clear with enter key"),
+    !.
 b093(00, default).
+
+b094(00, "All data"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initialization_target_setting),"all data"),
+    !.
+b094(01, "All data other than terminals/communications"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initialization_target_setting),"all data other than terminals/communications"),
+    !.
+b094(02, "Only User Selection 1 to 32 (U001 to U032)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initialization_target_setting),"only user selection 1 to 32 (u001 to u032)"),
+    !.
+b094(03, "Other than User Selection 1 to 32 (U001 to U032) and Display Selection (b037)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initialization_target_setting),"other than user selection 1 to 32 (u001 to u032) and display selection (b037)"),
+    !.
 b094(00, default).
+
+b095(00, "Disabled (Function not active)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/regenerative_braking_selection),"disabled (function not active)"),
+    !.
+b095(01, "Enabled (Disabled during stop)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/regenerative_braking_selection),"enabled (disabled during stop)"),
+    !.
+b095(02, "Enabled (Enabled during operation and stop)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/regenerative_braking_selection),"enabled (enabled during operation and stop)"),
+    !.
 b095(00, default).
+
+b096(F, "Regenerative Braking ON Level (V)"):- 
+    b_getval(spec, S),
+    F #= S.get(auxiliary_function/regenerative_braking_on_level),
+    F #>= 330, 
+    F #=< 380,
+    vdf_class(200V),
+    !.
+b096(F, "Regenerative Braking ON Level (V)"):-
+    b_getval(spec, S),
+    F #= S.get(auxiliary_function/regenerative_braking_on_level),
+    F #>= 660,
+    F #=< 760,
+    vdf_class(400V),
+    !.
 b096([], default).
+
+b097(R, "Braking Resistor Value (Ω)"):- 
+    b_getval(spec, S),
+    R #= S.get(auxiliary_function/minimum_braking_resistor_value),
+    R #=< 600.0,
+    !.
 b097([], default).
 
 %% V/f free function
+b100(F, "Free V/f Frequency 1 (Hz)"):- 
+    b_getval(spec, S),
+    F #= S.get(vf_free/free_vf_frequency_1),
+    F #>= 0.0, 
+    F #=< S.get(vf_free/free_vf_frequency_2),
+    !.
 b100(0, default).
+b101(V, "Free V/f Voltage 1 (V)"):- 
+    b_getval(spec, S),
+    V #= S.get(vf_free/free_vf_voltage_1),
+    V #>= 0.0, 
+    V #=< 800.0,
+    !.
 b101(0.0, default).
+b102(F, "Free V/f Frequency 2 (Hz)"):- 
+    b_getval(spec, S),
+    F #= S.get(vf_free/free_vf_frequency_2),
+    F #>= S.get(vf_free/free_vf_frequency_1), 
+    F #=< S.get(vf_free/free_vf_frequency_3),
+    !.
 b102(0, default).
+b103(V, "Free V/f Voltage 2 (V)"):- 
+    b_getval(spec, S),
+    V #= S.get(vf_free/free_vf_voltage_2),
+    V #>= 0.0, 
+    V #=< 800.0,
+    !.
 b103(0.0, default).
+b104(F, "Free V/f Frequency 3 (Hz)"):- 
+    b_getval(spec, S),
+    F #= S.get(vf_free/free_vf_frequency_3),
+    F #>= S.get(vf_free/free_vf_frequency_2), 
+    F #=< S.get(vf_free/free_vf_frequency_4),
+    !.
 b104(0, default).
+b105(V, "Free V/f Voltage 3 (V)"):- 
+    b_getval(spec, S),
+    V #= S.get(vf_free/free_vf_voltage_3),
+    V #>= 0.0, 
+    V #=< 800.0,
+    !.
 b105(0.0, default).
+b106(F, "Free V/f Frequency 4 (Hz)"):- 
+    b_getval(spec, S),
+    F #= S.get(vf_free/free_vf_frequency_4),
+    F #>= S.get(vf_free/free_vf_frequency_3), 
+    F #=< S.get(vf_free/free_vf_frequency_5),
+    !.
 b106(0, default).
+b107(V, "Free V/f Voltage 4 (V)"):- 
+    b_getval(spec, S),
+    V #= S.get(vf_free/free_vf_voltage_4),
+    V #>= 0.0, 
+    V #=< 800.0,
+    !.
 b107(0.0, default).
+b108(F, "Free V/f Frequency 5 (Hz)"):- 
+    b_getval(spec, S),
+    F #= S.get(vf_free/free_vf_frequency_5),
+    F #>= S.get(vf_free/free_vf_frequency_4), 
+    F #=< S.get(vf_free/free_vf_frequency_6),
+    !.
 b108(0, default).
+b109(V, "Free V/f Voltage 5 (V)"):- 
+    b_getval(spec, S),
+    V #= S.get(vf_free/free_vf_voltage_5),
+    V #>= 0.0, 
+    V #=< 800.0,
+    !.
 b109(0.0, default).
+b110(F, "Free V/f Frequency 6 (Hz)"):- 
+    b_getval(spec, S),
+    F #= S.get(vf_free/free_vf_frequency_6),
+    F #>= S.get(vf_free/free_vf_frequency_5), 
+    F #=< S.get(vf_free/free_vf_frequency_7),
+    !.
 b110(0, default).
+b111(V, "Free V/f Voltage 6 (V)"):- 
+    b_getval(spec, S),
+    V #= S.get(vf_free/free_vf_voltage_6),
+    V #>= 0.0, 
+    V #=< 800.0,
+    !.
 b111(0.0, default).
+b112(F, "Free V/f Frequency 7 (Hz)"):- 
+    b_getval(spec, S),
+    F #= S.get(vf_free/free_vf_frequency_7),
+    F #>= S.get(vf_free/free_vf_frequency_6), 
+    F #=< 400.0,
+    !.
 b112(0, default).
+b113(V, "Free V/f Voltage 7 (V)"):- 
+    b_getval(spec, S),
+    V #= S.get(vf_free/free_vf_voltage_7),
+    V #>= 0.0, 
+    V #=< 800.0,
+    !.
 b113(0.0, default).
 
 %brake control
+b120(00, "Brake Control Function Selection (Disabled)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/brake_control_function_selection),"disabled"),
+    !.
+b120(01, "Brake Control Function Selection (Enabled, DC Injection Braking enabled during stop)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/brake_control_function_selection),"enabled (dc injection braking enabled during stop)"),
+    !.
+b120(02, "Brake Control Function Selection (Enabled, DC Injection Braking disabled during stop)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/brake_control_function_selection),"enabled (dc injection braking disabled during stop)"),
+    !.
 b120(00, default).
+
+b121(T, "Brake Release Wait Time (s)"):- 
+    b_getval(spec, S),
+    T #= S.get(auxiliary_function/brake_release_wait_time),
+    T #>= 0.00, 
+    T #=< 5.00,
+    !.
 b121(0.00, default).
+
+b122(T, "Acceleration Wait Time on Brake Control (s)"):- 
+    b_getval(spec, S),
+    T #= S.get(auxiliary_function/acceleration_wait_time_on_brake_control),
+    T #>= 0.00, 
+    T #=< 5.00,
+    !.
 b122(0.00, default).
+
+b123(T, "Stop Wait Time on Brake Control (s)"):- 
+    b_getval(spec, S),
+    T #= S.get(auxiliary_function/stop_wait_time_on_brake_control),
+    T #>= 0.00, 
+    T #=< 5.00,
+    !.
 b123(0.00, default).
+
+b124(T, "Brake Error Detection Time (s)"):- 
+    b_getval(spec, S),
+    T #= S.get(auxiliary_function/brake_error_detection_time),
+    T #>= 0.00, 
+    T #=< 5.00,
+    !.
 b124(0.00, default).
+
+b125(F, "Brake Release Frequency (Hz)"):- 
+    b_getval(spec, S),
+    F #= S.get(auxiliary_function/brake_release_frequency),
+    F #>= 0.00, 
+    F #=< 400.0,
+    !.
+b125(00, default).
+
+b126(I, "Brake Release Current (A)"):- 
+    b_getval(spec, S),
+    I #= S.get(auxiliary_function/brake_release_current),
+    I #>= 0.00, 
+    I #=< S.get(operations/inverter_rated_current),
+    !.
 b126([], default).
+
+b127(F, "Brake Force Frequency (Hz)"):- 
+    b_getval(spec, S),
+    F #= S.get(auxiliary_function/brake_force_frequency),
+    F #>= 0.00, 
+    F #=< 400.0,
+    !.
 b127(0.00, default).
 
 %% Over voltage suppression during deceleration
+b130(00, "Overvoltage Suppression Function Selection During Deceleration (Disabled)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/overvoltage_suppression_function_selection_during_deceleration),"disabled"),
+    !.
+b130(01, "Overvoltage Suppression Function Selection During Deceleration (Enabled, DC voltage kept constant)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/overvoltage_suppression_function_selection_during_deceleration),"enabled (dc voltage kept constant)"),
+    !.
+b130(02, "Overvoltage Suppression Function Selection During Deceleration (Enabled, Acceleration enabled)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/overvoltage_suppression_function_selection_during_deceleration),"enabled (acceleration enabled)"),
+    !.
 b130(01, default).
-b131([], default).
+b131(V, "Overvoltage Suppression Level During Deceleration (V)"):- 
+    b_getval(spec, S),
+    V #= S.get(auxiliary_function/overvoltage_suppression_level_during_deceleration),
+    vdf_class(200V),
+    V #>= 330.0, 
+    V #=< 395.0,
+    !.
+b131(V, "Overvoltage Suppression Level During Deceleration (V)"):-
+    b_getval(spec, S),
+    V #= S.get(auxiliary_function/overvoltage_suppression_level_during_deceleration),
+    vdf_class(400V),
+    V #>= 660.0, 
+    V #=< 790.0,
+    !.
+b131(380, default):-
+    vdf_class(200V),
+    !.
+b131(760, default):-
+    vdf_class(400V),
+    !.
+
+b132(T, "Overvoltage Protection Parameter During Deceleration (s)"):- 
+    b_getval(spec, S),
+    T #= S.get(auxiliary_function/overvoltage_protection_parameter_during_deceleration),
+    T #>= 0.10, 
+    T #=< 30.00,
+    !.
 b132(1.00, default).
+
+b133(G, "Overvoltage Suppression Proportional Gain During Deceleration"):- 
+    b_getval(spec, S),
+    G #= S.get(auxiliary_function/overvoltage_suppression_proportional_gain_during_deceleration),
+    G #>= 0.00, 
+    G #=< 5.00,
+    !.
 b133(0.20, default).
+
+b134(T, "Overvoltage Suppression Integral Time During Deceleration (s)"):- 
+    b_getval(spec, S),
+    T #= S.get(auxiliary_function/overvoltage_suppression_integral_time_during_deceleration),
+    T #>= 0.0, 
+    T #=< 150.0,
+    !.
 b134(1.0, default).
 
 %% Auxiliary function
+b145(00, "No trip"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/gs_input_operation_selection),"no trip"),
+    !.
+b145(01, "Trip"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/gs_input_operation_selection),"trip"),
+    !.
 b145(00, default).
+b150(001, "d001: Output Frequency Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d001: output frequency monitor"),
+    !.
+b150(002, "d002: Output Current Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d002: output current monitor"),
+    !.
+b150(003, "d003: RUN Direction Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d003: run direction monitor"),
+    !.
+b150(004, "d004: PID feedback monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d004: pid feedback monitor"),
+    !.
+b150(005, "d005: Multi-function Input Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d005: multi-function input monitor"),
+    !.
+b150(006, "d006: Multi-function Output Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d006: multi-function output monitor"),
+    !.
+b150(007, "d007: Output Frequency Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d007: output frequency monitor"),
+    !.
+b150(008, "d008: Real Frequency Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d008: real frequency monitor"),
+    !.
+b150(009, "d009: Torque Reference Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d009: torque reference monitor"),
+    !.
+b150(010, "d010: Torque Bias Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d010: torque bias monitor"),
+    !.
+b150(012, "d012: Output Torque Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d012: output torque monitor"),
+    !.
+b150(013, "d013: Output Voltage Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d013: output voltage monitor"),
+    !.
+b150(014, "d014: Input Power Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d014: input power monitor"),
+    !.
+b150(015, "d015: Integrated Power Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d015: integrated power monitor"),
+    !.
+b150(016, "d016: Total RUN Time Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d016: total run time monitor"),
+    !.
+b150(017, "d017: Total Power ON Time Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d017: total power on time monitor"),
+    !.
+b150(018, "d018: Fin Temperature Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d018: fin temperature monitor"),
+    !.
+b150(022, "d022: Life Assessment Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d022: life assessment monitor"),
+    !.
+b150(023, "d023: Program Counter (DriveProgramming)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d023: program counter (driveprogramming)"),
+    !.
+b150(024, "d024: Program Number Monitor (DriveProgramming)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d024: program number monitor (driveprogramming)"),
+    !.
+b150(025, "d025: User Monitor 0 (DriveProgramming)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d025: user monitor 0 (driveprogramming)"),
+    !.
+b150(026, "d026: User Monitor 1 (DriveProgramming)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d026: user monitor 1 (driveprogramming)"),
+    !.
+b150(027, "d027: User Monitor 2 (DriveProgramming)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d027: user monitor 2 (driveprogramming)"),
+    !.
+b150(029, "d029: Position Command Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d029: position command monitor"),
+    !.
+b150(030, "d030: Current Position Monitor"):-   
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"d030: current position monitor"),
+    !.
+b150(050, "Dual User Monitor (2 types of data)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"dual user monitor (2 types of data)"),
+    !.
+b150(060, "Inverter Mode Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/inverter_display_on_operator_connection),"inverter mode monitor"),
+    !.
 b150(001, default).
+
+b160(001, "d001: Output Frequency Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d001: output frequency monitor"),
+    !.
+b160(002, "d002: Output Current Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d002: output current monitor"),
+    !.
+b160(003, "d003: RUN Direction Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d003: run direction monitor"),
+    !.
+b160(004, "d004: PID feedback monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d004: pid feedback monitor"),
+    !.
+b160(005, "d005: Multi-function Input Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d005: multi-function input monitor"),
+    !.
+b160(006, "d006: Multi-function Output Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d006: multi-function output monitor"),
+    !.
+b160(007, "d007: Output Frequency Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d007: output frequency monitor"),
+    !.
+b160(008, "d008: Real Frequency Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d008: real frequency monitor"),
+    !.
+b160(009, "d009: Torque Reference Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d009: torque reference monitor"),
+    !.
+b160(010, "d010: Torque Bias Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d010: torque bias monitor"),
+    !.
+b160(012, "d012: Output Torque Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d012: output torque monitor"),
+    !.
+b160(013, "d013: Output Voltage Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d013: output voltage monitor"),
+    !.
+b160(014, "d014: Input Power Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d014: input power monitor"),
+    !.
+b160(015, "d015: Integrated Power Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d015: integrated power monitor"),
+    !.
+b160(016, "d016: Total RUN Time Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d016: total run time monitor"),
+    !.
+b160(017, "d017: Total Power ON Time Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d017: total power on time monitor"),
+    !.
+b160(018, "d018: Fin Temperature Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d018: fin temperature monitor"),
+    !.
+b160(022, "d022: Life Assessment Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d022: life assessment monitor"),
+    !.
+b160(023, "d023: Program Counter (DriveProgramming)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d023: program counter (driveprogramming)"),
+    !.
+b160(024, "d024: Program Number Monitor (DriveProgramming)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d024: program number monitor (driveprogramming)"),
+    !.
+b160(025, "d025: User Monitor 0 (DriveProgramming)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d025: user monitor 0 (driveprogramming)"),
+    !.
+b160(026, "d026: User Monitor 1 (DriveProgramming)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d026: user monitor 1 (driveprogramming)"),
+    !.
+b160(027, "d027: User Monitor 2 (DriveProgramming)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d027: user monitor 2 (driveprogramming)"),
+    !.
+b160(029, "d029: Position Command Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d029: position command monitor"),
+    !.
+b160(030, "d030: Current Position Monitor"):-   
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_1),"d030: current position monitor"),
+    !.
 b160(001, default).
+
+b161(001, "d001: Output Frequency Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d001: output frequency monitor"),
+    !.
+b161(002, "d002: Output Current Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d002: output current monitor"),
+    !.
+b161(003, "d003: RUN Direction Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d003: run direction monitor"),
+    !.
+b161(004, "d004: PID feedback monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d004: pid feedback monitor"),
+    !.
+b161(005, "d005: Multi-function Input Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d005: multi-function input monitor"),
+    !.
+b161(006, "d006: Multi-function Output Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d006: multi-function output monitor"),
+    !.
+b161(007, "d007: Output Frequency Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d007: output frequency monitor"),
+    !.
+b161(008, "d008: Real Frequency Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d008: real frequency monitor"),
+    !.
+b161(009, "d009: Torque Reference Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d009: torque reference monitor"),
+    !.
+b161(010, "d010: Torque Bias Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d010: torque bias monitor"),
+    !.
+b161(012, "d012: Output Torque Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d012: output torque monitor"),
+    !.
+b161(013, "d013: Output Voltage Monitor"):- 
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d013: output voltage monitor"),
+    !.
+b161(014, "d014: Input Power Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d014: input power monitor"),
+    !.
+b161(015, "d015: Integrated Power Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d015: integrated power monitor"),
+    !.
+b161(016, "d016: Total RUN Time Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d016: total run time monitor"),
+    !.
+b161(017, "d017: Total Power ON Time Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d017: total power on time monitor"),
+    !.
+b161(018, "d018: Fin Temperature Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d018: fin temperature monitor"),
+    !.
+b161(022, "d022: Life Assessment Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d022: life assessment monitor"),
+    !.
+b161(023, "d023: Program Counter (DriveProgramming)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d023: program counter (driveprogramming)"),
+    !.
+b161(024, "d024: Program Number Monitor (DriveProgramming)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d024: program number monitor (driveprogramming)"),
+    !.
+b161(025, "d025: User Monitor 0 (DriveProgramming)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d025: user monitor 0 (driveprogramming)"),
+    !.
+b161(026, "d026: User Monitor 1 (DriveProgramming)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d026: user monitor 1 (driveprogramming)"),
+    !.
+b161(027, "d027: User Monitor 2 (DriveProgramming)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d027: user monitor 2 (driveprogramming)"),
+    !.
+b161(029, "d029: Position Command Monitor"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d029: position command monitor"),
+    !.
+b161(030, "d030: Current Position Monitor"):-   
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/user_monitor_selection_2),"d030: current position monitor"),
+    !.
 b161(002, default).
+b163(00, "Disabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/d001_d007_data_setting_selection),"disabled"),
+    !.
+b163(01, "Enabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/d001_d007_data_setting_selection),"enabled"),
+    !.
 b163(00, default).
+b164(00, "Disabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_automatic_return_function),"disabled"),
+    !.
+b164(01, "Enabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initial_screen_automatic_return_function),"enabled"),
+    !.
 b164(00, default).
+b165(00, "Trip"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/operation_selection_at_external_operator_disconnection),"trip"),
+    !.
+b165(01, "Trip after deceleration stop"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/operation_selection_at_external_operator_disconnection),"trip after deceleration stop"),
+    !.
+b165(02, "Ignore"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/operation_selection_at_external_operator_disconnection),"ignore"),
+    !.
+b165(03, "Free-run stop"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/operation_selection_at_external_operator_disconnection),"free-run stop"),
+    !.
+b165(04, "Deceleration stop"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/operation_selection_at_external_operator_disconnection),"deceleration stop"),
+    !.
 b165(02, default).
+
 b166(00, default).
 
 %% Mode
+b170(00, "Selection disabled"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(inverter_mode),"selection disabled"),
+    !.
+b170(01, "Induction motor mode"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(inverter_mode),"induction motor mode"),
+    !.
+b170(02, "Induction motor high-frequency mode"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(inverter_mode),"induction motor high-frequency mode"),
+    !.
+b170(03, "PM motor mode"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(inverter_mode),"pm motor mode"),
+    !.
 b171(00, default).
 
 %% Auxiliary function
+
+b180(00, "Initialization Execution (Disabled)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initialization_execution),"disabled"),
+    !.
+b180(01, "Initialization Execution (Enabled, Function 1)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/initialization_execution),"enabled"),
+    !.
 b180(00, default).
+b190(0000, "Password A Setting (Disabled)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/password_a_setting),"disabled"),
+    !.
+b190(Password,"Password A Setting"):-
+    b_getval(spec, S),
+    Password = S.get(auxiliary_function/password_a),
+    Password >= 0001, 
+    Password =< FFFF,
+    !.
 b190(0000, default).
+b191(Password, "Password A for Authentication"):- 
+    b_getval(spec, S),
+    Password = S.get(auxiliary_function/password_a_for_authentication),
+    Password >= 0000, 
+    Password =< FFFF,
+    !.
 b191(0000, default).
+b192(0000, "Password B Setting (Disabled)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/password_b_setting),"disabled"),
+    !.
+b192(Password,"Password B Setting"):-
+    b_getval(spec, S),
+    Password = S.get(auxiliary_function/password_b),
+    Password >= 0001, 
+    Password =< FFFF,
+    !.
 b192(0000, default).
+b193(Password, "Password B for Authentication"):- 
+    b_getval(spec, S),
+    Password = S.get(auxiliary_function/password_b_for_authentication),
+    Password >= 0000, 
+    Password =< FFFF,
+    !.
 b193(0000, default).
 
 %% Electronic thermal
+b910(00, "Motor Electronic Thermal Selection (Disabled)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/motor_electronic_thermal_selection),"disabled"),
+    !.
+b910(01, "Motor Electronic Thermal Selection (Enabled, Fixed subtraction ratio)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/motor_electronic_thermal_selection),"enabled (fixed subtraction ratio)"),
+    !.
+b910(02, "Motor Electronic Thermal Selection (Enabled, b911 subtraction ratio)"):
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/motor_electronic_thermal_selection),"enabled (b911 subtraction ratio)"),
+    !.
+b910(03, "Motor Electronic Thermal Selection (Enabled, b912 time parameter subtraction)"):-
+    b_getval(spec, S),
+    #fuzzy_match_key_value(S.get(auxiliary_function/motor_electronic_thermal_selection),"enabled (b912 time parameter subtraction)"),
+    !.
 b910(03, default).
+
+b911(R, "Motor Electronic Thermal Subtraction Ratio (upper 4 digits) (s)"):-
+    b_getval(spec, S),
+    R #= S.get(auxiliary_function/motor_electronic_thermal_subtraction_ratio),
+    R #>= 0.10, 
+    R #=< 100000.00,
+    !.
 b911(600.00, default).
+b912(T, "Motor Electronic Thermal Subtraction Time Constant (upper 4 digits) (s)"):- 
+    b_getval(spec, S),
+    T #= S.get(auxiliary_function/motor_electronic_thermal_subtraction_time_constant),
+    T #>= 0.10, 
+    T #=< 100000.00,
+    !.
 b912(120.00, default).
+b913(G, "Motor Electronic Thermal Integration Gain"):- 
+    b_getval(spec, S),
+    G #= S.get(auxiliary_function/motor_electronic_thermal_integration_gain),
+    G #>= 1.0, 
+    G #=< 200.0,
+    !.
 b913(100.0, default).
-
-group: Auxiliary function
-
-
-Parameter b075: Ambient Temperature ​
-
-Range: −10 to 50 °C ​
-Default Data: 40 °C ​
-Set Data: Adjustable
-Description: Sets the ambient temperature in the operating environment of the inverter. ​
-
-
-
-Parameter b078: Integrated Power Clear ​
-
-Range: 00 (Clear disabled), 01 (Clear with Enter key)
-Default Data: 00 ​
-Set Data: Adjustable
-Description: Clears the integrated power monitor data when enabled. ​
-
-
-
-Parameter b079: Integrated Power Display Scale ​
-
-Range: 1.0 to 1000.0 ​
-Default Data: 1.0
-Set Data: Adjustable
-Description: Sets the scaling factor for the integrated power display. ​
-
-
-
-Parameter b082: Starting Frequency ​
-
-Range: 0.01 to 9.99 Hz (100.0 Hz in high-frequency mode)
-Default Data: 1.50 Hz ​
-Set Data: Adjustable
-Description: Sets the frequency at which the inverter starts operation. ​
-
-
-
-Parameter b083: Carrier Frequency ​
-
-Range: 2.0 to 15.0 kHz (Heavy load mode), 2.0 to 10.0 kHz (Light load mode) ​
-Default Data: 10.0 kHz (Heavy load mode), 2.0 kHz (Light load mode)
-Set Data: Adjustable
-Description: Sets the carrier frequency for the inverter. ​
-
-
-
-Parameter b084: Initialization Selection ​
-
-Range: 00 (Disabled), 01 (Clearing Fault Monitor), 02 (Initialize data), 03 (Clear fault monitor + Initialize data), 04 (Clear fault monitor + Initialize data + Clear DriveProgramming) ​
-Default Data: 00 ​
-Set Data: Adjustable
-Description: Selects the type of initialization to perform on the inverter. ​
-
-
-
-Parameter b085: Initialization Data Selection ​
-
-Range: Fixed at 00
-Default Data: 00 ​
-Set Data: Fixed
-Description: Reserved for initialization data selection. ​
-
-
-
-Parameter b086: Frequency Conversion Coefficient ​
-
-Range: 0.01 to 99.99 ​
-Default Data: 1.00
-Set Data: Adjustable
-Description: Converts the output frequency value for monitoring purposes. ​
-
-
-
-Parameter b087: STOP Key Selection ​
-
-Range: 00 (Enabled), 01 (Disabled), 02 (Only RESET enabled)
-Default Data: 00 ​
-Set Data: Adjustable
-Description: Configures the functionality of the STOP key on the Digital Operator. ​
-
-
-
-Parameter b088: Free-run Stop Selection ​
-
-Range: 00 (0-Hz restart), 01 (Frequency matching restart), 02 (Frequency pull-in restart) ​
-Default Data: 00 ​
-Set Data: Adjustable
-Description: Configures the inverter's behavior during free-run stop. ​
-
-
-
-Parameter b089: Automatic Carrier Reduction ​
-
-Range: 00 (Disabled), 01 (Enabled based on current), 02 (Enabled based on cooling fin temperature) ​
-Default Data: 01 ​
-Set Data: Adjustable
-Description: Enables automatic carrier frequency reduction based on current or cooling fin temperature. ​
-
-
-
-Parameter b090: Usage Rate of Regenerative Braking ​
-
-Range: 0.0 to 100.0 % ​
-Default Data: 0.0 %
-Set Data: Adjustable
-Description: Sets the usage rate of regenerative braking. ​
-
-
-
-Parameter b091: Stop Selection ​
-
-Range: 00 (Deceleration stop), 01 (Free-run stop) ​
-Default Data: 00 ​
-Set Data: Adjustable
-Description: Configures the stop method for the inverter. ​
-
-
-
-Parameter b092: Cooling Fan Operation ​
-
-Range: 00 (Always enabled), 01 (Enabled only during operation), 02 (Dependent on cooling fin temperature) ​
-Default Data: 01 ​
-Set Data: Adjustable
-Description: Configures the cooling fan operation mode based on inverter status or temperature. ​
-
-
-
-Parameter b093: Total Fan Operation Time Clear ​
-
-Range: 00 (Clear disabled), 01 (Clear with Enter key)
-Default Data: 00 ​
-Set Data: Adjustable
-Description: Clears the total fan operation time, typically done when replacing the cooling fan. ​
-
-
-
-Parameter b097: Not specified in the provided document.
-
-
-
-group: V/f free function
-Parameters b100 to b113 are used to configure the Free V/f function, which allows adjustment of the inverter's output voltage and frequency characteristics at specific breakpoints. The parameters include frequency and voltage settings for up to seven breakpoints, enabling custom V/f characteristics for specialized motor control scenarios. ​
-
-
-Frequency Parameters:
-
-b100: Free V/f Frequency 1 ​
-b102: Free V/f Frequency 2 ​
-b104: Free V/f Frequency 3 ​
-b106: Free V/f Frequency 4 ​
-b108: Free V/f Frequency 5 ​
-b110: Free V/f Frequency 6 ​
-b112: Free V/f Frequency 7 ​
-
-
-
-Voltage Parameters:
-
-b101: Free V/f Voltage 1 ​
-b103: Free V/f Voltage 2 ​
-b105: Free V/f Voltage 3 ​
-b107: Free V/f Voltage 4 ​
-b109: Free V/f Voltage 5 ​
-b111: Free V/f Voltage 6 ​
-b113: Free V/f Voltage 7 ​
-
-
-
-Notes:
-
-Frequency values must be set in ascending order: f1 ≤ f2 ≤ f3 ≤ f4 ≤ f5 ≤ f6 ≤ f7. ​
-Voltage values correspond to the respective frequency points. ​
-The Free V/f function is disabled by default and can be enabled by setting the 1st/2nd Control Method (A044/A244) to 02 (Free V/f setting).
-When enabled, torque boost, base frequency, and maximum frequency settings are disabled. ​
-Frequency ranges are typically 0.0 to 400.0 Hz (580.0 Hz in high-frequency mode), and voltage ranges are 0.0 to 800.0 V.
-
-
-
-group: Brake control
-Parameters b120 to b127 are used to configure the Brake Control Function in the inverter, which is essential for managing external brakes in applications like elevators, cranes, or systems requiring precise braking control. ​ Below are the details of each parameter:
-
-
-b120: Brake Control Function Selection ​
-
-Range:
-
-00: Disabled ​
-01: Enabled (DC Injection Braking enabled during stop) ​
-02: Enabled (DC Injection Braking disabled during stop) ​
-
-
-Default Data: 00 ​
-Description: Enables or disables the brake control function and specifies DC Injection Braking behavior during stop. ​
-
-
-
-b121: Brake Release Wait Time ​
-
-Range: 0.00 to 5.00 seconds
-Default Data: 0.00 seconds ​
-Description: Sets the time the inverter waits after reaching the Brake Release Frequency before outputting the brake release signal. ​
-
-
-
-b122: Acceleration Wait Time on Brake Control ​
-
-Range: 0.00 to 5.00 seconds
-Default Data: 0.00 seconds ​
-Description: Sets the mechanical delay time from when the brake release signal turns ON until the brake is fully released. ​
-
-
-
-b123: Stop Wait Time on Brake Control ​
-
-Range: 0.00 to 5.00 seconds
-Default Data: 0.00 seconds ​
-Description: Sets the mechanical delay time from when the brake release signal turns OFF until the brake is fully applied. ​
-
-
-
-b124: Brake Error Detection Time ​
-
-Range: 0.00 to 5.00 seconds
-Default Data: 0.00 seconds ​
-Description: Sets the time the inverter waits for the brake confirmation signal to turn ON after outputting the brake release signal. ​ If the signal does not turn ON within this time, the inverter detects a brake error. ​
-
-
-
-b125: Brake Release Frequency ​
-
-Range: 0.00 to 400.0 Hz ​
-Default Data: 0.00 Hz ​
-Description: Sets the frequency at which the brake release signal is output. ​
-
-
-
-b126: Brake Release Current ​
-
-Range: 0.00 to 2.00 × Rated current of inverter ​
-Default Data: Rated current of inverter ​
-Description: Sets the output current value sufficient to support the load and output the brake release signal. ​
-
-
-
-b127: Brake Force Frequency ​
-
-Range: 0.00 to 400.0 Hz
-Default Data: 0.00 Hz ​
-Description: Sets the frequency at which the brake release signal turns OFF and forces the brake during stop. ​
-
-
-
-Notes:
-
-Proper configuration of these parameters ensures smooth operation and prevents mechanical damage or load fall accidents. ​
-It is recommended to use Sensorless Vector Control for high torque during startup. ​
-Ensure the frequency set in b125 is higher than the Starting Frequency (b082) to avoid overload detection.
-
-
-
-group: Overvoltage suppression during deceleration
-Parameters b130 to b134 are used to configure the Overvoltage Suppression Function During Deceleration, which prevents overvoltage trips caused by regenerative energy during motor deceleration. Below are the details of each parameter:
-
-
-b130: Overvoltage Suppression Function Selection During Deceleration ​
-
-Range:
-
-00: Disabled ​
-01: Enabled (DC voltage kept constant) ​
-02: Enabled (Acceleration enabled)
-
-
-Default Data: 01 (Enabled: DC voltage kept constant) ​
-Description: Enables or disables the overvoltage suppression function during deceleration. ​ When enabled, the inverter adjusts the deceleration rate or accelerates to suppress overvoltage. ​
-
-
-
-b131: Overvoltage Suppression Level During Deceleration ​
-
-Range:
-
-200-V class: 330.0 to 395.0 V
-400-V class: 660.0 to 790.0 V
-
-
-Default Data:
-
-200-V class: 380.0 V
-400-V class: 760.0 V
-
-
-Description: Sets the DC voltage level at which the overvoltage suppression function activates. Ensure this value is higher than the input voltage multiplied by √2 to avoid deceleration issues. ​
-
-
-
-b132: Overvoltage Suppression Parameter During Deceleration ​
-
-Range: 0.10 to 30.00 seconds
-Default Data: 1.00 seconds
-Description: Sets the acceleration rate or deceleration time for the output frequency when the overvoltage suppression function is enabled. ​ This determines how quickly the suppression function reacts.
-
-
-
-b133: Overvoltage Suppression Proportional Gain During Deceleration ​
-
-Range: 0.00 to 5.00 ​
-Default Data: 0.20 ​
-Description: Sets the proportional gain for DC voltage constant control. ​ Higher values result in faster suppression response but may increase the risk of overcurrent trips. ​
-
-
-
-b134: Overvoltage Suppression Integral Time During Deceleration ​
-
-Range: 0.0 to 150.0 seconds
-Default Data: 1.0 seconds
-Description: Sets the integral time for DC voltage constant control. ​ Lower values provide faster response but may increase the risk of overcurrent trips. ​
-
-
-
-Notes:
-
-Proper configuration of these parameters ensures smooth deceleration without overvoltage trips. ​
-Adjust b133 and b134 carefully to balance suppression speed and stability. ​
-If regenerative braking units or braking resistors are used, these settings may need adjustment to optimize performance. ​
-For applications with high inertia loads, such as elevators or conveyors, these parameters are critical to prevent overvoltage errors caused by regenerative energy. ​
-
-group: Auxiliary function
-
-b145 GS Input Operation Selection
-00: No trip (shut off by hardware)
-01: Trip
-
-b150 Inverter Display on Operator Connection
-001 to 060 (Corresponding to d001 to d060)
-
-b160 User Monitor Selection 1
-001 to 030 (Corresponding to d001 to d030)
-
-b161 User Monitor Selection 2
-001 to 030 (Corresponding to d001 to d030)
-
-b163 d001/d007 Data Setting Selection
-00: Disabled
-01: Enabled
-
-b164 Initial Screen Automatic Return Function
-00: Disabled
-01: Enabled
-
-b165 Operation Selection at External Operator Disconnection
-00: Trip
-01: Trip after deceleration stop
-02: Ignore
-03: Free-run stop
-04: Deceleration stop
-
-b166 (Reserved) Do not change the default 00
-
-
-
-
-group: Mode
-b171 Inverter Mode Selection
-00: Selection disabled
-01: Induction motor mode
-02: Induction motor high-frequency mode
-03: PM motor mode
-
-group: Auxiliary function
-
-b180 Initialization Execution
-00: Function disabled
-01: Execute initialization
-
-b190 Password A Setting
-0000: Function disabled
-0001 to FFFF: Password
-
-b191 Password A for Authentication 
-0000 to FFFF
-
-b192 Password B Setting
-0000: Function disabled
-0001 to FFFF: Password
-
-b193 Password B for Authentication 
-0000 to FFFF
-
-
-group: Electronic thermal
-b910 Motor Electronic Thermal Selection
-00: Disabled
-01: Enabled (Fixed subtraction ratio)
-02: Enabled (b911 subtraction ratio)
-03: Enabled (b912 time parameter subtraction)
-
-b911 Motor Electronic Thermal Subtraction Ratio
-0.10 to 100000.00
-(Displays upper 4 digits)
-
-b912 Motor Electronic Thermal Subtraction Time Constant
-0.10 to 100000.00
-(Displays upper 4 digits)
-
-b913 Motor Electronic Thermal Integration Gain
-1.0 to 200.0
