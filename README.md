@@ -50,7 +50,7 @@ This project introduces an expert system that automates parameter generation. Us
 
 Because I can!
 
-Also because Prolog is well suited for logical and relation rules base systems. Which is exactly calculating VFD parameters from specification is. Genreally, a prolog program is 10 to 120 lines less that equivalent Python or C program. 
+Also because Prolog is well suited for logical and relation rules base systems. Which is exactly whay calculating VFD parameters from specification is. Genreally, a prolog program is 10 to 120 lines less that equivalent Python or C program. 
 
 In Prolog, code is data and data is code. As a result, the main program is actually extremely simple.  One line to load the rules -
 ```prolog
@@ -58,7 +58,7 @@ In Prolog, code is data and data is code. As a result, the main program is actua
 load_param_def(Yaml_spec.get(inverter/brand), Yaml_spec.get(inverter/model)),
 ...
 ```
-, and one line to eacute the rules -
+, and one line to execute rules -
 ```prolog
 findall([Param, Value], (
         ...
