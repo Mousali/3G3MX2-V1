@@ -20,3 +20,6 @@ inputs:
     s7: 
         function: JG (Jogging)
         normally_closed: true # default is false (or not specified)
+
+    analog:
+        analog_input_filter_ms: 10
