@@ -8,33 +8,13 @@ motor:
         power_kw : 3.0
         rpm :
             min : 3000
-            base : 24000
-            max : 24000
+            base : 18000
+            max : 18000
         poles : 2
         voltage : 220
 
-
-        #####################################################################
-        # speed (frequency) reference input selection valid value is of:
-        # - Digital Operator (Volume)
-        # - Control circuit terminal block (Analog input)
-        # - voltage (FV)
-        # - current (FI)
-        # - Digital Operator (F001)
-        # - Modbus communication
-        # - Option
-        # - Pulse train frequency
-        # - DriveProgramming
-        # - Operation function output
+        frequency_reference_selection: Control circuit terminal block (Analog input)
         speed_reference: voltage (FV)
-        
-        #####################################################################
-        # Run command source valid options:
-        # - Drive-Programming
-        # - Digital Operator
-        # - Modbus communication
-        # - Option
-        #####################################################################
         run_command_source: Digital Operator
 
         speed_response: 110
@@ -43,7 +23,7 @@ motor:
         permanent_magnet: false
         inductive_voltage: 0.1254
 
-    2nd :
+    2nd:
         brand : HQD
         model : GDZ-24
         power_kw : 1.5
@@ -54,20 +34,7 @@ motor:
         poles : 2
         voltage : 220
 
-
-        #####################################################################
-        # speed (frequency) reference input selection valid value is of:
-        # - Digital Operator (Volume)
-        # - Control circuit terminal block (Analog input)
-        # - voltage (FV)
-        # - current (FI)
-        # - Digital Operator (F001)
-        # - Modbus communication
-        # - Option
-        # - Pulse train frequency
-        # - DriveProgramming
-        # - Operation function output
-
+        frequency_reference_selection: "Control circuit terminal block (Analog input)"
         speed_reference : voltage (FV)
 
 
