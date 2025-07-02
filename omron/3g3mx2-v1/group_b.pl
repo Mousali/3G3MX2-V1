@@ -264,14 +264,6 @@ b221(03, "enabled during acceleration and constant speed (accelerated during reg
     !.
 b221(01, default).
 
-b022 1st Overload Limit  Level 
-b222 2nd Overload Limit  Level
-
-values:
-0.20 × Rated current to 2.00 × Rated current (Heavy load)
-0.20 × Rated current to 1.50 × Rated current (Light load)
-
-
 b022(Ti, "1st Overload Limit Level (A)"):- 
     b_getval(spec, S),
     Ti #= S.get(overload_limit_overcurrent_protection/first_overload_limit_level),
@@ -370,11 +362,6 @@ b029(T, "Frequency Pull-in Restart Time (s)"):-
     T #=< 3000.0,
     !.
 b029(0.5, default).
-
-Starting Frequency  Selection at  Frequency Pull-in  Restart
-00: Frequency at interruption
-01: Maximum frequency
-02: Set frequency (Frequency  reference)
 
 b030(00, "Frequency at interruption"):-
     b_getval(spec, S),
@@ -1068,14 +1055,14 @@ b096(F, "Regenerative Braking ON Level (V)"):-
     F #= S.get(auxiliary_function/regenerative_braking_on_level),
     F #>= 330, 
     F #=< 380,
-    vdf_class(200V),
+    vdf_class('200V'),
     !.
 b096(F, "Regenerative Braking ON Level (V)"):-
     b_getval(spec, S),
     F #= S.get(auxiliary_function/regenerative_braking_on_level),
     F #>= 660,
     F #=< 760,
-    vdf_class(400V),
+    vdf_class('400V'),
     !.
 b096([], default).
 
@@ -1274,22 +1261,22 @@ b130(01, default).
 b131(V, "Overvoltage Suppression Level During Deceleration (V)"):- 
     b_getval(spec, S),
     V #= S.get(auxiliary_function/overvoltage_suppression_level_during_deceleration),
-    vdf_class(200V),
+    vdf_class('200V'),
     V #>= 330.0, 
     V #=< 395.0,
     !.
 b131(V, "Overvoltage Suppression Level During Deceleration (V)"):-
     b_getval(spec, S),
     V #= S.get(auxiliary_function/overvoltage_suppression_level_during_deceleration),
-    vdf_class(400V),
+    vdf_class('400V'),
     V #>= 660.0, 
     V #=< 790.0,
     !.
 b131(380, default):-
-    vdf_class(200V),
+    vdf_class('200V'),
     !.
 b131(760, default):-
-    vdf_class(400V),
+    vdf_class('400V'),
     !.
 
 b132(T, "Overvoltage Protection Parameter During Deceleration (s)"):- 
@@ -1719,14 +1706,14 @@ b190(Password,"Password A Setting"):-
     b_getval(spec, S),
     Password = S.get(auxiliary_function/password_a),
     Password >= 0001, 
-    Password =< FFFF,
+    Password =< 'FFFF',
     !.
 b190(0000, default).
 b191(Password, "Password A for Authentication"):- 
     b_getval(spec, S),
     Password = S.get(auxiliary_function/password_a_for_authentication),
     Password >= 0000, 
-    Password =< FFFF,
+    Password =< 'FFFF',
     !.
 b191(0000, default).
 b192(0000, "Password B Setting (Disabled)"):-
@@ -1737,14 +1724,14 @@ b192(Password,"Password B Setting"):-
     b_getval(spec, S),
     Password = S.get(auxiliary_function/password_b),
     Password >= 0001, 
-    Password =< FFFF,
+    Password =< 'FFFF',
     !.
 b192(0000, default).
 b193(Password, "Password B for Authentication"):- 
     b_getval(spec, S),
     Password = S.get(auxiliary_function/password_b_for_authentication),
     Password >= 0000, 
-    Password =< FFFF,
+    Password =< 'FFFF',
     !.
 b193(0000, default).
 
@@ -1757,7 +1744,7 @@ b910(01, "Motor Electronic Thermal Selection (Enabled, Fixed subtraction ratio)"
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(auxiliary_function/motor_electronic_thermal_selection),"enabled (fixed subtraction ratio)"),
     !.
-b910(02, "Motor Electronic Thermal Selection (Enabled, b911 subtraction ratio)"):
+b910(02, "Motor Electronic Thermal Selection (Enabled, b911 subtraction ratio)"):-
     b_getval(spec, S),
     #fuzzy_match_key_value(S.get(auxiliary_function/motor_electronic_thermal_selection),"enabled (b911 subtraction ratio)"),
     !.
