@@ -7,6 +7,10 @@
 is_vfd_param(P_name):-
     re_match("^[a,b,c,d,f,h,p,u]\\d{3}$",P_name).
 
+vdf_class('400V').
+
+:- multifile value_function_text/3.
+
 :- consult(group_a).
 :- consult(group_b).
 :- consult(group_c).
