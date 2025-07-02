@@ -271,25 +271,23 @@ a015(V, Text):-
 
 a015(01, default).
 
-a016(1, Msg):-
+a016(1, "2 ms"):-
     b_getval(spec, S),
-    F #= S.get(inputs/analog/analog_input_filter_ms) / 2,
-    format(atom(Msg), '2 ms'),
+    F #= S.get(inputs/analog/analog_input_filter_ms) // 2,
     F < 1,
     !.
 
 a016(F, Msg):-
     b_getval(spec, S),
-    F #= S.get(inputs/analog/analog_input_filter_ms) / 2,
+    F #= S.get(inputs/analog/analog_input_filter_ms) // 2,
     format(atom(Msg), '~D / 2 ms', S.get(inputs/analog/analog_input_filter_ms)),
     F >= 1,
     F =< 30,
     !.
 
-a016(31, Msg):-
+a016(31, "500 ms with ±0.1 Hz hysteresis"):-
     b_getval(spec, S),
-    F #= S.get(inputs/analog/analog_input_filter_ms) / 2,
-    format(atom(Msg), '500 ms with ±0.1 Hz hysteresis'),
+    F #= S.get(inputs/analog/analog_input_filter_ms) // 2,
     F > 30,
     !.
 
