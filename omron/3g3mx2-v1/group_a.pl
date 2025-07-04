@@ -67,6 +67,24 @@ value_function_text(00, Function, Text):-
 value_function_text(01, Function, Text):-
     Text = "Bit (8-step selection with 7 terminals)",
     #fuzzy_match_key_value(Function, Text).
+value_function_text(00, Function, Text):-
+    Text = "Free-running on jogging stop/Disabled during operation",
+    #fuzzy_match_key_value(Function, Text).
+value_function_text(01, Function, Text):-
+    Text = "Deceleration stop on jogging stop/Disabled during operation",
+    #fuzzy_match_key_value(Function, Text).
+value_function_text(02, Function, Text):-
+    Text = "DC injection braking on jogging stop/Disabled during operation",
+    #fuzzy_match_key_value(Function, Text). 
+value_function_text(03, Function, Text):-
+    Text = "Free-running on jogging stop/Enabled during operation",
+    #fuzzy_match_key_value(Function, Text).
+value_function_text(04, Function, Text):-
+    Text = "Deceleration stop on jogging stop/Enabled during operation",
+    #fuzzy_match_key_value(Function, Text).
+value_function_text(05, Function, Text):-
+    Text = "DC injection braking on jogging stop/Enabled during operation",
+    #fuzzy_match_key_value(Function, Text).
 
 %%%%%%%%%%%%
 
@@ -632,6 +650,12 @@ a038(RPM, Msg):-
     #fuzzy_match_key_value(S.get(operations/inverter_mode),"Induction motor high-frequency"),
     !.
 a038(6.00, default).
+
+a039(V, Text):-
+    b_getval(spec, S),
+    value_fuzzy_match_key_value(V, S.get(inputs/multi_step_speed_jogging/jogging_stop_selection), Text),
+    !.
+a039(04, default).
 
 a041(01, default).
 a241(01, default).
