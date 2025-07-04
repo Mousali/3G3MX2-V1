@@ -251,7 +251,7 @@ a012(0.00, default).
 a013(R, "FV Start Ratio"):-
     b_getval(spec, S),
     R = S.get(inputs/analog/fv_start_ration),
-    R >= S.get(inputs/analog/fv_end_ration)
+    R >= S.get(inputs/analog/fv_end_ration),
 	!.
 
 a013(0, default).
@@ -306,28 +306,335 @@ a019(V, Text):-
     !.
 a019(00, default).
 
-
+a020(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/'1st_speed_reference_0') * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/'1st_speed_reference_0'), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a004(RPM_max, _),
+    RPM =< RPM_max,
+    !.
 a020(6.00, default).
-a021(0.00, default).
-a022(0.00, default).
-a023(0.00, default).
-a024(0.00, default).
-a025(0.00, default).
-a026(0.00, default).
-a027(0.00, default).
-a028(0.00, default).
-a029(0.00, default).
-a030(0.00, default).
-a031(0.00, default).
-a032(0.00, default).
-a033(0.00, default).
-a034(0.00, default).
-a035(0.00, default).
-a038(6.00, default).
-a039(04, default).
 
+a220(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/'2nd_speed_reference_0') * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/'2nd_speed_reference_0'), S.get(motor/'1st'/poles)]),
+    a204(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a220(6.00, default).
+
+a021(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_1) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_1), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a004(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a021(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_1) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_1), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a204(RPM_max, _),
+    RPM =< RPM_max,
+    !.    
+a021(0.00, default).
+
+a022(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_2) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_2), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a004(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a022(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_2) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_2), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a204(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a022(0.00, default).
+a023(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_3) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_3), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a004(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a023(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_3) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_3), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a204(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a023(0.00, default).
+a024(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_4) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_4), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a204(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a024(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_4) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_4), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a204(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a024(0.00, default).
+a025(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_5) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_5), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a004(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a025(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_5) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_5), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a204(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a025(0.00, default).
+a026(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_6) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_6), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a004(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a026(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_6) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_6), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a204(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a026(0.00, default).
+a027(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_7) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_7), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a004(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a027(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_7) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_7), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a204(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a027(0.00, default).
+a028(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_8) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_8), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a004(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a028(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_8) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_8), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a204(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a028(0.00, default).
+a029(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_9) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_9), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a004(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a029(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_9) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_9), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a204(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a029(0.00, default).
+a030(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_10) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_10), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a004(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a030(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_10) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_10), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a204(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a030(0.00, default).
+a031(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_11) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_11), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a004(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a031(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_11) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_11), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a204(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a031(0.00, default).
+a032(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_12) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_12), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a204(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a032(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_12) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_12), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a204(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a032(0.00, default).
+a033(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_13) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_13), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a004(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a033(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_13) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_13), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a204(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a033(0.00, default).
+a034(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_14) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_14), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a004(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a034(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_14 ) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_14), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a204(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a034(0.00, default).
+a035(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_15) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_15), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a004(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a035(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/speed_reference_15) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/speed_reference_15), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    a204(RPM_max, _),
+    RPM =< RPM_max,
+    !.
+a035(0.00, default).
+
+a038(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/jogging_frequency) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/jogging_frequency), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    RPM =< 9.99,
+    \+ #fuzzy_match_key_value(S.get(operations/inverter_mode),"Induction motor high-frequency"),
+    !.
+a038(RPM, Msg):-
+    b_getval(spec, S),
+    RPM #= S.get(inputs/multi_step_speed_jogging/jogging_frequency) * S.get(motor/'1st'/poles) // 120,
+    format(atom(Msg), '(~D RPM * ~D poles) / 120', [S.get(inputs/multi_step_speed_jogging/jogging_frequency), S.get(motor/'1st'/poles)]),
+    b082(RPM_min, _),
+    RPM >= RPM_min,
+    RPM =< 100,
+    #fuzzy_match_key_value(S.get(operations/inverter_mode),"Induction motor high-frequency"),
+    !.
+a038(6.00, default).
 
 a041(01, default).
+a241(01, default).
 a042(1.0, default).
 a043(5.0, default).
 a044(00, default).
@@ -400,8 +707,6 @@ a162(0.00, default).
 a163(0.0, default).
 a164(100.0, default).
 a165(01, default).
-a220(6.00, default).
-a241(01, default).
 a242(1.0, default).
 a243(5.0, default).
 a244(00, default).
